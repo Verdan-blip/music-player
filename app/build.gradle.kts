@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -36,6 +37,15 @@ android {
 }
 
 dependencies {
+
+    implementation(project(":data:auth"))
+    implementation(project(":core:common"))
+    implementation(project(":features:oauth"))
+    implementation(project(":navigation"))
+
+    val daggerVersion = "2.48"
+    implementation("com.google.dagger:dagger:$daggerVersion")
+    ksp("com.google.dagger:dagger-compiler:$daggerVersion")
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")

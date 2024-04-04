@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Common -->
+    <dimen name="fragment_title_text">36sp</dimen>
+    <dimen name="fragment_subtitle_text">14sp</dimen>
+
+    <!-- Edit text config -->
+    <dimen name="et_corner_radius">8dp</dimen>
+    <dimen name="et_padding_top">8dp</dimen>
+    <dimen name="et_padding_bottom">8dp</dimen>
+    <dimen name="et_padding_right">16dp</dimen>
+    <dimen name="et_padding_left">16dp</dimen>
+    <dimen name="et_min_width">256dp</dimen>
+
+
+    <!-- Music item config -->
+    <dimen name="music_item_card_corner_radius">8dp</dimen>
+    <dimen name="music_item_card_padding">6dp</dimen>
+    <dimen name="music_item_info_margin_left">6dp</dimen>
+    <dimen name="music_item_title_text">14sp</dimen>
+    <dimen name="music_item_authors_text">10sp</dimen>
+    <dimen name="music_item_authors_margin_top">4dp</dimen>
+    <dimen name="music_item_cover_width">44dp</dimen>
+    <dimen name="music_item_cover_height">44dp</dimen>
+    <dimen name="music_item_seekbar_thumb_radius">9dp</dimen>
+    <dimen name="music_item_seekbar_margin_top">8dp</dimen>
+    <dimen name="music_item_seekbar_margin_bottom">2dp</dimen>
+
+    <!-- Playlist config -->
+    <dimen name="playlist_card_corner_radius">8dp</dimen>
+    <dimen name="playlist_card_padding">10dp</dimen>
+    <dimen name="playlist_title_text">12sp</dimen>
+    <dimen name="playlist_title_text_margin_top">10dp</dimen>
+    <dimen name="playlist_cover_width">84dp</dimen>
+    <dimen name="playlist_cover_height">84dp</dimen>
+    <dimen name="playlist_card_width">128dp</dimen>
+    <dimen name="playlist_card_height">128dp</dimen>
+
+    <!-- Playing music config -->
+    <dimen name="playing_cover_card_corner_radius">24dp</dimen>
+    <dimen name="playing_music_title_text">40sp</dimen>
+    <dimen name="playing_music_authors_text">24sp</dimen>
+    <dimen name="playing_cover_width">240dp</dimen>
+    <dimen name="playing_cover_height">240dp</dimen>
+    <dimen name="playing_seekbar_width">272dp</dimen>
+    <dimen name="playing_music_title_margin_top">32dp</dimen>
+    <dimen name="playing_music_authors_margin_top">16dp</dimen>
+    <dimen name="playing_seekbar_margin_top">36dp</dimen>
+    <dimen name="playing_last_time_margin_top">12dp</dimen>
+    <dimen name="playing_pause_or_play_margin_top">32dp</dimen>
+    <dimen name="playing_pause_or_play_radius">64dp</dimen>
+
+    <!-- Featured musics fragment config -->
+    <dimen name="features_fragment_title_text">36sp</dimen>
+    <dimen name="features_fragment_subtitle_text">14sp</dimen>
+    <dimen name="features_fragment_tap_to_search_text">16sp</dimen>
+    <dimen name="features_fragment_title_margin_top">56dp</dimen>
+    <dimen name="features_fragment_subtitle_margin_top">24dp</dimen>
+    <dimen name="features_fragment_playlists_margin_top">24dp</dimen>
+    <dimen name="features_fragment_tracks_margin_top">24dp</dimen>
+    <dimen name="features_fragment_padding">16dp</dimen>
+
+    <!-- Search fragment config -->
+    <dimen name="search_fragment_search_icon_margin_right">16dp</dimen>
+    <dimen name="search_fragment_padding">16dp</dimen>
+    <dimen name="search_fragment_recently_searched_margin_top">32dp</dimen>
+    <dimen name="search_fragment_recently_searched_text">14sp</dimen>
+    <dimen name="search_fragment_recently_searched_items_margin_top">16dp</dimen>
+    <dimen name="search_fragment_found_margin_top">24dp</dimen>
+    <dimen name="search_fragment_found_text">14sp</dimen>
+    <dimen name="search_fragment_found_loaded_items_margin_top">20dp</dimen>
+    <dimen name="search_fragment_found_items_margin_top">32dp</dimen>
+
+    <!-- Upload track fragment config -->
+    <dimen name="upload_fragment_upload_title_text">36sp</dimen>
+    <dimen name="upload_fragment_upload_padding">16dp</dimen>
+    <dimen name="upload_fragment_upload_step_text">14sp</dimen>
+    <dimen name="upload_fragment_upload_title_margin_top">56dp</dimen>
+    <dimen name="upload_fragment_upload_step1_margin_top">24dp</dimen>
+    <dimen name="upload_fragment_upload_track_title_text">14dp</dimen>
+    <dimen name="upload_fragment_upload_track_title_margin_top">24dp</dimen>
+    <dimen name="upload_fragment_upload_step2_margin_top">24dp</dimen>
+    <dimen name="upload_fragment_upload_authors_margin_top">24dp</dimen>
+    <dimen name="upload_fragment_upload_step3_margin_top">24dp</dimen>
+    <dimen name="upload_fragment_upload_track_margin_top">24dp</dimen>
+    <dimen name="upload_fragment_card_track_file_width">256dp</dimen>
+    <dimen name="upload_fragment_card_track_file_height">56dp</dimen>
+    <dimen name="upload_fragment_card_track_file_corner_radius">8dp</dimen>
+    <dimen name="upload_fragment_card_track_file_text">14sp</dimen>
+    <dimen name="upload_fragment_card_track_file_icon_margin_right">12dp</dimen>
+    <dimen name="upload_fragment_upload_step4_margin_top">24dp</dimen>
+    <dimen name="upload_fragment_card_cover_file_width">168dp</dimen>
+    <dimen name="upload_fragment_card_cover_file_height">128dp</dimen>
+    <dimen name="upload_fragment_card_cover_file_corner_radius">8dp</dimen>
+    <dimen name="upload_fragment_card_cover_file_margin_top">24dp</dimen>
+    <dimen name="upload_fragment_card_cover_image_width">96dp</dimen>
+    <dimen name="upload_fragment_card_cover_image_height">96dp</dimen>
+    <dimen name="upload_fragment_card_cover_image_margin_start">16dp</dimen>
+    <dimen name="upload_fragment_card_cover_image_icon_margin_right">16dp</dimen>
+
+    <!-- Recently searched text config -->
+    <dimen name="recently_searched_item_text">14sp</dimen>
+    <dimen name="recently_searched_item_padding">4dp</dimen>
+    
+    <!-- Author card view config -->
+    <dimen name="authors_card_width">72dp</dimen>
+    <dimen name="authors_card_height">72dp</dimen>
+    <dimen name="authors_card_padding">8dp</dimen>
+    <dimen name="authors_card_corner_radius">8dp</dimen>
+
+
+
+</resources>

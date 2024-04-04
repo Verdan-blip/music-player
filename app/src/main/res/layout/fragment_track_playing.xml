@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        tools:src="@drawable/cover_blurred_blinding_eyes" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/playing_cover_card_corner_radius">
+
+            <ImageView
+                android:layout_width="@dimen/playing_cover_width"
+                android:layout_height="@dimen/playing_cover_height"
+                tools:src="@drawable/cover_blinding_eyes"
+                android:scaleType="fitXY" />
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/playing_music_title_margin_top"
+            style="@style/AppTextView"
+            android:textColor="@color/primary_text_light"
+            android:textSize="@dimen/playing_music_title_text"
+            tools:text="Название песни" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/playing_music_authors_margin_top"
+            style="@style/AppTextView"
+            android:textColor="@color/primary_text_light"
+            android:textSize="@dimen/playing_music_authors_text"
+            tools:text="Авторы" />
+
+        <SeekBar
+            android:layout_width="@dimen/playing_seekbar_width"
+            android:layout_height="wrap_content"
+            style="@style/AppSeekBar"
+            tools:progress="30"
+            android:layout_marginTop="@dimen/playing_seekbar_margin_top"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/playing_last_time_margin_top"
+            style="@style/AppTextView"
+            android:textColor="@color/primary_text_light"
+            tools:text="00:54" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="@dimen/playing_pause_or_play_radius"
+            android:layout_height="@dimen/playing_pause_or_play_radius"
+            android:layout_marginTop="@dimen/playing_pause_or_play_margin_top"
+            android:background="@drawable/playing_music_pause" />
+
+    </LinearLayout>
+
+</FrameLayout>

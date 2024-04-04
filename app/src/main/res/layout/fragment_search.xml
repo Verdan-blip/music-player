@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        tools:src="@drawable/cover_blurred_blinding_eyes" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/search_fragment_padding"
+        android:orientation="vertical">
+
+        <Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/AppEditTextSearch"
+                android:hint="@string/search_fragment_search_hint" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="@dimen/search_fragment_search_icon_margin_right"
+                android:src="@drawable/search" />
+
+        </Toolbar>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/search_fragment_recently_searched_margin_top"
+            style="@style/AppTextView"
+            android:textColor="@color/secondary_text_light"
+            android:textSize="@dimen/search_fragment_recently_searched_text"
+            android:text="@string/search_fragment_recently_searched" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/item_recently_searched"
+            android:layout_marginTop="@dimen/search_fragment_recently_searched_items_margin_top" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/search_fragment_found_margin_top"
+            style="@style/AppTextView"
+            android:textColor="@color/secondary_text_light"
+            android:textSize="@dimen/search_fragment_found_text"
+            android:text="@string/search_fragment_found" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/item_track"
+            android:layout_marginTop="@dimen/search_fragment_found_loaded_items_margin_top" />
+
+
+    </LinearLayout>
+
+</FrameLayout>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        tools:src="@drawable/cover_blurred_blinding_eyes" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center|top"
+        android:paddingStart="@dimen/features_fragment_padding"
+        android:paddingEnd="@dimen/features_fragment_padding"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/features_fragment_title_margin_top"
+            style="@style/AppTextView"
+            android:textColor="@color/primary_text_light"
+            android:textSize="@dimen/features_fragment_title_text"
+            android:text="@string/features_fragment_featured"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/features_fragment_subtitle_margin_top"
+            style="@style/AppTextView"
+            android:textColor="@color/secondary_text_light"
+            android:textSize="@dimen/features_fragment_subtitle_text"
+            android:text="@string/features_fragment_playlists" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/features_fragment_playlists_margin_top"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_playlist"
+            android:orientation="horizontal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/features_fragment_subtitle_margin_top"
+            style="@style/AppTextView"
+            android:textColor="@color/secondary_text_light"
+            android:textSize="@dimen/features_fragment_subtitle_text"
+            android:text="@string/features_fragment_tracks" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/features_fragment_tracks_margin_top"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="vertical"
+            tools:listitem="@layout/item_track" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/AppTextView"
+            android:textSize="@dimen/features_fragment_subtitle_text"
+            android:text="cxxc" />
+
+    </LinearLayout>
+
+</FrameLayout>
