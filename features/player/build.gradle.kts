@@ -1,15 +1,14 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.android.kotlin)
-    alias(libs.plugins.ksp)
 }
 
 android {
-    namespace = "ru.kpfu.itis.common"
+    namespace = "ru.kpfu.itis.bagaviev.player"
     compileSdk = 34
 
     defaultConfig {
-        minSdk = 21
+        minSdk = 24
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -34,15 +33,9 @@ android {
 }
 
 dependencies {
-    implementation(libs.dagger)
-    ksp(libs.dagger.compiler)
-
-    implementation(libs.lifecycle.runtime)
-
     implementation(libs.android.core)
     implementation(libs.android.appcompat)
     implementation(libs.android.material)
-    implementation(libs.contraintlayout)
     testImplementation(libs.juint)
     androidTestImplementation(libs.android.test.junit)
     androidTestImplementation(libs.android.test.espresso)
