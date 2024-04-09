@@ -41,6 +41,7 @@ dependencies {
     implementation(project(":data:auth"))
     implementation(project(":core:common"))
     implementation(project(":features:oauth"))
+    implementation(project(":features:player"))
     implementation(project(":navigation"))
 
     implementation(libs.dagger)

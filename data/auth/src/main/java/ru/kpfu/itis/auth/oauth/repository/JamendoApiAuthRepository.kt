@@ -1,10 +1,10 @@
 package ru.kpfu.itis.auth.oauth.repository
 
 import ru.kpfu.itis.auth.oauth.config.OAuthApiConfig
-import ru.kpfu.itis.auth.oauth.entity.request.GrantTokenRequestEntity
-import ru.kpfu.itis.auth.oauth.entity.request.RefreshTokenRequestEntity
-import ru.kpfu.itis.auth.oauth.entity.response.GrantTokenResponseEntity
-import ru.kpfu.itis.auth.oauth.entity.response.RefreshTokenResponseEntity
+import ru.kpfu.itis.auth.oauth.entities.request.GrantTokenRequestEntity
+import ru.kpfu.itis.auth.oauth.entities.request.RefreshTokenRequestEntity
+import ru.kpfu.itis.auth.oauth.entities.response.GrantTokenResponseEntity
+import ru.kpfu.itis.auth.oauth.entities.response.RefreshTokenResponseEntity
 import ru.kpfu.itis.auth.oauth.service.JamendoApiOAuthService
 import java.net.URI
 import javax.inject.Inject

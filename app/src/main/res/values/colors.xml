@@ -9,10 +9,6 @@
     <color name="secondary_text_light">#999999</color>
     <color name="on_surface_light">#FFFFFF</color>
 
-    <color name="seekbar_thumb_color_light">#D9D9D9</color>
-    <color name="seekbar_playing_progress_color_light">#FFFFFF</color>
-    <color name="seekbar_playing_progress_bg_color_light">#7E7E7E</color>
-
     <color name="primary_text_dark">#191919</color>
     <color name="secondary_text_dark">#5B5B5B</color>
 

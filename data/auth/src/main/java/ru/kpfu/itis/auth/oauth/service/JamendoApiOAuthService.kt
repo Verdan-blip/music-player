@@ -2,10 +2,10 @@ package ru.kpfu.itis.auth.oauth.service
 
 import retrofit2.http.Body
 import retrofit2.http.POST
-import ru.kpfu.itis.auth.oauth.entity.request.GrantTokenRequestEntity
-import ru.kpfu.itis.auth.oauth.entity.request.RefreshTokenRequestEntity
-import ru.kpfu.itis.auth.oauth.entity.response.GrantTokenResponseEntity
-import ru.kpfu.itis.auth.oauth.entity.response.RefreshTokenResponseEntity
+import ru.kpfu.itis.auth.oauth.entities.request.GrantTokenRequestEntity
+import ru.kpfu.itis.auth.oauth.entities.request.RefreshTokenRequestEntity
+import ru.kpfu.itis.auth.oauth.entities.response.GrantTokenResponseEntity
+import ru.kpfu.itis.auth.oauth.entities.response.RefreshTokenResponseEntity
 
 interface JamendoApiOAuthService {
 

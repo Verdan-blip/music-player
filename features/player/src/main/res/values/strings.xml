@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="poster_image_content_description">Poster image</string>
+    <string name="image_blurred_background_content_description">Poster image</string>
+
+</resources>

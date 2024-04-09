@@ -71,11 +71,10 @@
         <SeekBar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/music_item_seekbar_margin_top"
-            android:layout_marginBottom="@dimen/music_item_seekbar_margin_bottom"
+            android:layout_marginTop="@dimen/music_playing_seekbar_margin_top"
+            android:layout_marginBottom="@dimen/music_playing_seekbar_margin_bottom"
             tools:progress="20"
-            android:visibility="gone"
-            style="@style/AppSeekBar" />
+            android:visibility="gone" />
 
 
     </LinearLayout>

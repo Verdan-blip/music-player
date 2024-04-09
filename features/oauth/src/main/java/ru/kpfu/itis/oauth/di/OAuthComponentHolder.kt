@@ -9,5 +9,4 @@ object OAuthComponentHolder : FeatureComponentHolder<OAuthComponent>() {
     override fun createComponent(context: Context): OAuthComponent =
         DaggerOAuthComponent.factory()
             .create(ComponentDependenciesProvider.get(context))
-
 }

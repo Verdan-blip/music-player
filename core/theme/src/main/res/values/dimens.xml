@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Card dimens -->
+    <dimen name="poster_card_corner_radius">24dp</dimen>
+    <dimen name="poster_card_width">240dp</dimen>
+    <dimen name="poster_card_height">240dp</dimen>
+
+</resources>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <style name="CoverCard" parent="@style/CardView">
+        <item name="cardCornerRadius">@dimen/poster_card_corner_radius</item>
+        <item name="android:layout_width">@dimen/poster_card_width</item>
+        <item name="android:layout_height">@dimen/poster_card_height</item>
+    </style>
+
+    <style name="ThinTextView" parent="@style/Widget.AppCompat.TextView">
+        <item name="fontFamily">sans-serif-thin</item>
+    </style>
+    
+</resources>

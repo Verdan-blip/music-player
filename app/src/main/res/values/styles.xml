@@ -10,12 +10,6 @@
         <item name="fontFamily">sans-serif-light</item>
     </style>
 
-    <style name="AppSeekBar" parent="@style/Widget.AppCompat.SeekBar">
-        <item name="android:thumb">@drawable/music_seekbar_thumb</item>
-        <item name="android:progressTint">@color/seekbar_playing_progress_color_light</item>
-        <item name="android:progressBackgroundTint">@color/seekbar_playing_progress_bg_color_light</item>
-    </style>
-
     <style name="AppEditText" parent="@style/Widget.AppCompat.EditText">
         <item name="android:background">@drawable/et_background</item>
         <item name="android:textColor">@color/primary_text_light</item>

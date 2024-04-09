@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="MusicPlayingProgressSeekBar" parent="@style/Widget.AppCompat.SeekBar">
+        <item name="android:thumb">@drawable/music_progress_thumb</item>
+        <item name="android:progressTint">@color/light_playing_music_progress_color</item>
+        <item name="android:progressBackgroundTint">@color/light_playing_music_progress_background_color</item>
+    </style>
+
+</resources>
