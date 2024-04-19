@@ -7,9 +7,9 @@ import ru.kpfu.itis.oauth.domain.repository.OAuthRepository
 
 interface OAuthComponentDependencies : ComponentDependencies {
 
-    fun getAuthTokenRepository(): AuthTokenRepository
+    fun authTokenRepository(): AuthTokenRepository
 
-    fun getOAuthRepository(): OAuthRepository
+    fun authRepository(): OAuthRepository
 
-    fun getOAuthRouter(): OAuthRouter
+    fun oAuthRouter(): OAuthRouter
 }

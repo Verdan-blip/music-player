@@ -4,18 +4,21 @@ import dagger.BindsInstance
 import dagger.Component
 import ru.kpfu.itis.auth.di.DataModule
 import ru.kpfu.itis.bagaviev.App
+import ru.kpfu.itis.bagaviev.di.deps.FeatureComponentsDependencies
+import ru.kpfu.itis.bagaviev.di.deps.FeatureDependenciesModule
 import ru.kpfu.itis.bagaviev.glue.FeaturesModule
-import ru.kpfu.itis.common.di.connector.deps.ComponentDependencies
+import ru.kpfu.itis.common.di.scopes.ApplicationScope
 
+@ApplicationScope
 @Component(
     modules = [
         AppModule::class,
         DataModule::class,
-        DependenciesModule::class,
+        FeatureDependenciesModule::class,
         FeaturesModule::class
     ]
 )
-interface AppComponent : ComponentDependencies {
+interface AppComponent : FeatureComponentsDependencies {
 
     fun inject(application: App)
 

@@ -18,5 +18,4 @@ interface JamendoApiOAuthService {
     suspend fun refreshAccessToken(
         @Body refreshTokenRequestEntity: RefreshTokenRequestEntity
     ): RefreshTokenResponseEntity
-
 }

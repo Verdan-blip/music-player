@@ -4,10 +4,10 @@ import android.content.Context
 import javax.inject.Inject
 
 class SharedPreferencesDataSource @Inject constructor(
-    context: Context?
+    context: Context
 ) : DataSource {
 
-    private val sharedPreferences = context?.getSharedPreferences(
+    private val sharedPreferences = context.getSharedPreferences(
         SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE
     )
 
@@ -25,5 +25,4 @@ class SharedPreferencesDataSource @Inject constructor(
     companion object {
         const val SHARED_PREFERENCES_NAME = "token_store"
     }
-
 }

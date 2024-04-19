@@ -1,24 +1,29 @@
 package ru.kpfu.itis.oauth.presentation
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.fragment.app.Fragment
-import ru.kpfu.itis.common.extensions.observe
 import ru.kpfu.itis.common.states.CustomTabsState
+import ru.kpfu.itis.common.util.extensions.observe
 import ru.kpfu.itis.oauth.R
 import ru.kpfu.itis.oauth.databinding.FragmentOauthBinding
 import ru.kpfu.itis.oauth.di.OAuthComponentHolder
-import javax.inject.Inject
 
 class OAuthFragment : Fragment(R.layout.fragment_oauth) {
 
     private var viewBinding: FragmentOauthBinding? = null
 
-    @Inject lateinit var oAuthViewModel: OAuthViewModel
+    private val viewModel by lazy {
+        with (OAuthComponentHolder) {
+            provideContext(requireContext())
+            buildComponent()
+            bind(lifecycle)
+            requireComponent()
+        }.viewModelFactory.create(OAuthViewModel::class.java)
+    }
 
     private fun observeCustomTabsState(customTabsState: CustomTabsState) {
         when (customTabsState) {
@@ -34,12 +39,6 @@ class OAuthFragment : Fragment(R.layout.fragment_oauth) {
         }
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        OAuthComponentHolder.get(context)
-            .inject(this)
-    }
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,11 +52,11 @@ class OAuthFragment : Fragment(R.layout.fragment_oauth) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        oAuthViewModel.customTabsState.observe(viewLifecycleOwner, ::observeCustomTabsState)
+        viewModel.customTabsState.observe(viewLifecycleOwner, ::observeCustomTabsState)
 
         viewBinding?.apply {
             btnAuthenticate.setOnClickListener {
-                oAuthViewModel.onAuthenticateButtonPressed()
+                viewModel.onAuthenticateButtonPressed()
             }
         }
 
@@ -67,6 +66,4 @@ class OAuthFragment : Fragment(R.layout.fragment_oauth) {
         super.onDestroyView()
         viewBinding = null
     }
-
-
 }

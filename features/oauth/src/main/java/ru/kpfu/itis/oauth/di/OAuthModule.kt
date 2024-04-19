@@ -9,10 +9,9 @@ import ru.kpfu.itis.common.di.scopes.FeatureScope
 import ru.kpfu.itis.oauth.presentation.OAuthViewModel
 
 @Module
-internal interface OAuthModule {
+interface OAuthModule {
 
     @FeatureScope
     @[Binds IntoMap ViewModelKey(OAuthViewModel::class)]
     fun provideOAuthViewModel(oAuthViewModel: OAuthViewModel): ViewModel
-
 }

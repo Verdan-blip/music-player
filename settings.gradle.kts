@@ -10,6 +10,9 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven {
+            url = uri("https://jitpack.io")
+        }
     }
 }
 
@@ -24,3 +27,5 @@ include(":core:common")
 include(":navigation")
 include(":features:player")
 include(":core:theme")
+include(":features:player:api")
+include(":features:player:impl")

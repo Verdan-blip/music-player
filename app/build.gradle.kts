@@ -41,11 +41,14 @@ dependencies {
     implementation(project(":data:auth"))
     implementation(project(":core:common"))
     implementation(project(":features:oauth"))
-    implementation(project(":features:player"))
+    implementation(project(":features:player:api"))
+    implementation(project(":features:player:impl"))
     implementation(project(":navigation"))
 
     implementation(libs.dagger)
     ksp(libs.dagger.compiler)
+
+    implementation(libs.media3.session)
 
     implementation(libs.android.core)
     implementation(libs.android.appcompat)

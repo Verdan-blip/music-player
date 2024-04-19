@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="playing_cover_card_corner_radius">24dp</dimen>
+    <dimen name="playing_music_title_text">40sp</dimen>
+    <dimen name="playing_music_authors_text">24sp</dimen>
+    <dimen name="playing_cover_width">240dp</dimen>
+    <dimen name="playing_cover_height">240dp</dimen>
+    <dimen name="playing_seekbar_width">272dp</dimen>
+    <dimen name="playing_music_title_margin_top">32dp</dimen>
+    <dimen name="playing_music_authors_margin_top">16dp</dimen>
+    <dimen name="playing_seekbar_margin_top">36dp</dimen>
+    <dimen name="playing_last_time_margin_top">12dp</dimen>
+    <dimen name="playing_pause_or_play_margin_top">48dp</dimen>
+    <dimen name="playing_pause_or_play_radius">64dp</dimen>
+
+    <dimen name="music_playing_seekbar_thumb_radius">9dp</dimen>
+    <dimen name="music_playing_seekbar_margin_top">8dp</dimen>
+    <dimen name="music_playing_seekbar_margin_bottom">2dp</dimen>
+
+</resources>

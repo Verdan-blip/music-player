@@ -8,14 +8,12 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import ru.kpfu.itis.common.states.CustomTabsState
+import ru.kpfu.itis.common.util.typealiases.ViewModelFactories
 import ru.kpfu.itis.oauth.OAuthRouter
 import ru.kpfu.itis.oauth.domain.usecase.GetOAuthUriUseCase
 import ru.kpfu.itis.oauth.domain.usecase.GrantAccessTokenUseCase
 import ru.kpfu.itis.oauth.domain.usecase.SaveAccessTokenUseCase
 import javax.inject.Inject
-import javax.inject.Provider
-
-typealias ViewModelFactories = Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>
 
 class OAuthViewModel @Inject constructor(
     private val getOAuthUriUseCase: GetOAuthUriUseCase,
@@ -56,7 +54,8 @@ class OAuthViewModel @Inject constructor(
     }
 
     companion object {
-        class Factory(
+
+        class Factory @Inject constructor(
             private val viewModelFactories: ViewModelFactories
         ) : ViewModelProvider.Factory {
 
