@@ -14,9 +14,9 @@ import ru.kpfu.itis.bagaviev.api.domain.entities.MusicItem
 import ru.kpfu.itis.bagaviev.api.domain.repository.MusicControllerRepository
 import ru.kpfu.itis.bagaviev.impl.data.mapper.toMediaItem
 import ru.kpfu.itis.bagaviev.impl.data.mapper.toMusicItem
-import ru.kpfu.itis.bagaviev.impl.util.extensions.currentMediaItemAsFlow
-import ru.kpfu.itis.bagaviev.impl.util.extensions.currentPlayingPositionAsFlow
-import ru.kpfu.itis.bagaviev.impl.util.extensions.isPlayingAsFlow
+import ru.kpfu.itis.bagaviev.impl.data.util.extensions.currentMediaItemAsFlow
+import ru.kpfu.itis.bagaviev.impl.data.util.extensions.currentPlayingPositionAsFlow
+import ru.kpfu.itis.bagaviev.impl.data.util.extensions.isPlayingAsFlow
 import ru.kpfu.itis.common.util.extensions.toURI
 import javax.inject.Inject
 

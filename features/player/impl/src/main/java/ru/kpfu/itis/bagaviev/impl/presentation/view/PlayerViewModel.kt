@@ -11,7 +11,7 @@ import ru.kpfu.itis.bagaviev.api.domain.interactor.MusicControllerInteractor
 import ru.kpfu.itis.bagaviev.impl.presentation.entities.MusicItemModel
 import ru.kpfu.itis.bagaviev.impl.presentation.mapper.toMusicItemModel
 import ru.kpfu.itis.bagaviev.impl.presentation.states.PlayPauseButtonState
-import ru.kpfu.itis.bagaviev.impl.util.TimeFormatter
+import ru.kpfu.itis.bagaviev.impl.presentation.util.TimeFormatter
 import ru.kpfu.itis.common.util.extensions.progressAsTime
 import ru.kpfu.itis.common.util.extensions.timeAsProgress
 import ru.kpfu.itis.common.util.typealiases.ViewModelFactories
@@ -97,22 +97,29 @@ class PlayerViewModel @Inject constructor(
     }
 
     fun onPlayPauseButtonPress() {
-        when (_playPauseButtonState.value) {
-            is PlayPauseButtonState.Playing -> {
-                interactor.pause()
-            }
-            is PlayPauseButtonState.Paused -> {
-                interactor.play()
+        viewModelScope.launch {
+            when (_playPauseButtonState.value) {
+                is PlayPauseButtonState.Playing -> {
+                    interactor.pause()
+                }
+                is PlayPauseButtonState.Paused -> {
+                    interactor.play()
+                }
             }
         }
     }
 
-    fun onHoldAndMoveSeekBarThumb(progress: Int) {
+    fun onHoldSeekBarThumb() {
         viewModelScope.launch {
             _shouldStopTrackingProgressing = true
+        }
+    }
 
+    fun onMoveHeldSeekBarThumb(progress: Int) {
+        viewModelScope.launch {
             _currentMusicItemState.value?.apply {
-                _playingTimeState.emit(TimeFormatter.millisToMmSs(
+                _playingTimeState.emit(
+                    TimeFormatter.millisToMmSs(
                     progress.progressAsTime(duration)
                 ))
             }
@@ -120,10 +127,11 @@ class PlayerViewModel @Inject constructor(
     }
 
     fun onReleaseSeekBarThumb(position: Int) {
-        _shouldStopTrackingProgressing = false
-
-        _currentMusicItemState.value?.apply {
-            interactor.seekTo(position.progressAsTime(duration))
+        viewModelScope.launch {
+            _shouldStopTrackingProgressing = false
+            _currentMusicItemState.value?.apply {
+                interactor.seekTo(position.progressAsTime(duration))
+            }
         }
     }
 

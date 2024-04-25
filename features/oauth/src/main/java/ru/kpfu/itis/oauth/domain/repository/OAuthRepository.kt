@@ -8,5 +8,4 @@ interface OAuthRepository {
     suspend fun getOAuthUri(): URI
 
     suspend fun getGrantedTokenData(code: String): GrantedTokenData
-
 }

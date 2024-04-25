@@ -1,4 +1,4 @@
-package ru.kpfu.itis.bagaviev.impl.util
+package ru.kpfu.itis.bagaviev.impl.presentation.util
 
 object TimeFormatter {
 

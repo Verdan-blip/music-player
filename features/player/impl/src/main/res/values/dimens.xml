@@ -9,6 +9,7 @@
     <dimen name="playing_seekbar_width">272dp</dimen>
     <dimen name="playing_music_title_margin_top">32dp</dimen>
     <dimen name="playing_music_authors_margin_top">16dp</dimen>
+    <dimen name="playing_music_poster_margin_top">128dp</dimen>
     <dimen name="playing_seekbar_margin_top">36dp</dimen>
     <dimen name="playing_last_time_margin_top">12dp</dimen>
     <dimen name="playing_pause_or_play_margin_top">48dp</dimen>

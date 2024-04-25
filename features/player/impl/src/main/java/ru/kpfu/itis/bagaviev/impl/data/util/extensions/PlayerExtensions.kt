@@ -1,4 +1,4 @@
-package ru.kpfu.itis.bagaviev.impl.util.extensions
+package ru.kpfu.itis.bagaviev.impl.data.util.extensions
 
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player

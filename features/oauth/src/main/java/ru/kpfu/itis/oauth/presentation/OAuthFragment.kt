@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import ru.kpfu.itis.common.states.CustomTabsState
 import ru.kpfu.itis.common.util.extensions.observe
 import ru.kpfu.itis.oauth.R
@@ -16,13 +17,13 @@ class OAuthFragment : Fragment(R.layout.fragment_oauth) {
 
     private var viewBinding: FragmentOauthBinding? = null
 
-    private val viewModel by lazy {
+    private val viewModel: OAuthViewModel by viewModels {
         with (OAuthComponentHolder) {
             provideContext(requireContext())
             buildComponent()
             bind(lifecycle)
             requireComponent()
-        }.viewModelFactory.create(OAuthViewModel::class.java)
+        }.viewModelFactory
     }
 
     private fun observeCustomTabsState(customTabsState: CustomTabsState) {
@@ -59,7 +60,6 @@ class OAuthFragment : Fragment(R.layout.fragment_oauth) {
                 viewModel.onAuthenticateButtonPressed()
             }
         }
-
     }
 
     override fun onDestroyView() {
