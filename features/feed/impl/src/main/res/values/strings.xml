@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="feed_fragment_feed">Лента</string>
+    <string name="feed_fragment_popular_playlists">Популярные плейлисты (%d)</string>
+    <string name="feed_fragment_top_charts">Топ чарты (%d)</string>
+    <string name="feed_fragment_tap_to_search">Нажмите для поиска</string>
+
+</resources>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="feed_fragment_title_text">36sp</dimen>
+    <dimen name="feed_fragment_subtitle_text">14sp</dimen>
+    <dimen name="feed_fragment_tap_to_search_text">16sp</dimen>
+    <dimen name="feed_fragment_title_margin_top">56dp</dimen>
+    <dimen name="feed_fragment_subtitle_margin_top">24dp</dimen>
+    <dimen name="feed_fragment_playlists_margin_top">24dp</dimen>
+    <dimen name="feed_fragment_tracks_margin_top">24dp</dimen>
+    <dimen name="feed_fragment_padding">16dp</dimen>
+
+    <!-- Track item config -->
+    <dimen name="track_item_card_padding">6dp</dimen>
+    <dimen name="track_item_info_margin_left">8dp</dimen>
+    <dimen name="track_item_title_text">14sp</dimen>
+    <dimen name="track_item_authors_text">10sp</dimen>
+    <dimen name="track_item_authors_margin_top">4dp</dimen>
+    <dimen name="track_item_play_pause_margin_end">16dp</dimen>
+    <dimen name="track_item_play_more_actions_end">8dp</dimen>
+    <dimen name="track_playing_seekbar_thumb_radius">9dp</dimen>
+    <dimen name="track_playing_seekbar_margin_top">8dp</dimen>
+    <dimen name="track_playing_seekbar_margin_bottom">2dp</dimen>
+
+    <!-- Playlist config -->
+    <dimen name="playlist_title_text">10sp</dimen>
+    <dimen name="playlist_title_text_margin_top">10dp</dimen>
+
+</resources>

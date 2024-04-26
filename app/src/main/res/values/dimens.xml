@@ -51,16 +51,6 @@
     <dimen name="playing_pause_or_play_margin_top">32dp</dimen>
     <dimen name="playing_pause_or_play_radius">64dp</dimen>
 
-    <!-- Featured musics fragment config -->
-    <dimen name="features_fragment_title_text">36sp</dimen>
-    <dimen name="features_fragment_subtitle_text">14sp</dimen>
-    <dimen name="features_fragment_tap_to_search_text">16sp</dimen>
-    <dimen name="features_fragment_title_margin_top">56dp</dimen>
-    <dimen name="features_fragment_subtitle_margin_top">24dp</dimen>
-    <dimen name="features_fragment_playlists_margin_top">24dp</dimen>
-    <dimen name="features_fragment_tracks_margin_top">24dp</dimen>
-    <dimen name="features_fragment_padding">16dp</dimen>
-
     <!-- Search fragment config -->
     <dimen name="search_fragment_search_icon_margin_right">16dp</dimen>
     <dimen name="search_fragment_padding">16dp</dimen>

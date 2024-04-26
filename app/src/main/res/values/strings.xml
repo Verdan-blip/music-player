@@ -1,11 +1,6 @@
 <resources>
     <string name="app_name">music-player</string>
 
-    <!-- Features fragment -->
-    <string name="features_fragment_featured">Избранное</string>
-    <string name="features_fragment_playlists">Плейлисты (%d)</string>
-    <string name="features_fragment_tracks">Треки (%d)</string>
-
     <!-- Search fragment -->
     <string name="search_fragment_search_hint">Введите название</string>
     <string name="search_fragment_recently_searched">Недавно искали</string>

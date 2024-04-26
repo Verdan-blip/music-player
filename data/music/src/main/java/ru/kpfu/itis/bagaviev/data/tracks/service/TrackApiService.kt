@@ -3,8 +3,8 @@ package ru.kpfu.itis.bagaviev.data.tracks.service
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
-import ru.kpfu.itis.bagaviev.data.tracks.entities.responses.TrackDetailsResponse
-import ru.kpfu.itis.bagaviev.data.tracks.entities.responses.TrackResponse
+import ru.kpfu.itis.bagaviev.data.tracks.entities.responses.TrackDetailsResponseEntity
+import ru.kpfu.itis.bagaviev.data.tracks.entities.responses.TrackResponseEntity
 
 interface TrackApiService {
 
@@ -12,15 +12,15 @@ interface TrackApiService {
     fun getCharts(
         @Query("limit") limit: Int = 10,
         @Query("offset") offset: Int = 0
-    ): List<TrackResponse>
+    ): List<TrackResponseEntity>
 
     @GET("/v1/tracks/{id}")
     fun getById(
         @Path("id") trackId: Long
-    ): TrackDetailsResponse
+    ): TrackDetailsResponseEntity
 
     @GET("/v1/tracks")
     fun getAllByKeywords(
         @Query("keys") keys: String
-    ): List<TrackResponse>
+    ): List<TrackResponseEntity>
 }
