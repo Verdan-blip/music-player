@@ -39,11 +39,16 @@ android {
 dependencies {
 
     implementation(project(":data:auth"))
+    implementation(project(":data:music"))
     implementation(project(":core:common"))
     implementation(project(":features:oauth"))
     implementation(project(":features:player:api"))
     implementation(project(":features:player:impl"))
+    implementation(project(":features:feed:api"))
+    implementation(project(":features:feed:impl"))
     implementation(project(":navigation"))
+
+    implementation(libs.lifecycle.viewmodel)
 
     implementation(libs.dagger)
     ksp(libs.dagger.compiler)

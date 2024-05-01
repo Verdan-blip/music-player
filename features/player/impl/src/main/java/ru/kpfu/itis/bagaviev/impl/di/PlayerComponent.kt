@@ -20,8 +20,6 @@ interface PlayerComponent : DiComponent {
     @Component.Factory
     interface Factory {
 
-        fun create(
-            dependencies: PlayerComponentDependencies
-        ): PlayerComponent
+        fun create(dependencies: PlayerComponentDependencies): PlayerComponent
     }
 }

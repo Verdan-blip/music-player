@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <integer name="blur_radius">50</integer>
+    <integer name="blur_sampling">5</integer>
+
+</resources>

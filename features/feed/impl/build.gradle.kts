@@ -45,12 +45,16 @@ dependencies {
     implementation(libs.dagger)
     implementation(libs.legacy.support.v4)
     implementation(libs.lifecycle.livedata.ktx)
-    implementation(libs.viewmodel)
+    implementation(libs.lifecycle.viewmodel)
+
+    implementation(libs.blurry)
 
     implementation(libs.fragment.ktx)
     ksp(libs.dagger.compiler)
 
     implementation(libs.coil)
+
+    implementation(libs.shimmer)
 
     implementation(libs.android.core)
     implementation(libs.android.appcompat)

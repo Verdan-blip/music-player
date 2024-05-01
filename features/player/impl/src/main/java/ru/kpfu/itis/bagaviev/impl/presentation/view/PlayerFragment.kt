@@ -60,7 +60,7 @@ class PlayerFragment : BaseFragment(R.layout.fragment_player) {
                 tvAuthors.text = authors.joinToString()
                 tvTitle.text = title
                 enqueueLoadImageRequest(
-                    data = musicItemModel.posterUri,
+                    data = musicItemModel.coverUri,
                     allowHardware = false,
                     onSuccess = { _, resp ->
                         ivCover.setImageDrawable(resp.drawable)

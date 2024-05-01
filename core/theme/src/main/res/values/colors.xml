@@ -7,10 +7,12 @@
     <color name="on_surface_light_primary">#FFFFFF</color>
     <color name="on_surface_light_secondary">#0DFFFFFF</color>
 
-    <color name="surface">#0DFFFFFF</color>
+    <color name="surface">#1AFFFFFF</color>
 
     <color name="light_playing_thumb_color">#D9D9D9</color>
     <color name="light_playing_progress_color">#FFFFFF</color>
     <color name="light_playing_progress_background_color">#7E7E7E</color>
+
+    <color name="placeholder_light">#303030</color>
 
 </resources>

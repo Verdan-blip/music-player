@@ -43,6 +43,11 @@ class PlayerViewModel @Inject constructor(
         get() = _currentMusicItemState
 
 
+    private val _currentPlayingItemDuration = MutableStateFlow<Long?>(null)
+    val currentPlayingItemDuration: StateFlow<Long?>
+        get() = _currentPlayingItemDuration
+
+
     private var _shouldStopTrackingProgressing = false
 
     init {
@@ -50,6 +55,7 @@ class PlayerViewModel @Inject constructor(
             launch { collectIsPlaying() }
             launch { collectCurrentMusicItem() }
             launch { collectPlayingTime() }
+            launch { collectCurrentPlayingItemDuration() }
         }
     }
 
@@ -75,6 +81,12 @@ class PlayerViewModel @Inject constructor(
             }
     }
 
+    private suspend fun collectCurrentPlayingItemDuration() {
+        interactor.currentPlayingItemDuration
+            .filterNotNull()
+            .collect(_currentPlayingItemDuration::emit)
+    }
+
     private suspend fun collectPlayingTime() {
         interactor.currentPlayingPositionInMs
             .filterNotNull()
@@ -85,11 +97,9 @@ class PlayerViewModel @Inject constructor(
                             currentPlayingPositionInMs
                         )
                     )
-                    _currentMusicItemState.value?.also { musicItem ->
+                    _currentPlayingItemDuration.value?.also { duration ->
                         _playingTimeProgressState.emit(
-                            currentPlayingPositionInMs.timeAsProgress(
-                                musicItem.duration
-                            )
+                            currentPlayingPositionInMs.timeAsProgress(duration)
                         )
                     }
                 }
@@ -117,7 +127,7 @@ class PlayerViewModel @Inject constructor(
 
     fun onMoveHeldSeekBarThumb(progress: Int) {
         viewModelScope.launch {
-            _currentMusicItemState.value?.apply {
+            _currentPlayingItemDuration.value?.also { duration ->
                 _playingTimeState.emit(
                     TimeFormatter.millisToMmSs(
                     progress.progressAsTime(duration)
@@ -129,7 +139,7 @@ class PlayerViewModel @Inject constructor(
     fun onReleaseSeekBarThumb(position: Int) {
         viewModelScope.launch {
             _shouldStopTrackingProgressing = false
-            _currentMusicItemState.value?.apply {
+            _currentPlayingItemDuration.value?.also { duration ->
                 interactor.seekTo(position.progressAsTime(duration))
             }
         }

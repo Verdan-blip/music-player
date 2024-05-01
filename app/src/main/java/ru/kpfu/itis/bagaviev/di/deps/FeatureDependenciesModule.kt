@@ -4,6 +4,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 import ru.kpfu.itis.bagaviev.di.AppComponent
+import ru.kpfu.itis.bagaviev.impl.di.FeedComponentDependencies
 import ru.kpfu.itis.bagaviev.impl.di.PlayerComponentDependencies
 import ru.kpfu.itis.common.di.connector.deps.ComponentDependencies
 import ru.kpfu.itis.common.di.keys.ComponentDependenciesKey
@@ -21,4 +22,9 @@ interface FeatureDependenciesModule {
     @IntoMap
     @ComponentDependenciesKey(PlayerComponentDependencies::class)
     fun playerComponentDependencies(appComponent: AppComponent): ComponentDependencies
+
+    @Binds
+    @IntoMap
+    @ComponentDependenciesKey(FeedComponentDependencies::class)
+    fun feedComponentDependencies(appComponent: AppComponent): ComponentDependencies
 }

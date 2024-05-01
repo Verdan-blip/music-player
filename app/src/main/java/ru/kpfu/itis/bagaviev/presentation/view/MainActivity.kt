@@ -3,7 +3,8 @@ package ru.kpfu.itis.bagaviev.presentation.view
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import ru.kpfu.itis.bagaviev.R
-import ru.kpfu.itis.bagaviev.impl.presentation.view.PlayerFragment
+import ru.kpfu.itis.bagaviev.impl.presentation.view.FeedFragment
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -13,7 +14,8 @@ class MainActivity : AppCompatActivity() {
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.fv_container,
-                PlayerFragment())
+                FeedFragment()
+            )
             .commit()
     }
 }

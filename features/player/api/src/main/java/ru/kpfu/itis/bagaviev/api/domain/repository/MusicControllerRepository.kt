@@ -9,9 +9,13 @@ interface MusicControllerRepository {
 
     val currentPlayingPositionInMs: StateFlow<Long?>
 
+    val currentPlayingItemDuration: StateFlow<Long?>
+
     val isPlaying: StateFlow<Boolean?>
 
     fun play()
+
+    fun play(musicItem: MusicItem)
 
     fun pause()
 

@@ -76,7 +76,7 @@ dependencies {
     implementation(libs.dagger)
     ksp(libs.dagger.compiler)
 
-    implementation(libs.viewmodel)
+    implementation(libs.lifecycle.viewmodel)
 
     implementation(libs.browser)
 

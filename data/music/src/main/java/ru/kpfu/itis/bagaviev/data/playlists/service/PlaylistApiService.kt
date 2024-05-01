@@ -8,13 +8,19 @@ import ru.kpfu.itis.bagaviev.data.playlists.entities.responses.PlaylistResponseE
 
 interface PlaylistApiService {
 
-    @GET("/v1/tracks/{id}")
-    fun getById(
+    @GET("/v1/playlists/{id}")
+    suspend fun getById(
         @Path("id") trackId: Long
-    ): PlaylistDetailsResponseEntity
+    ): PlaylistDetailsResponseEntity?
 
-    @GET("/v1/tracks")
-    fun getAllByKeywords(
+    @GET("/v1/playlists/popular")
+    suspend fun getPopularPlaylists(
+        @Query("limit") limit: Int,
+        @Query("offset") offset: Int
+    ): List<PlaylistResponseEntity>
+
+    @GET("/v1/playlists")
+    suspend fun getAllByKeywords(
         @Query("keys") keys: String
     ): List<PlaylistResponseEntity>
 }

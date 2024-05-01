@@ -9,18 +9,18 @@ import ru.kpfu.itis.bagaviev.data.tracks.entities.responses.TrackResponseEntity
 interface TrackApiService {
 
     @GET("/v1/tracks/charts")
-    fun getCharts(
+    suspend fun getCharts(
         @Query("limit") limit: Int = 10,
         @Query("offset") offset: Int = 0
     ): List<TrackResponseEntity>
 
     @GET("/v1/tracks/{id}")
-    fun getById(
+    suspend fun getById(
         @Path("id") trackId: Long
-    ): TrackDetailsResponseEntity
+    ): TrackDetailsResponseEntity?
 
     @GET("/v1/tracks")
-    fun getAllByKeywords(
+    suspend fun getAllByKeywords(
         @Query("keys") keys: String
     ): List<TrackResponseEntity>
 }

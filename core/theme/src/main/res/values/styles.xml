@@ -8,7 +8,11 @@
     </style>
 
     <style name="ThinTextView" parent="@style/Widget.AppCompat.TextView">
-        <item name="fontFamily">sans-serif-thin</item>
+        <item name="android:fontFamily">sans-serif-thin</item>
+    </style>
+
+    <style name="LightTextView" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:fontFamily">sans-serif-light</item>
     </style>
 
     <style name="SquareCard" parent="@style/CardView">
@@ -20,26 +24,25 @@
     <style name="SmallSquareCard" parent="@style/SquareCard">
         <item name="android:layout_width">@dimen/small_square_card_width</item>
         <item name="android:layout_height">@dimen/small_square_card_height</item>
-        <item name="cornerRadius">@dimen/small_square_card_corner_radius</item>
-        <item name="contentPadding">@dimen/small_square_card_padding</item>
+        <item name="cardCornerRadius">@dimen/small_square_card_corner_radius</item>
     </style>
 
     <style name="MediumSquareCard" parent="@style/SquareCard">
         <item name="android:layout_width">@dimen/medium_square_card_width</item>
         <item name="android:layout_height">@dimen/medium_square_card_height</item>
-        <item name="cornerRadius">@dimen/medium_square_card_corner_radius</item>
+        <item name="cardCornerRadius">@dimen/medium_square_card_corner_radius</item>
     </style>
 
     <style name="LargeSquareCard" parent="@style/SquareCard">
         <item name="android:layout_width">@dimen/large_square_card_width</item>
         <item name="android:layout_height">@dimen/large_square_card_height</item>
-        <item name="cornerRadius">@dimen/large_square_card_corner_radius</item>
+        <item name="cardCornerRadius">@dimen/large_square_card_corner_radius</item>
     </style>
 
     <style name="ExtraLargeSquareCard" parent="@style/SquareCard">
         <item name="android:layout_width">@dimen/extra_large_square_card_width</item>
         <item name="android:layout_height">@dimen/extra_large_square_card_height</item>
-        <item name="cornerRadius">@dimen/extra_large_square_card_corner_radius</item>
+        <item name="cardCornerRadius">@dimen/extra_large_square_card_corner_radius</item>
     </style>
 
     <style name="PlayingProgressSeekBar" parent="@style/Widget.AppCompat.SeekBar">
@@ -47,6 +50,12 @@
         <item name="android:progressTint">@color/light_playing_progress_color</item>
         <item name="android:progressBackgroundTint">@color/light_playing_progress_background_color</item>
         <item name="android:layout_marginStart">@dimen/playing_seekbar_fixing_margin_start</item>
+    </style>
+    
+    <style name="TranslucentPopupMenu" parent="@style/Widget.AppCompat.PopupMenu">
+        <item name="android:backgroundTint">@color/surface</item>
+        <item name="android:fontFamily">sans-serif-thin</item>
+        <item name="android:textColor">@color/on_surface_light_secondary</item>
     </style>
     
 </resources>

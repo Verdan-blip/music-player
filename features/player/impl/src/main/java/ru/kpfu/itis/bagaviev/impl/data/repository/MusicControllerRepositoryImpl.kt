@@ -15,9 +15,9 @@ import ru.kpfu.itis.bagaviev.api.domain.repository.MusicControllerRepository
 import ru.kpfu.itis.bagaviev.impl.data.mapper.toMediaItem
 import ru.kpfu.itis.bagaviev.impl.data.mapper.toMusicItem
 import ru.kpfu.itis.bagaviev.impl.data.util.extensions.currentMediaItemAsFlow
+import ru.kpfu.itis.bagaviev.impl.data.util.extensions.currentPlayingItemDurationAsFlow
 import ru.kpfu.itis.bagaviev.impl.data.util.extensions.currentPlayingPositionAsFlow
 import ru.kpfu.itis.bagaviev.impl.data.util.extensions.isPlayingAsFlow
-import ru.kpfu.itis.common.util.extensions.toURI
 import javax.inject.Inject
 
 @OptIn(DelicateCoroutinesApi::class)
@@ -31,6 +31,8 @@ class MusicControllerRepositoryImpl @Inject constructor(
 
     override val currentPlayingPositionInMs = MutableStateFlow<Long?>(null)
 
+    override val currentPlayingItemDuration =  MutableStateFlow<Long?>(null)
+
     override val isPlaying = MutableStateFlow<Boolean?>(null)
 
     init {
@@ -39,13 +41,12 @@ class MusicControllerRepositoryImpl @Inject constructor(
             launch { collectIsPlayingFlow() }
             launch { collectCurrentMediaItemFlow() }
             launch { collectCurrentPlayingPositionFlow() }
+            launch { collectCurrentPlayingItemDurationFlow() }
         }
     }
 
     private suspend fun collectIsPlayingFlow() {
-        player?.isPlayingAsFlow()?.collect { playing ->
-            isPlaying.emit(playing)
-        }
+        player?.isPlayingAsFlow()?.collect(isPlaying::emit)
     }
 
     private suspend fun collectCurrentMediaItemFlow() {
@@ -58,27 +59,29 @@ class MusicControllerRepositoryImpl @Inject constructor(
         }
     }
 
-    private suspend fun collectCurrentPlayingPositionFlow() {
-        player?.currentPlayingPositionAsFlow()?.collect { currentPlayingPosition ->
-            currentPlayingPositionInMs.emit(currentPlayingPosition)
+    private suspend fun collectCurrentPlayingItemDurationFlow() {
+        player?.apply {
+            currentPlayingItemDurationAsFlow()
+                .filterNotNull()
+                .collect(currentPlayingItemDuration::emit)
         }
+    }
+
+    private suspend fun collectCurrentPlayingPositionFlow() {
+        player?.currentPlayingPositionAsFlow()?.collect(currentPlayingPositionInMs::emit)
     }
 
     private suspend fun initPlayer() {
         player = mediaControllerFuture.await()
-        player?.addMediaItem(
-            MusicItem(
-                id = 0,
-                title = "За край", listOf("Три дня дождя"),
-                duration = 201000L,
-                posterUri = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXXwAe4fzOc8kjKYF_XonJmvz92PQKexo2lSXP0jTH5g&s".toURI(),
-                fileUri = "https://mp3uks.ru/mp3/files/tri-dnya-dozhdya-za-kraj-mp3.mp3".toURI()
-            ).toMediaItem()
-        )
         player?.prepare()
     }
 
     override fun play() {
+        player?.play()
+    }
+
+    override fun play(musicItem: MusicItem) {
+        player?.setMediaItem(musicItem.toMediaItem())
         player?.play()
     }
 
@@ -103,6 +106,8 @@ class MusicControllerRepositoryImpl @Inject constructor(
     }
 
     override fun add(musicItemList: List<MusicItem>) {
-        player?.addMediaItems(musicItemList.map { it.toMediaItem() })
+        player?.addMediaItems(musicItemList.map {
+            musicItem -> musicItem.toMediaItem()
+        })
     }
 }

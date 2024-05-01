@@ -2,12 +2,14 @@ package ru.kpfu.itis.bagaviev.impl.data.util.extensions
 
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
+import androidx.media3.exoplayer.ExoPlayer
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.channels.trySendBlocking
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.flow
+
 
 fun Player.isPlayingAsFlow(): Flow<Boolean> = callbackFlow {
     trySendBlocking(isPlaying)
@@ -29,6 +31,21 @@ fun Player.currentMediaItemAsFlow(): Flow<MediaItem?> = callbackFlow {
             trySendBlocking(currentMediaItem)
         }
     }
+    addListener(listener)
+    awaitClose { removeListener(listener) }
+}
+
+fun Player.currentPlayingItemDurationAsFlow(): Flow<Long?> = callbackFlow {
+    trySendBlocking(duration)
+    val listener = object : Player.Listener {
+
+        override fun onPlaybackStateChanged(playbackState: Int) {
+            if (playbackState == ExoPlayer.STATE_READY) {
+                trySendBlocking(duration)
+            }
+        }
+    }
+
     addListener(listener)
     awaitClose { removeListener(listener) }
 }

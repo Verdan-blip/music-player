@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="feed_fragment_feed">Лента</string>
+    <string name="feed_fragment_feed">Популярное</string>
     <string name="feed_fragment_popular_playlists">Популярные плейлисты (%d)</string>
     <string name="feed_fragment_top_charts">Топ чарты (%d)</string>
     <string name="feed_fragment_tap_to_search">Нажмите для поиска</string>
+    
+    <string name="item_track_menu_add_to_favourites">Добавить в избранное</string>
+    <string name="item_track_menu_save_to_device">Сохранить на устройстве</string>
+
+    <string name="item_track_title_placeholder">-- --</string>
 
 </resources>

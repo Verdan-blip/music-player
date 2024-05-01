@@ -1,50 +1,52 @@
 package ru.kpfu.itis.bagaviev.impl.presentation.entities.playlists.mappers
 
-import ru.kpfu.itis.bagaviev.api.domain.playlists.entites.responses.PlaylistDetailsResponse
-import ru.kpfu.itis.bagaviev.api.domain.playlists.entites.responses.PlaylistResponse
-import ru.kpfu.itis.bagaviev.feed.domain.playlists.entites.responses.PlaylistDetailsResponseModel
-import ru.kpfu.itis.bagaviev.feed.domain.playlists.entites.responses.PlaylistResponseModel
-import ru.kpfu.itis.bagaviev.impl.presentation.entities.tracks.mappers.toTrackResponse
-import ru.kpfu.itis.bagaviev.impl.presentation.entities.tracks.mappers.toTrackResponseModel
-import ru.kpfu.itis.bagaviev.impl.presentation.entities.users.mappers.toUserResponse
-import ru.kpfu.itis.bagaviev.impl.presentation.entities.users.mappers.toUserResponseModel
+import ru.kpfu.itis.bagaviev.api.domain.playlists.entites.PlaylistDetails
+import ru.kpfu.itis.bagaviev.api.domain.playlists.entites.Playlist
+import ru.kpfu.itis.bagaviev.impl.presentation.entities.playlists.PlaylistDetailsModel
+import ru.kpfu.itis.bagaviev.impl.presentation.entities.playlists.PlaylistModel
+import ru.kpfu.itis.bagaviev.impl.presentation.entities.tracks.mappers.toTrack
+import ru.kpfu.itis.bagaviev.impl.presentation.entities.tracks.mappers.toTrackModel
+import ru.kpfu.itis.bagaviev.impl.presentation.entities.users.mappers.toUser
+import ru.kpfu.itis.bagaviev.impl.presentation.entities.users.mappers.toUserModel
 import ru.kpfu.itis.common.util.extensions.toURI
 import ru.kpfu.itis.common.util.extensions.toUri
 
-fun PlaylistResponse.toPlaylistResponseModel(): PlaylistResponseModel =
-    PlaylistResponseModel(
+fun Playlist.toPlaylistModel(): PlaylistModel =
+    PlaylistModel(
         id = id,
         title = title,
         coverUri = coverUri.toUri(),
-        user = user.toUserResponseModel(),
-        tracks = tracks.map { track -> track.toTrackResponseModel() }
+        user = user.toUserModel(),
+        tracks = tracks.map { track -> track.toTrackModel() }
     )
 
-fun PlaylistResponseModel.toPlaylistResponse(): PlaylistResponse =
-    PlaylistResponse(
+fun PlaylistModel.toPlaylist(): Playlist =
+    Playlist(
         id = id,
         title = title,
         coverUri = coverUri.toURI(),
-        user = user.toUserResponse(),
-        tracks = tracks.map { track -> track.toTrackResponse() }
+        user = user.toUser(),
+        tracks = tracks.map { track -> track.toTrack() }
     )
 
-fun PlaylistDetailsResponse.toPlaylistDetailsResponseModel(): PlaylistDetailsResponseModel =
-    PlaylistDetailsResponseModel(
+fun PlaylistDetails.toPlaylistDetailsModel(): PlaylistDetailsModel =
+    PlaylistDetailsModel(
         id = id,
         title = title,
         coverUri = coverUri.toUri(),
-        tracks = tracks.map { track -> track.toTrackResponseModel() },
-        createdTime = createdTime,
-        playsCount = playsCount
+        tracks = tracks.map { track -> track.toTrackModel() },
+        createdTime = createdDate,
+        playsCount = playsCount,
+        user = user.toUserModel()
     )
 
-fun PlaylistDetailsResponseModel.toPlaylistDetailsResponse(): PlaylistDetailsResponse =
-    PlaylistDetailsResponse(
+fun PlaylistDetailsModel.toPlaylistDetails(): PlaylistDetails =
+    PlaylistDetails(
         id = id,
         title = title,
         coverUri = coverUri.toURI(),
-        tracks = tracks.map { track -> track.toTrackResponse() },
-        createdTime = createdTime,
-        playsCount = playsCount
+        tracks = tracks.map { track -> track.toTrack() },
+        createdDate = createdTime,
+        playsCount = playsCount,
+        user = user.toUser()
     )

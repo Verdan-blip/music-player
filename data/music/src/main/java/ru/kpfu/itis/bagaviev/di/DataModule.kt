@@ -2,6 +2,7 @@ package ru.kpfu.itis.bagaviev.di
 
 import dagger.Module
 
-@Module
-interface DataModule {
-}
+@Module(
+    includes = [NetworkModule::class]
+)
+interface DataModule

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_item_add_to_favourites"
+        android:title="@string/item_track_menu_add_to_favourites" />
+
+    <item
+        android:id="@+id/menu_item_save_to_device"
+        android:title="@string/item_track_menu_save_to_device" />
+</menu>

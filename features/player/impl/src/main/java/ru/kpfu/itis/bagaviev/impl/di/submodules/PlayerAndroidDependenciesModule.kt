@@ -13,12 +13,10 @@ import ru.kpfu.itis.common.di.scopes.FeatureScope
 @Module
 class PlayerAndroidDependenciesModule {
 
-    @FeatureScope
     @Provides
     fun provideSessionToken(context: Context): SessionToken =
         SessionToken(context, ComponentName(context, PlayerService::class.java))
 
-    @FeatureScope
     @Provides
     fun provideMediaControllerFuture(context: Context, sessionToken: SessionToken):
             ListenableFuture<MediaController> =

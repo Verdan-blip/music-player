@@ -9,7 +9,6 @@ import ru.kpfu.itis.common.di.scopes.FeatureScope
 @Module
 interface PlayerRepositoriesModule {
 
-    @FeatureScope
     @Binds
     fun provideMusicControllerRepositoryImpl_to_MusicControllerRepository(
         musicControllerRepositoryImpl: MusicControllerRepositoryImpl

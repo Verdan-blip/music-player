@@ -1,38 +1,35 @@
 package ru.kpfu.itis.bagaviev.impl.data.mapper
 
-import android.net.Uri
-import androidx.core.os.bundleOf
 import androidx.media3.common.MediaItem
 import androidx.media3.common.MediaMetadata
 import ru.kpfu.itis.bagaviev.api.domain.entities.MusicItem
-import ru.kpfu.itis.common.util.converters.UriConverter
+import ru.kpfu.itis.bagaviev.api.domain.exceptions.AudioFileUriNotProvidedException
+import ru.kpfu.itis.bagaviev.api.domain.exceptions.AuthorsNotProvidedException
+import ru.kpfu.itis.bagaviev.api.domain.exceptions.CoverUriNotProvidedException
+import ru.kpfu.itis.common.util.extensions.toURI
+import ru.kpfu.itis.common.util.extensions.toUri
 
 fun MusicItem.toMediaItem(): MediaItem {
-    val mediaMetaData = MediaMetadata.Builder()
+    val mediaMetadata = MediaMetadata.Builder()
         .setTitle(title)
-        .setArtist(authors.joinToString(separator = "& "))
-        .setArtworkUri(Uri.parse(posterUri.toString()))
-        .setMediaType(MediaMetadata.MEDIA_TYPE_MUSIC)
-        .setExtras(bundleOf("duration" to duration))
+        .setArtworkUri(coverUri.toUri())
+        .setArtist(authors.joinToString(separator = " & "))
+        .setGenre(genre)
         .build()
+
     return MediaItem.Builder()
-        .setUri(fileUri.toString())
-        .setMediaMetadata(mediaMetaData)
+        .setMediaMetadata(mediaMetadata)
         .setMediaId(id.toString())
+        .setUri(audioFileUri.toUri())
         .build()
 }
 
-fun MediaItem.toMusicItem(): MusicItem {
-    return MusicItem(
-        id = mediaId.toInt(),
+fun MediaItem.toMusicItem(): MusicItem =
+    MusicItem(
+        id = mediaId.toLong(),
         title = mediaMetadata.title.toString(),
-        authors = mediaMetadata.artist?.split("& ") ?: listOf(),
-        duration = mediaMetadata.extras?.getLong("duration") ?: 0L,
-        posterUri = UriConverter.UriToURI(
-            mediaMetadata.artworkUri ?: throw IllegalStateException("Poster uri was not provided")
-        ),
-        fileUri = UriConverter.UriToURI(
-            localConfiguration?.uri ?: throw IllegalStateException("File uri was not provided")
-        )
+        authors = mediaMetadata.artist?.split(" & ") ?: throw AuthorsNotProvidedException(),
+        genre = mediaMetadata.genre.toString(),
+        audioFileUri = localConfiguration?.uri?.toURI() ?: throw AudioFileUriNotProvidedException(),
+        coverUri = mediaMetadata.artworkUri?.toURI() ?: throw CoverUriNotProvidedException()
     )
-}

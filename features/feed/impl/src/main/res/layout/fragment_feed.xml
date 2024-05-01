@@ -6,6 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <ImageView
+        android:id="@+id/iv_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="fitXY"
@@ -15,8 +16,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center|top"
-        android:paddingStart="@dimen/feed_fragment_padding"
-        android:paddingEnd="@dimen/feed_fragment_padding"
         android:orientation="vertical">
 
         <TextView
@@ -28,47 +27,15 @@
             android:textSize="@dimen/feed_fragment_title_text"
             android:text="@string/feed_fragment_feed"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/feed_fragment_subtitle_margin_top"
-            style="@style/ThinTextView"
-            android:textColor="@color/light_text_secondary_color"
-            android:textSize="@dimen/feed_fragment_subtitle_text"
-            android:text="@string/feed_fragment_popular_playlists" />
-
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/feed_fragment_playlists_margin_top"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_playlist"
-            android:orientation="horizontal" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/feed_fragment_subtitle_margin_top"
-            style="@style/ThinTextView"
-            android:textColor="@color/light_text_secondary_color"
-            android:textSize="@dimen/feed_fragment_subtitle_text"
-            android:text="@string/feed_fragment_top_charts" />
-
-        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_chart_tracks"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/feed_fragment_tracks_margin_top"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:orientation="vertical"
-            tools:listitem="@layout/item_track" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            style="@style/ThinTextView"
-            android:textSize="@dimen/feed_fragment_subtitle_text"
-            android:text="@string/feed_fragment_tap_to_search"/>
+            tools:listitem="@layout/item_track"
+            tools:itemCount="5" />
 
     </LinearLayout>
 

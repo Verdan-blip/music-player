@@ -14,6 +14,7 @@
     <dimen name="medium_square_card_width">84dp</dimen>
     <dimen name="medium_square_card_height">84dp</dimen>
     <dimen name="medium_square_card_corner_radius">8dp</dimen>
+    <dimen name="medium_square_card_padding">12dp</dimen>
 
     <dimen name="large_square_card_width">128dp</dimen>
     <dimen name="large_square_card_height">128dp</dimen>
@@ -27,6 +28,6 @@
     <dimen name="playing_seekbar_thumb_radius">9dp</dimen>
     <dimen name="playing_seekbar_margin_top">8dp</dimen>
     <dimen name="playing_seekbar_margin_bottom">2dp</dimen>
-    <dimen name="playing_seekbar_fixing_margin_start">-16dp</dimen>
+    <dimen name="playing_seekbar_fixing_margin_start">-8dp</dimen>
 
 </resources>

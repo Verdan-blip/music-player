@@ -1,34 +1,31 @@
 package ru.kpfu.itis.bagaviev.api.domain.interactor
 
-import ru.kpfu.itis.bagaviev.api.domain.repository.MusicControllerRepository
+import kotlinx.coroutines.flow.StateFlow
+import ru.kpfu.itis.bagaviev.api.domain.entities.MusicItem
 
-class MusicControllerInteractor(
-    private val musicControllerRepository: MusicControllerRepository
-) {
+interface MusicControllerInteractor {
 
-    var currentMusicItem = musicControllerRepository.currentMusicItem
+    val currentMusicItem: StateFlow<MusicItem?>
 
-    var isPlaying = musicControllerRepository.isPlaying
+    val currentPlayingPositionInMs: StateFlow<Long?>
 
-    var currentPlayingPositionInMs = musicControllerRepository.currentPlayingPositionInMs
+    val currentPlayingItemDuration: StateFlow<Long?>
 
-    fun play() {
-        musicControllerRepository.play()
-    }
+    val isPlaying: StateFlow<Boolean?>
 
-    fun pause() {
-        musicControllerRepository.pause()
-    }
+    fun play()
 
-    fun playNext() {
-        musicControllerRepository.playNext()
-    }
+    fun play(musicItem: MusicItem)
 
-    fun playPrevious() {
-        musicControllerRepository.playPrevious()
-    }
+    fun pause()
 
-    fun seekTo(positionInMs: Long) {
-        musicControllerRepository.seekTo(positionInMs)
-    }
+    fun playNext()
+
+    fun playPrevious()
+
+    fun seekTo(positionInMs: Long)
+
+    fun add(musicItem: MusicItem)
+
+    fun add(musicItemList: List<MusicItem>)
 }

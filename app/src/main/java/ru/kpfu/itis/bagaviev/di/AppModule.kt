@@ -6,7 +6,9 @@ import dagger.Module
 import dagger.Provides
 import ru.kpfu.itis.bagaviev.App
 
-@Module
+@Module(
+    includes = [DataModule::class]
+)
 interface AppModule {
 
     @Binds
