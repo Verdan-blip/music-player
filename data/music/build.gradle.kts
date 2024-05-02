@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.kpfu.itis.bagaviev"
+    namespace = "ru.kpfu.itis.bagaviev.music"
     compileSdk = 34
 
     defaultConfig {

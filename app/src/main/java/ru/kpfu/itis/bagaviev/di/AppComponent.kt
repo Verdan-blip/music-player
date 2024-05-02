@@ -4,9 +4,11 @@ import dagger.BindsInstance
 import dagger.Component
 import ru.kpfu.itis.auth.di.DataModule
 import ru.kpfu.itis.bagaviev.App
+import ru.kpfu.itis.bagaviev.di.deps.MainDependenciesModule
 import ru.kpfu.itis.bagaviev.di.deps.FeatureComponentsDependencies
 import ru.kpfu.itis.bagaviev.di.deps.FeatureDependenciesModule
 import ru.kpfu.itis.bagaviev.glue.FeaturesModule
+import ru.kpfu.itis.bagaviev.presentation.di.MainActivityComponentDependencies
 import ru.kpfu.itis.common.di.scopes.ApplicationScope
 
 @ApplicationScope
@@ -15,10 +17,11 @@ import ru.kpfu.itis.common.di.scopes.ApplicationScope
         AppModule::class,
         DataModule::class,
         FeatureDependenciesModule::class,
+        MainDependenciesModule::class,
         FeaturesModule::class
     ]
 )
-interface AppComponent : FeatureComponentsDependencies {
+interface AppComponent : FeatureComponentsDependencies, MainActivityComponentDependencies {
 
     fun inject(application: App)
 

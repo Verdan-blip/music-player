@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    tools:backgroundTint="@color/cardview_dark_background"
     app:contentPadding="@dimen/large_square_card_padding"
     style="@style/LargeSquareCard">
 

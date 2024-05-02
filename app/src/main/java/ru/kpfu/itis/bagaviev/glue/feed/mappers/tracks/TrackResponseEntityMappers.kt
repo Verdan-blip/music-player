@@ -1,14 +1,13 @@
 package ru.kpfu.itis.bagaviev.glue.feed.mappers.tracks
 
-import ru.kpfu.itis.bagaviev.api.domain.tracks.entites.TrackDetails
-import ru.kpfu.itis.bagaviev.api.domain.tracks.entites.Track
-import ru.kpfu.itis.bagaviev.data.tracks.entities.responses.TrackDetailsResponseEntity
-import ru.kpfu.itis.bagaviev.data.tracks.entities.responses.TrackResponseEntity
+import ru.kpfu.itis.bagaviev.feed.api.domain.tracks.entites.Track
+import ru.kpfu.itis.bagaviev.feed.api.domain.tracks.entites.TrackDetails
+import ru.kpfu.itis.bagaviev.music.data.tracks.entities.responses.TrackDetailsResponseEntity
+import ru.kpfu.itis.bagaviev.music.data.tracks.entities.responses.TrackResponseEntity
 import ru.kpfu.itis.bagaviev.glue.feed.mappers.users.toUserResponse
 import ru.kpfu.itis.bagaviev.glue.feed.mappers.users.toUserResponseEntity
 import ru.kpfu.itis.common.util.extensions.toURI
 import java.sql.Date
-import java.sql.Timestamp
 
 fun Track.toTrackResponseEntity(): TrackResponseEntity =
     TrackResponseEntity(

@@ -73,7 +73,7 @@
             android:textColor="@color/light_text_primary_color"
             tools:text="00:54" />
 
-        <ru.kpfu.itis.bagaviev.impl.presentation.view.custom.PlayPauseButton
+        <ru.kpfu.itis.bagaviev.player.impl.presentation.view.custom.PlayPauseButton
             android:id="@+id/btn_play_or_pause"
             android:layout_width="@dimen/playing_pause_or_play_radius"
             android:layout_height="@dimen/playing_pause_or_play_radius"

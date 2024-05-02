@@ -1,16 +1,14 @@
 package ru.kpfu.itis.bagaviev.glue.feed.mappers.playlists
 
-import ru.kpfu.itis.bagaviev.api.domain.playlists.entites.Playlist
-import ru.kpfu.itis.bagaviev.api.domain.playlists.entites.PlaylistDetails
-import ru.kpfu.itis.bagaviev.data.playlists.entities.responses.PlaylistDetailsResponseEntity
-import ru.kpfu.itis.bagaviev.data.playlists.entities.responses.PlaylistResponseEntity
+import ru.kpfu.itis.bagaviev.feed.api.domain.playlists.entites.Playlist
+import ru.kpfu.itis.bagaviev.feed.api.domain.playlists.entites.PlaylistDetails
+import ru.kpfu.itis.bagaviev.music.data.playlists.entities.responses.PlaylistDetailsResponseEntity
+import ru.kpfu.itis.bagaviev.music.data.playlists.entities.responses.PlaylistResponseEntity
 import ru.kpfu.itis.bagaviev.glue.feed.mappers.tracks.toTrack
 import ru.kpfu.itis.bagaviev.glue.feed.mappers.tracks.toTrackResponseEntity
 import ru.kpfu.itis.bagaviev.glue.feed.mappers.users.toUserResponse
 import ru.kpfu.itis.bagaviev.glue.feed.mappers.users.toUserResponseEntity
 import ru.kpfu.itis.common.util.extensions.toURI
-import java.sql.Timestamp
-import java.util.Calendar
 import java.util.Date
 
 fun Playlist.toPlaylistResponseEntity(): PlaylistResponseEntity =

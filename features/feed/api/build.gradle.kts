@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.kpfu.itis.bagaviev.api"
+    namespace = "ru.kpfu.itis.bagaviev.feed.api"
     compileSdk = 34
 
     defaultConfig {

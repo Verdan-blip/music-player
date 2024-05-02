@@ -25,6 +25,9 @@
     <dimen name="track_playing_seekbar_margin_top">8dp</dimen>
     <dimen name="track_playing_seekbar_margin_bottom">2dp</dimen>
 
+    <dimen name="track_floating_margin_start">16dp</dimen>
+    <dimen name="track_floating_margin_bottom">16dp</dimen>
+
     <dimen name="track_placeholder_text_height">12dp</dimen>
     <dimen name="track_placeholder_text_width">64dp</dimen>
     <dimen name="track_placeholder_card_padding">6dp</dimen>

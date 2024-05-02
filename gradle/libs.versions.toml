@@ -38,6 +38,7 @@ blurry = "4.0.0"
 kotlin-parcelize = "2.0.0-RC1"
 
 shimmer = "0.5.0"
+activity = "1.8.0"
 
 [libraries]
 
@@ -86,6 +87,7 @@ coil = { module = "io.coil-kt:coil", version.ref = "coil" }
 blurry = { group = "com.github.wasabeef", name = "blurry", version.ref = "blurry" }
 
 shimmer = { group = "com.facebook.shimmer", name = "shimmer", version.ref = "shimmer" }
+activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 
 [plugins]
 

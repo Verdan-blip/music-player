@@ -8,7 +8,7 @@
 
     <application>
         <service
-            android:name=".presentation.service.PlayerService"
+            android:name="ru.kpfu.itis.bagaviev.player.impl.presentation.service.PlayerService"
             android:foregroundServiceType="mediaPlayback"
             android:exported="false">
             <intent-filter>

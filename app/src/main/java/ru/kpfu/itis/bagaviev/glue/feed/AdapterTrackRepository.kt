@@ -1,9 +1,9 @@
 package ru.kpfu.itis.bagaviev.glue.feed
 
-import ru.kpfu.itis.bagaviev.api.domain.tracks.entites.TrackDetails
-import ru.kpfu.itis.bagaviev.api.domain.tracks.entites.Track
-import ru.kpfu.itis.bagaviev.api.domain.tracks.repository.TrackRepository
-import ru.kpfu.itis.bagaviev.data.tracks.repository.TrackDataRepository
+import ru.kpfu.itis.bagaviev.feed.api.domain.tracks.entites.TrackDetails
+import ru.kpfu.itis.bagaviev.feed.api.domain.tracks.entites.Track
+import ru.kpfu.itis.bagaviev.feed.api.domain.tracks.repository.TrackRepository
+import ru.kpfu.itis.bagaviev.music.data.tracks.repository.TrackDataRepository
 import ru.kpfu.itis.bagaviev.glue.feed.mappers.tracks.toTrackDetails
 import ru.kpfu.itis.bagaviev.glue.feed.mappers.tracks.toTrack
 import javax.inject.Inject

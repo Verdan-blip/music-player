@@ -46,11 +46,14 @@ dependencies {
     implementation(project(":features:player:impl"))
     implementation(project(":features:feed:api"))
     implementation(project(":features:feed:impl"))
-    implementation(project(":navigation"))
 
     implementation(libs.lifecycle.viewmodel)
 
+    implementation(libs.navigation.fragment)
+    implementation(libs.navigation.ui)
+
     implementation(libs.dagger)
+    implementation(libs.activity)
     ksp(libs.dagger.compiler)
 
     implementation(libs.media3.session)

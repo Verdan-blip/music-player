@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.kpfu.itis.bagaviev.impl"
+    namespace = "ru.kpfu.itis.bagaviev.player.impl"
     compileSdk = 34
 
     defaultConfig {

@@ -1,9 +1,9 @@
 package ru.kpfu.itis.bagaviev.glue.feed
 
-import ru.kpfu.itis.bagaviev.api.domain.playlists.entites.PlaylistDetails
-import ru.kpfu.itis.bagaviev.api.domain.playlists.entites.Playlist
-import ru.kpfu.itis.bagaviev.api.domain.playlists.repository.PlaylistRepository
-import ru.kpfu.itis.bagaviev.data.playlists.repository.PlaylistDataRepository
+import ru.kpfu.itis.bagaviev.feed.api.domain.playlists.entites.PlaylistDetails
+import ru.kpfu.itis.bagaviev.feed.api.domain.playlists.entites.Playlist
+import ru.kpfu.itis.bagaviev.feed.api.domain.playlists.repository.PlaylistRepository
+import ru.kpfu.itis.bagaviev.music.data.playlists.repository.PlaylistDataRepository
 import ru.kpfu.itis.bagaviev.glue.feed.mappers.playlists.toPlaylistDetailsResponse
 import ru.kpfu.itis.bagaviev.glue.feed.mappers.playlists.toPlaylistResponse
 import javax.inject.Inject

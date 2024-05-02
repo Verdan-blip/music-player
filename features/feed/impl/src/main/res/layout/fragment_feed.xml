@@ -39,4 +39,21 @@
 
     </LinearLayout>
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|left"
+        app:cardCornerRadius="@dimen/medium_square_card_corner_radius"
+        android:layout_marginBottom="@dimen/track_floating_margin_bottom"
+        android:layout_marginStart="@dimen/track_floating_margin_start"
+        style="@style/SquareCard">
+
+        <ImageView
+            android:id="@+id/iv_floating_playing_track"
+            android:layout_width="@dimen/medium_square_card_width"
+            android:layout_height="@dimen/medium_square_card_height"
+            tools:src="@drawable/cover_example" />
+
+    </androidx.cardview.widget.CardView>
+
 </FrameLayout>
