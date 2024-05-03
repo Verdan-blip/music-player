@@ -1,14 +1,15 @@
 package ru.kpfu.itis.bagaviev.presentation.view
 
+import android.content.Context
 import android.os.Bundle
+import android.util.AttributeSet
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import ru.kpfu.itis.bagaviev.App
 import ru.kpfu.itis.bagaviev.R
 import ru.kpfu.itis.bagaviev.navigation.Navigator
-import ru.kpfu.itis.bagaviev.presentation.di.DaggerMainActivityComponent
-import ru.kpfu.itis.common.di.connector.deps.ComponentDependenciesProvider
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -21,9 +22,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        DaggerMainActivityComponent
-            .factory()
-            .create(ComponentDependenciesProvider.get(this.applicationContext))
+        (applicationContext as App).appComponent
             .inject(this)
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fv_container)
