@@ -2,7 +2,7 @@ package ru.kpfu.itis.oauth.domain.usecase
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
-import ru.kpfu.itis.common.di.modules.IODispatcher
+import ru.kpfu.itis.bagaviev.common.di.modules.IODispatcher
 import ru.kpfu.itis.oauth.domain.repository.AuthTokenRepository
 import javax.inject.Inject
 

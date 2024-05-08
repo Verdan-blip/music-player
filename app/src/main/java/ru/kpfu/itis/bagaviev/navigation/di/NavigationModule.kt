@@ -4,7 +4,7 @@ import dagger.Module
 import dagger.Provides
 import ru.kpfu.itis.bagaviev.navigation.Navigator
 import ru.kpfu.itis.bagaviev.presentation.GlobalRouter
-import ru.kpfu.itis.common.di.scopes.ApplicationScope
+import ru.kpfu.itis.bagaviev.common.di.scopes.ApplicationScope
 
 @Module
 class NavigationModule {

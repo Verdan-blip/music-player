@@ -35,8 +35,6 @@ kotlin-serialization = "1.6.2"
 
 blurry = "4.0.0"
 
-kotlin-parcelize = "2.0.0-RC1"
-
 shimmer = "0.5.0"
 activity = "1.8.0"
 
@@ -100,6 +98,4 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 
 kotlin-jvm =  { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-
-kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin-parcelize" }
 

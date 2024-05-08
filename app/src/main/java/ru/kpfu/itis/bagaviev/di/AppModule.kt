@@ -8,7 +8,10 @@ import ru.kpfu.itis.bagaviev.music.di.DataModule
 import ru.kpfu.itis.bagaviev.navigation.di.NavigationModule
 
 @Module(
-    includes = [DataModule::class, NavigationModule::class]
+    includes = [
+        DataModule::class,
+        NavigationModule::class
+    ]
 )
 interface AppModule {
 

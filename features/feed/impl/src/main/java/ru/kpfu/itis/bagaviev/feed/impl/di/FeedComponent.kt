@@ -1,9 +1,9 @@
 package ru.kpfu.itis.bagaviev.feed.impl.di
 
 import dagger.Component
+import ru.kpfu.itis.bagaviev.common.di.DiComponent
+import ru.kpfu.itis.bagaviev.common.di.scopes.FeatureScope
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.FeedViewModel
-import ru.kpfu.itis.common.di.DiComponent
-import ru.kpfu.itis.common.di.scopes.FeatureScope
 
 @FeatureScope
 @Component(

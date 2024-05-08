@@ -11,7 +11,7 @@ import ru.kpfu.itis.bagaviev.feed.impl.databinding.ItemPlaylistsBinding
 import ru.kpfu.itis.bagaviev.feed.impl.databinding.ItemTrackBinding
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.entities.playlists.PlaylistModel
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.entities.tracks.TrackModel
-import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.diffutil.TracksDiffUtil
+import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.diffutil.TracksCallback
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.holder.FeedViewHolder
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.holder.feed.FeedSubtitleViewHolder
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.holder.feed.PlaylistsViewHolder
@@ -37,6 +37,10 @@ class FeedAdapter(
     private var currentProgress: Int = 0
 
     fun setPlayingTrack(trackId: Long) {
+
+        if (currentPlayingId == trackId)
+            return
+
         currentPlayingIdIndex?.also { oldIndex ->
             notifyItemChanged(
                 trackPositionAsFeedPosition(oldIndex)
@@ -53,10 +57,6 @@ class FeedAdapter(
                 trackPositionAsFeedPosition(index), true
             )
         }
-    }
-
-    fun setPlayingPlaylist(playlistId: Long) {
-
     }
 
     fun updatePlayingProgress(progress: Int) {
@@ -85,7 +85,7 @@ class FeedAdapter(
 
     fun submitTrackList(trackList: List<TrackModel>) {
         val diffResult = DiffUtil.calculateDiff(
-            TracksDiffUtil(oldList = this.trackList, newList = trackList)
+            TracksCallback(oldList = this.trackList, newList = trackList)
         )
         this.trackList = trackList
         diffResult.dispatchUpdatesTo(this)
@@ -136,7 +136,11 @@ class FeedAdapter(
             )
             is TrackViewHolder -> holder.bind(
                 trackList[feedPositionAsTrackPosition(position)],
-                TrackViewHolder.Companion.TrackState.Static
+                if (feedPositionAsTrackPosition(position) == currentPlayingIdIndex) {
+                    TrackViewHolder.Companion.TrackState.Playing(isPlaying, currentProgress)
+                } else {
+                    TrackViewHolder.Companion.TrackState.Static
+                }
             )
             is PlaylistsViewHolder -> holder.bind(
                 playlistList

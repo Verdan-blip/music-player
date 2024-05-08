@@ -6,13 +6,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import ru.kpfu.itis.bagaviev.feed.impl.databinding.ItemPlaylistBinding
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.entities.playlists.PlaylistModel
-import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.diffutil.PlaylistDiffUtil
+import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.diffutil.PlaylistItemCallback
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.holder.playlist.PlaylistViewHolder
 
 class PlaylistAdapter(
     private val context: Context,
     private val interactor: PlaylistViewHolder.Companion.PlaylistInteractor
-) : ListAdapter<PlaylistModel, PlaylistViewHolder>(PlaylistDiffUtil()) {
+) : ListAdapter<PlaylistModel, PlaylistViewHolder>(PlaylistItemCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaylistViewHolder =
         PlaylistViewHolder(

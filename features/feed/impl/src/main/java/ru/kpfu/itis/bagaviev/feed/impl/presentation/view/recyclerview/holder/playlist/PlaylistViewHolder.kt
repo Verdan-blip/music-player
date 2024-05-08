@@ -13,9 +13,17 @@ class PlaylistViewHolder(
     private var playlist: PlaylistModel? = null
 
     init {
-        binding.root.setOnClickListener {
-            playlist?.apply {
-                interactor.onClick(id)
+        binding.apply {
+            root.setOnClickListener {
+                playlist?.apply {
+                    interactor.onClick(id)
+                }
+            }
+            root.setOnLongClickListener {
+                playlist?.apply {
+                    interactor.onLongClick(id)
+                }
+                true
             }
         }
     }
@@ -33,6 +41,8 @@ class PlaylistViewHolder(
         interface PlaylistInteractor {
 
             fun onClick(playlistId: Long)
+
+            fun onLongClick(playlistId: Long)
         }
     }
 }

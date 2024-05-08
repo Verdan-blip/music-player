@@ -2,10 +2,11 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.android.kotlin)
     alias(libs.plugins.ksp)
+    id("kotlin-parcelize")
 }
 
 android {
-    namespace = "ru.kpfu.itis.bagaviev.player.impl"
+    namespace = "ru.kpfu.itis.bagaviev.feature.player.impl"
     compileSdk = 34
 
     defaultConfig {
@@ -38,14 +39,11 @@ android {
 
 dependencies {
 
-    implementation(project(":features:player:api"))
+    implementation(project(":player:api"))
     implementation(project(":core:common"))
     implementation(project(":core:theme"))
 
     implementation(libs.coil)
-    implementation(libs.media3.session)
-    implementation(libs.media3.exoplayer)
-    implementation(libs.media3.dash)
 
     implementation(libs.fragment.ktx)
 

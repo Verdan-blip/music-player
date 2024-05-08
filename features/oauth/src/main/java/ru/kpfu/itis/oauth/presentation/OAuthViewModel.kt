@@ -7,8 +7,8 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import ru.kpfu.itis.common.states.CustomTabsState
-import ru.kpfu.itis.common.util.typealiases.ViewModelFactories
+import ru.kpfu.itis.bagaviev.common.states.CustomTabsState
+import ru.kpfu.itis.bagaviev.common.util.typealiases.ViewModelFactories
 import ru.kpfu.itis.oauth.OAuthRouter
 import ru.kpfu.itis.oauth.domain.usecase.GetOAuthUriUseCase
 import ru.kpfu.itis.oauth.domain.usecase.GrantAccessTokenUseCase
@@ -30,7 +30,8 @@ class OAuthViewModel @Inject constructor(
     fun onAuthenticateButtonPressed() {
         viewModelScope.launch {
             val authUri = getOAuthUriUseCase()
-            _customTabsState.emit(CustomTabsState.Opened(
+            _customTabsState.emit(
+                CustomTabsState.Opened(
                 Uri.parse(authUri.toString()))
             )
         }

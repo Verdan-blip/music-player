@@ -1,11 +1,11 @@
 package ru.kpfu.itis.bagaviev
 
 import android.app.Application
+import ru.kpfu.itis.bagaviev.common.di.connector.containers.DependenciesContainer
 import ru.kpfu.itis.bagaviev.di.AppComponent
 import ru.kpfu.itis.bagaviev.di.DaggerAppComponent
 import ru.kpfu.itis.bagaviev.di.deps.ComponentDependenciesManager
-import ru.kpfu.itis.common.di.connector.containers.DependenciesContainer
-import ru.kpfu.itis.common.di.connector.deps.ComponentDependencies
+import ru.kpfu.itis.bagaviev.common.di.connector.deps.ComponentDependencies
 import javax.inject.Inject
 
 class App : Application(), DependenciesContainer {

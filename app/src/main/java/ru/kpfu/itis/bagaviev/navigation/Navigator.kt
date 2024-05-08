@@ -20,6 +20,6 @@ class Navigator : GlobalRouter {
     }
 
     override fun navigateToPlayer() {
-        navController?.navigate(R.id.playerFragment)
+        navController?.navigate(R.id.action_feedFragment_to_playerFragment)
     }
 }

@@ -15,31 +15,31 @@
         <item name="android:fontFamily">sans-serif-light</item>
     </style>
 
-    <style name="SquareCard" parent="@style/CardView">
+    <style name="AppCard" parent="@style/CardView">
         <item name="android:backgroundTint">@color/surface</item>
         <item name="android:elevation">0dp</item>
         <item name="cardElevation">0dp</item>
     </style>
 
-    <style name="SmallSquareCard" parent="@style/SquareCard">
+    <style name="SmallSquareCard" parent="@style/AppCard">
         <item name="android:layout_width">@dimen/small_square_card_width</item>
         <item name="android:layout_height">@dimen/small_square_card_height</item>
         <item name="cardCornerRadius">@dimen/small_square_card_corner_radius</item>
     </style>
 
-    <style name="MediumSquareCard" parent="@style/SquareCard">
+    <style name="MediumSquareCard" parent="@style/AppCard">
         <item name="android:layout_width">@dimen/medium_square_card_width</item>
         <item name="android:layout_height">@dimen/medium_square_card_height</item>
         <item name="cardCornerRadius">@dimen/medium_square_card_corner_radius</item>
     </style>
 
-    <style name="LargeSquareCard" parent="@style/SquareCard">
+    <style name="LargeSquareCard" parent="@style/AppCard">
         <item name="android:layout_width">@dimen/large_square_card_width</item>
         <item name="android:layout_height">@dimen/large_square_card_height</item>
         <item name="cardCornerRadius">@dimen/large_square_card_corner_radius</item>
     </style>
 
-    <style name="ExtraLargeSquareCard" parent="@style/SquareCard">
+    <style name="ExtraLargeSquareCard" parent="@style/AppCard">
         <item name="android:layout_width">@dimen/extra_large_square_card_width</item>
         <item name="android:layout_height">@dimen/extra_large_square_card_height</item>
         <item name="cardCornerRadius">@dimen/extra_large_square_card_corner_radius</item>

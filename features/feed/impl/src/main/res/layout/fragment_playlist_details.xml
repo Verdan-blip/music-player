@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:backgroundTint="@color/dialog_surface"
+    style="@style/AppCard"
+    app:cardCornerRadius="@dimen/medium_square_card_corner_radius">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:gravity="center|top"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/medium_square_card_corner_radius"
+            style="@style/AppCard">
+
+            <ImageView
+                android:id="@+id/iv_track_cover"
+                android:layout_width="@dimen/large_square_card_width"
+                android:layout_height="@dimen/large_square_card_height"
+                tools:src="@drawable/cover_example" />
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/tv_track_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            tools:text="Название плейлиста"
+            android:textColor="@color/on_surface_light_primary"
+            style="@style/ThinTextView" />
+
+        <TextView
+            android:id="@+id/tv_track_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            tools:text="Автор"
+            android:textColor="@color/on_surface_light_primary"
+            style="@style/ThinTextView" />
+
+        <TextView
+            android:id="@+id/tv_track_release_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            tools:text="Время выпуска"
+            android:textColor="@color/on_surface_light_primary"
+            style="@style/ThinTextView" />
+
+        <TextView
+            android:id="@+id/tv_track_plays_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            tools:text="Количество проигрываний"
+            android:textColor="@color/on_surface_light_primary"
+            style="@style/ThinTextView" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_playlist_tracks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            tools:listitem="@layout/item_track"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="vertical" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

@@ -8,8 +8,8 @@ import ru.kpfu.itis.bagaviev.feed.impl.presentation.entities.tracks.mappers.toTr
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.entities.tracks.mappers.toTrackModel
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.entities.users.mappers.toUser
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.entities.users.mappers.toUserModel
-import ru.kpfu.itis.common.util.extensions.toURI
-import ru.kpfu.itis.common.util.extensions.toUri
+import ru.kpfu.itis.bagaviev.common.util.extensions.toURI
+import ru.kpfu.itis.bagaviev.common.util.extensions.toUri
 
 fun Playlist.toPlaylistModel(): PlaylistModel =
     PlaylistModel(

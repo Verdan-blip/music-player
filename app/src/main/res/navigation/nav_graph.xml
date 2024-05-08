@@ -13,12 +13,14 @@
         tools:layout="@layout/fragment_feed">
         <action
             android:id="@+id/action_feedFragment_to_playerFragment"
-            app:destination="@id/playerFragment" />
+            app:destination="@id/playerFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
 
     </fragment>
     <fragment
         android:id="@+id/playerFragment"
-        android:name="ru.kpfu.itis.bagaviev.player.impl.presentation.view.PlayerFragment"
+        android:name="ru.kpfu.itis.bagaviev.feature.player.impl.presentation.view.PlayerFragment"
         android:label="PlayerFragment"
         tools:layout="@layout/fragment_player"/>
 </navigation>

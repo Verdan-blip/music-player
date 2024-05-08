@@ -5,9 +5,9 @@ import dagger.Module
 import dagger.multibindings.IntoMap
 import ru.kpfu.itis.bagaviev.di.AppComponent
 import ru.kpfu.itis.bagaviev.feed.impl.di.FeedComponentDependencies
-import ru.kpfu.itis.bagaviev.player.impl.di.PlayerComponentDependencies
-import ru.kpfu.itis.common.di.connector.deps.ComponentDependencies
-import ru.kpfu.itis.common.di.keys.ComponentDependenciesKey
+import ru.kpfu.itis.bagaviev.feature.player.impl.di.PlayerComponentDependencies
+import ru.kpfu.itis.bagaviev.common.di.connector.deps.ComponentDependencies
+import ru.kpfu.itis.bagaviev.common.di.keys.ComponentDependenciesKey
 import ru.kpfu.itis.oauth.di.OAuthComponentDependencies
 
 @Module

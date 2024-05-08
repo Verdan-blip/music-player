@@ -6,7 +6,7 @@ import ru.kpfu.itis.bagaviev.music.data.tracks.entities.responses.TrackDetailsRe
 import ru.kpfu.itis.bagaviev.music.data.tracks.entities.responses.TrackResponseEntity
 import ru.kpfu.itis.bagaviev.glue.feed.mappers.users.toUserResponse
 import ru.kpfu.itis.bagaviev.glue.feed.mappers.users.toUserResponseEntity
-import ru.kpfu.itis.common.util.extensions.toURI
+import ru.kpfu.itis.bagaviev.common.util.extensions.toURI
 import java.sql.Date
 
 fun Track.toTrackResponseEntity(): TrackResponseEntity =
@@ -47,7 +47,7 @@ fun TrackDetailsResponseEntity.toTrackDetails(): TrackDetails =
         users = users.map { user -> user.toUserResponse() },
         smallCoverUri = smallCoverUri.toURI(),
         coverUri = coverUri.toURI(),
-        audioFileUri = coverUri.toURI(),
+        audioFileUri = audioFileUri.toURI(),
         videoFileUri = videoFileUri?.toURI(),
         releaseDate = Date.valueOf(releaseDate),
         playsCount = playsCount

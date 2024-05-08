@@ -41,6 +41,8 @@ dependencies {
     implementation(project(":data:auth"))
     implementation(project(":data:music"))
     implementation(project(":core:common"))
+    implementation(project(":player:api"))
+    implementation(project(":player:impl"))
     implementation(project(":features:oauth"))
     implementation(project(":features:player:api"))
     implementation(project(":features:player:impl"))

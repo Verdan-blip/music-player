@@ -62,7 +62,7 @@
 
             </LinearLayout>
 
-            <androidx.appcompat.widget.AppCompatImageButton
+            <ImageView
                 android:id="@+id/ib_play_pause"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

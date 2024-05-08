@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.kpfu.itis.common"
+    namespace = "ru.kpfu.itis.bagaviev.common"
     compileSdk = 34
 
     defaultConfig {
@@ -38,6 +38,9 @@ dependencies {
     ksp(libs.dagger.compiler)
 
     implementation(libs.lifecycle.runtime)
+
+    implementation(libs.fragment.ktx)
+    implementation(libs.lifecycle.viewmodel)
 
     implementation(libs.coil)
 

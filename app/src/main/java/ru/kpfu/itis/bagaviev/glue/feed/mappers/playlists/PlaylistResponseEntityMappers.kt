@@ -8,7 +8,7 @@ import ru.kpfu.itis.bagaviev.glue.feed.mappers.tracks.toTrack
 import ru.kpfu.itis.bagaviev.glue.feed.mappers.tracks.toTrackResponseEntity
 import ru.kpfu.itis.bagaviev.glue.feed.mappers.users.toUserResponse
 import ru.kpfu.itis.bagaviev.glue.feed.mappers.users.toUserResponseEntity
-import ru.kpfu.itis.common.util.extensions.toURI
+import ru.kpfu.itis.bagaviev.common.util.extensions.toURI
 import java.util.Date
 
 fun Playlist.toPlaylistResponseEntity(): PlaylistResponseEntity =

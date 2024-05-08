@@ -34,6 +34,8 @@ android {
 
 dependencies {
 
+    implementation(libs.blurry)
+
     implementation(libs.android.core)
     implementation(libs.android.appcompat)
     implementation(libs.android.material)

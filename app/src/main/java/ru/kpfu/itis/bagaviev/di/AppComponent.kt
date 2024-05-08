@@ -4,11 +4,11 @@ import dagger.BindsInstance
 import dagger.Component
 import ru.kpfu.itis.auth.di.DataModule
 import ru.kpfu.itis.bagaviev.App
+import ru.kpfu.itis.bagaviev.common.di.scopes.ApplicationScope
 import ru.kpfu.itis.bagaviev.di.deps.FeatureComponentsDependencies
 import ru.kpfu.itis.bagaviev.di.deps.FeatureDependenciesModule
 import ru.kpfu.itis.bagaviev.glue.FeaturesModule
 import ru.kpfu.itis.bagaviev.presentation.view.MainActivity
-import ru.kpfu.itis.common.di.scopes.ApplicationScope
 
 @ApplicationScope
 @Component(

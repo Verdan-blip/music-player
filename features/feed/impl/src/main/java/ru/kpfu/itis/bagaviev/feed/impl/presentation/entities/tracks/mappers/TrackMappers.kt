@@ -7,8 +7,8 @@ import ru.kpfu.itis.bagaviev.feed.impl.presentation.entities.tracks.TrackDetails
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.entities.tracks.TrackModel
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.entities.users.mappers.toUser
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.entities.users.mappers.toUserModel
-import ru.kpfu.itis.common.util.extensions.toURI
-import ru.kpfu.itis.common.util.extensions.toUri
+import ru.kpfu.itis.bagaviev.common.util.extensions.toURI
+import ru.kpfu.itis.bagaviev.common.util.extensions.toUri
 
 fun Track.toTrackModel(): TrackModel =
     TrackModel(
@@ -32,7 +32,7 @@ fun TrackDetails.toTrackDetailsModel(): TrackDetailsModel =
         title = title,
         smallCoverUri = smallCoverUri.toUri(),
         coverUri = coverUri.toUri(),
-        audioFileUri = coverUri.toUri(),
+        audioFileUri = audioFileUri.toUri(),
         releaseDate = releaseDate,
         playsCount = playsCount,
         genre = genre,
@@ -46,7 +46,7 @@ fun TrackDetailsModel.toTrackDetails(): TrackDetails =
         title = title,
         smallCoverUri = smallCoverUri.toURI(),
         coverUri = coverUri.toURI(),
-        audioFileUri = coverUri.toURI(),
+        audioFileUri = audioFileUri.toURI(),
         videoFileUri = videoFileUri?.toURI(),
         releaseDate = releaseDate,
         playsCount = playsCount,

@@ -9,6 +9,14 @@
     <string name="item_track_menu_add_to_favourites">Добавить в избранное</string>
     <string name="item_track_menu_save_to_device">Сохранить на устройстве</string>
 
-    <string name="item_track_title_placeholder">-- --</string>
+    <string name="track_details_fragment_title">Название трека: %s</string>
+    <string name="track_details_fragment_authors">Авторы: %s</string>
+    <string name="track_details_fragment_release_date">Дата релиза: %s</string>
+    <string name="track_details_fragment_plays_count">Количество прослушиваний: %d</string>
+
+    <string name="playlist_details_fragment_title">Название плейлиста: %s</string>
+    <string name="playlist_details_fragment_authors">Автор: %s</string>
+    <string name="playlist_details_fragment_release_date">Дата релиза: %s</string>
+    <string name="playlist_details_fragment_plays_count">Количество прослушиваний: %d</string>
 
 </resources>

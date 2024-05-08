@@ -1,23 +1,32 @@
 package ru.kpfu.itis.bagaviev.feed.impl.presentation.view
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.graphics.drawable.toBitmap
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import coil.ImageLoader
+import coil.load
+import coil.memory.MemoryCache
+import coil.request.ImageRequest
 import jp.wasabeef.blurry.Blurry
+import ru.kpfu.itis.bagaviev.common.base.BaseFragment
+import ru.kpfu.itis.bagaviev.common.util.extensions.observe
+import ru.kpfu.itis.bagaviev.common.util.listeners.setOnSeekBarChangeListener
 import ru.kpfu.itis.bagaviev.feed.impl.R
 import ru.kpfu.itis.bagaviev.feed.impl.databinding.FragmentFeedBinding
 import ru.kpfu.itis.bagaviev.feed.impl.di.FeedComponentHolder
-import ru.kpfu.itis.bagaviev.feed.impl.presentation.entities.playlists.PlaylistModel
-import ru.kpfu.itis.bagaviev.feed.impl.presentation.entities.tracks.TrackDetailsModel
-import ru.kpfu.itis.bagaviev.feed.impl.presentation.entities.tracks.TrackModel
+import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.dialogs.playlist.PlaylistDetailsDialogFragment
+import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.dialogs.track.TrackDetailsDialogFragment
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.adapter.FeedAdapter
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.decorator.FeedItemDecorator
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.holder.playlist.PlaylistViewHolder
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.holder.track.TrackViewHolder
-import ru.kpfu.itis.common.base.BaseFragment
-import ru.kpfu.itis.common.util.extensions.observe
+import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.state.FeedDialogState
+import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.state.FeedUiState
 
 class FeedFragment : BaseFragment(R.layout.fragment_feed) {
 
@@ -36,114 +45,151 @@ class FeedFragment : BaseFragment(R.layout.fragment_feed) {
                     viewModel.onPlayPause()
                 }
 
+                override fun onMoveHeldThumb(progress: Int) {
+                    viewModel.onMoveHeldSeekBar(progress)
+                }
+
                 override fun onSeekTo(progress: Int) {
                     viewModel.onSeekTo(progress)
+                }
+
+                override fun onLongClick(trackId: Long) {
+                    viewModel.onTrackLongClick(trackId)
                 }
             },
             object : PlaylistViewHolder.Companion.PlaylistInteractor {
 
                 override fun onClick(playlistId: Long) {
-
                     viewModel.onPlaylistClick(playlistId)
+                }
+
+                override fun onLongClick(playlistId: Long) {
+                    viewModel.onPlaylistLongClick(playlistId)
                 }
             }
         )
     }
 
-    private val viewModel: FeedViewModel by viewModels {
-        with (FeedComponentHolder) {
-            provideContext(requireContext().applicationContext)
-            buildComponent()
-            bind(requireActivity().lifecycle)
-            requireComponent()
-        }.viewModelFactory
+    private val viewModel: FeedViewModel by viewModels(ownerProducer = ::requireActivity) {
+        FeedComponentHolder.createComponent(requireContext())
+            .viewModelFactory
     }
 
-    private fun observeLoadedTracks(trackList: List<TrackModel>) {
-        viewBinding?.apply {
-            feedAdapter.submitTrackList(trackList)
+    private fun initListeners() {
+        viewBinding?.layoutPlayingTrack?.sbPlayingTrackProgress?.setOnSeekBarChangeListener(
+            onStartTrackingTouch = { seekBar ->
+                seekBar?.apply { viewModel.onMoveHeldSeekBar(progress) }
+            },
+            onStopTrackingTouch = { seekBar ->
+                seekBar?.apply { viewModel.onSeekTo(progress) }
+            }
+        )
+    }
+
+    private fun loadBackgroundImage(uri: Uri?) {
+        with(requireContext().resources) {
+            val imageRequest = ImageRequest.Builder(requireContext())
+                .data(uri)
+                .allowHardware(false)
+                .listener { _, result ->
+                    Blurry.with(context)
+                        .sampling(getInteger(ru.kpfu.itis.bagaviev.theme.R.integer.blur_sampling))
+                        .radius(getInteger(ru.kpfu.itis.bagaviev.theme.R.integer.blur_sampling))
+                        .from(result.drawable.toBitmap())
+                        .into(viewBinding?.ivBackground)
+                }
+                .build()
+            ImageLoader.Builder(requireContext())
+                .memoryCache {
+                    MemoryCache.Builder(requireContext())
+                        .maxSizePercent(0.25)
+                        .build()
+                }
+                .build()
+                .enqueue(imageRequest)
         }
     }
 
-    private fun observeLoadedPlaylists(playlist: List<PlaylistModel>) {
-        viewBinding?.apply {
-            feedAdapter.submitPlaylistList(playlist)
-        }
-    }
+    private fun observeUiState(state: FeedUiState) {
+        with(state) {
+            with(feedAdapter) {
+                if (isPlaying) play() else pause()
+                playingMusicItem?.apply { setPlayingTrack(id) }
+                submitTrackList(chartTracks)
+                submitPlaylistList(popularPlaylists)
+                loadBackgroundImage(background)
+            }
 
-    private fun observeCurrentPlayingItemProgress(progress: Int?) {
-        progress?.also { progressValue ->
-            feedAdapter.updatePlayingProgress(progressValue)
-        }
-    }
-
-    private fun observeCurrentPlayingTrackId(trackId: Long?) {
-        trackId?.also { id ->
-            feedAdapter.setPlayingTrack(id)
-            viewModel.onGetTrackDetails(trackId)
-        }
-    }
-
-    private fun observeIsPlayingState(isPlayingState: Boolean?) {
-        isPlayingState?.also { isPlaying ->
-            if (isPlaying)
-                feedAdapter.play()
-            else
-                feedAdapter.pause()
-        }
-    }
-
-    private fun observeTrackDetailsState(trackDetails: TrackDetailsModel?) {
-        trackDetails?.apply {
             viewBinding?.apply {
-                enqueueLoadImageRequest(
-                    data = coverUri,
-                    allowHardware = false,
-                    onSuccess = { _, resp ->
-                        ivBackground.setImageDrawable(resp.drawable)
-                        Blurry.with(context)
-                            .radius(resources.getInteger(
-                                ru.kpfu.itis.bagaviev.theme.R.integer.blur_radius)
-                            )
-                            .sampling(resources.getInteger(
-                                ru.kpfu.itis.bagaviev.theme.R.integer.blur_sampling)
-                            )
-                            .capture(ivBackground)
-                            .into(ivBackground)
-                        ivFloatingPlayingTrack.setImageDrawable(resp.drawable)
+                layoutPlayingTrack.apply {
+                    if (playingMusicItem != null) {
+                        root.isVisible = true
+                        tvPlayingTrackTitle.text = playingMusicItem.title
+                        tvPlayingTrackAuthors.text = playingMusicItem
+                            .authors.joinToString(separator = " & ")
+                        ivPlayingTrackCover.load(background)
+                    } else {
+                        root.isVisible = false
                     }
-                )
+                }
             }
         }
     }
+
+    private fun observeCurrentPlayingProgress(progress: Int) {
+        feedAdapter.updatePlayingProgress(progress)
+        viewBinding?.layoutPlayingTrack
+            ?.sbPlayingTrackProgress?.progress = progress
+    }
+
+    private fun observeDialogState(dialogState: FeedDialogState) {
+        when (dialogState) {
+            is FeedDialogState.TrackDetails -> {
+                val dialogFragment = TrackDetailsDialogFragment
+                    .newInstance(dialogState.trackDetails)
+                dialogFragment.show(childFragmentManager, null)
+            }
+            is FeedDialogState.PlaylistDetails -> {
+                val dialogFragment = PlaylistDetailsDialogFragment
+                    .newInstance(dialogState.playlistDetails)
+                dialogFragment.show(childFragmentManager, null)
+            }
+        }
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         viewBinding = FragmentFeedBinding.inflate(inflater, container, false)
-        viewBinding?.apply {
-            rvChartTracks.adapter = feedAdapter
-            rvChartTracks.addItemDecoration(FeedItemDecorator(requireContext()))
-            rvChartTracks.itemAnimator = null
-            ivFloatingPlayingTrack.setOnClickListener {
-                viewModel.onFloatingTrackClick()
-            }
+        initListeners()
+        with(viewModel) {
+            uiState.observe(viewLifecycleOwner, ::observeUiState)
+            currentPlayingProgress.observe(viewLifecycleOwner, ::observeCurrentPlayingProgress)
+            dialogState.observe(viewLifecycleOwner, ::observeDialogState)
         }
         return viewBinding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        with(viewModel) {
-            onLoadTracks()
-            onLoadPlaylists()
-            cartTracks.observe(viewLifecycleOwner, ::observeLoadedTracks)
-            currentPlayingItemProgress.observe(viewLifecycleOwner, ::observeCurrentPlayingItemProgress)
-            currentPlayingTrackId.observe(viewLifecycleOwner, ::observeCurrentPlayingTrackId)
-            isPlayingState.observe(viewLifecycleOwner, ::observeIsPlayingState)
-            trackDetails.observe(viewLifecycleOwner, ::observeTrackDetailsState)
-            popularPlaylists.observe(viewLifecycleOwner, ::observeLoadedPlaylists)
+        viewBinding?.apply {
+            rvChartTracks.adapter = feedAdapter
+            rvChartTracks.addItemDecoration(FeedItemDecorator(requireContext()))
+            layoutPlayingTrack.root.setOnClickListener {
+                viewModel.onFloatingTrackClick()
+            }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        viewBinding = null
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        FeedComponentHolder.releaseComponent()
     }
 }

@@ -6,7 +6,7 @@ import coil.load
 import ru.kpfu.itis.bagaviev.feed.impl.databinding.ItemTrackBinding
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.entities.tracks.TrackModel
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.holder.FeedViewHolder
-import ru.kpfu.itis.common.util.listeners.setOnSeekBarChangeListener
+import ru.kpfu.itis.bagaviev.common.util.listeners.setOnSeekBarChangeListener
 
 class TrackViewHolder(
     private val binding: ItemTrackBinding,
@@ -18,6 +18,9 @@ class TrackViewHolder(
     init {
         binding.apply {
             pbTrackPlaying.setOnSeekBarChangeListener(
+                onStartTrackingTouch = { seekBar ->
+                    seekBar?.apply { interactor.onMoveHeldThumb(progress) }
+                },
                 onStopTrackingTouch = { seekBar ->
                     seekBar?.apply { interactor.onSeekTo(progress) }
                 }
@@ -25,8 +28,9 @@ class TrackViewHolder(
             root.setOnClickListener {
                 track?.apply { interactor.onClick(id) }
             }
-            ibPlayPause.setOnClickListener {
-                interactor.onPlayPause()
+            root.setOnLongClickListener {
+                track?.apply { interactor.onLongClick(id) }
+                true
             }
         }
     }
@@ -81,7 +85,11 @@ class TrackViewHolder(
 
             fun onClick(trackId: Long)
 
+            fun onLongClick(trackId: Long)
+
             fun onPlayPause()
+
+            fun onMoveHeldThumb(progress: Int)
 
             fun onSeekTo(progress: Int)
         }

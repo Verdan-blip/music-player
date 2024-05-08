@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.android.kotlin)
     alias(libs.plugins.ksp)
+    id("kotlin-parcelize")
 }
 
 android {
@@ -41,11 +42,13 @@ dependencies {
     implementation(project(":core:common"))
     implementation(project(":core:theme"))
     implementation(project(":features:feed:api"))
+    implementation(project(":player:api"))
 
     implementation(libs.dagger)
     implementation(libs.legacy.support.v4)
     implementation(libs.lifecycle.livedata.ktx)
     implementation(libs.lifecycle.viewmodel)
+
 
     implementation(libs.blurry)
 

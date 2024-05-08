@@ -1,6 +1,6 @@
 package ru.kpfu.itis.bagaviev.di.deps
 
-import ru.kpfu.itis.common.di.connector.deps.ComponentDependencies
+import ru.kpfu.itis.bagaviev.common.di.connector.deps.ComponentDependencies
 import javax.inject.Inject
 
 typealias DependenciesMap = Map<

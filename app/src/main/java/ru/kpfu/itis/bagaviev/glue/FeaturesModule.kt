@@ -1,11 +1,15 @@
 package ru.kpfu.itis.bagaviev.glue
 
 import dagger.Module
-import ru.kpfu.itis.bagaviev.glue.feed.di.FeedModule
-import ru.kpfu.itis.bagaviev.glue.oauth.di.OAuthModule
-import ru.kpfu.itis.bagaviev.glue.player.di.PlayerModule
+import ru.kpfu.itis.bagaviev.glue.feed.di.FeatureFeedModule
+import ru.kpfu.itis.bagaviev.glue.oauth.di.FeatureOAuthModule
+import ru.kpfu.itis.bagaviev.glue.player.di.FeaturePlayerModule
 
 @Module(
-    includes = [OAuthModule::class, PlayerModule::class, FeedModule::class]
+    includes = [
+        FeatureOAuthModule::class,
+        FeaturePlayerModule::class,
+        FeatureFeedModule::class
+    ]
 )
 interface FeaturesModule

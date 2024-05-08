@@ -7,8 +7,8 @@ import dagger.multibindings.IntoMap
 import ru.kpfu.itis.bagaviev.feed.impl.di.submodules.PlaylistUseCaseModule
 import ru.kpfu.itis.bagaviev.feed.impl.di.submodules.TrackUseCasesModule
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.FeedViewModel
-import ru.kpfu.itis.common.di.keys.ViewModelKey
-import ru.kpfu.itis.common.di.scopes.FeatureScope
+import ru.kpfu.itis.bagaviev.common.di.keys.ViewModelKey
+import ru.kpfu.itis.bagaviev.common.di.scopes.FeatureScope
 
 @Module(
     includes = [TrackUseCasesModule::class, PlaylistUseCaseModule::class]
