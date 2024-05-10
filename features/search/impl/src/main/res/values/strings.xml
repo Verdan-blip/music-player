@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="search_fragment_found_items_count">Найдено: (%d + %d)</string>
+
+    <string name="playlist_details_fragment_title">Название плейлиста: %s</string>
+    <string name="playlist_details_fragment_authors">Автор: %s</string>
+    <string name="playlist_details_fragment_release_date">Дата релиза: %s</string>
+    <string name="playlist_details_fragment_plays_count">Количество прослушиваний: %d</string>
+
+</resources>

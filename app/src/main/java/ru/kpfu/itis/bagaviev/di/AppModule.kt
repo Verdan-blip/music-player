@@ -4,12 +4,10 @@ import android.content.Context
 import dagger.Binds
 import dagger.Module
 import ru.kpfu.itis.bagaviev.App
-import ru.kpfu.itis.bagaviev.music.di.DataModule
 import ru.kpfu.itis.bagaviev.navigation.di.NavigationModule
 
 @Module(
     includes = [
-        DataModule::class,
         NavigationModule::class
     ]
 )

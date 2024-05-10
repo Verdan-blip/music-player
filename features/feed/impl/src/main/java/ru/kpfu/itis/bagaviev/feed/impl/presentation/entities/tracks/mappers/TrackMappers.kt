@@ -23,7 +23,7 @@ fun TrackModel.toTrack(): Track =
         id = id,
         title = title,
         users = users.map { user -> user.toUser() },
-        smallCoverUri = smallCoverUri.toString()
+        smallCoverUri = smallCoverUri.toURI()
     )
 
 fun TrackDetails.toTrackDetailsModel(): TrackDetailsModel =

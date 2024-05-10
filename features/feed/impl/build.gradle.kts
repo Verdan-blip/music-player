@@ -41,7 +41,11 @@ dependencies {
 
     implementation(project(":core:common"))
     implementation(project(":core:theme"))
+
     implementation(project(":features:feed:api"))
+
+    implementation(project(":data:music:api"))
+
     implementation(project(":player:api"))
 
     implementation(libs.dagger)

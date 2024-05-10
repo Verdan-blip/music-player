@@ -51,17 +51,6 @@
     <dimen name="playing_pause_or_play_margin_top">32dp</dimen>
     <dimen name="playing_pause_or_play_radius">64dp</dimen>
 
-    <!-- Search fragment config -->
-    <dimen name="search_fragment_search_icon_margin_right">16dp</dimen>
-    <dimen name="search_fragment_padding">16dp</dimen>
-    <dimen name="search_fragment_recently_searched_margin_top">32dp</dimen>
-    <dimen name="search_fragment_recently_searched_text">14sp</dimen>
-    <dimen name="search_fragment_recently_searched_items_margin_top">16dp</dimen>
-    <dimen name="search_fragment_found_margin_top">24dp</dimen>
-    <dimen name="search_fragment_found_text">14sp</dimen>
-    <dimen name="search_fragment_found_loaded_items_margin_top">20dp</dimen>
-    <dimen name="search_fragment_found_items_margin_top">32dp</dimen>
-
     <!-- Upload track fragment config -->
     <dimen name="upload_fragment_upload_title_text">36sp</dimen>
     <dimen name="upload_fragment_upload_padding">16dp</dimen>

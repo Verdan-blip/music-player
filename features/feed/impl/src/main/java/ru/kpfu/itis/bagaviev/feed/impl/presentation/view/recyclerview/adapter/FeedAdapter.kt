@@ -3,100 +3,57 @@ package ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView
 import ru.kpfu.itis.bagaviev.feed.impl.R
 import ru.kpfu.itis.bagaviev.feed.impl.databinding.ItemFeedSubtitleBinding
 import ru.kpfu.itis.bagaviev.feed.impl.databinding.ItemPlaylistsBinding
 import ru.kpfu.itis.bagaviev.feed.impl.databinding.ItemTrackBinding
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.entities.playlists.PlaylistModel
-import ru.kpfu.itis.bagaviev.feed.impl.presentation.entities.tracks.TrackModel
-import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.diffutil.TracksCallback
-import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.holder.FeedViewHolder
-import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.holder.feed.FeedSubtitleViewHolder
-import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.holder.feed.PlaylistsViewHolder
-import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.holder.playlist.PlaylistViewHolder
-import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.holder.track.TrackViewHolder
+import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.holder.PlayableInfoViewHolder
+import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.holder.SubtitleViewHolder
+import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.holder.PlaylistViewHolder
+import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.holder.PlaylistsViewHolder
+import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.holder.TrackViewHolder
 
 class FeedAdapter(
     private var context: Context,
     private val trackInteractor: TrackViewHolder.Companion.TrackInteractor,
     private val playlistInteractor: PlaylistViewHolder.Companion.PlaylistInteractor
-) : RecyclerView.Adapter<FeedViewHolder>() {
-
-    private var trackList: List<TrackModel> = listOf()
+) : AbstractTracksAdapter() {
 
     private var playlistList: List<PlaylistModel> = listOf()
-
-    private var currentPlayingId: Long? = null
-
-    private var currentPlayingIdIndex: Int? = null
-
-    private var isPlaying: Boolean = false
-
-    private var currentProgress: Int = 0
-
-    fun setPlayingTrack(trackId: Long) {
-
-        if (currentPlayingId == trackId)
-            return
-
-        currentPlayingIdIndex?.also { oldIndex ->
-            notifyItemChanged(
-                trackPositionAsFeedPosition(oldIndex)
-            )
-        }
-        currentPlayingIdIndex = trackList.indexOfFirst { track ->
-            track.id == trackId
-        }.also { index ->
-            currentPlayingId = trackId
-            currentProgress = 0
-            isPlaying = true
-
-            notifyItemChanged(
-                trackPositionAsFeedPosition(index), true
-            )
-        }
-    }
-
-    fun updatePlayingProgress(progress: Int) {
-        currentProgress = progress
-
-        currentPlayingIdIndex?.also { index ->
-            notifyItemChanged(trackPositionAsFeedPosition(index), true)
-        }
-    }
-
-    fun play() {
-        isPlaying = true
-
-        currentPlayingIdIndex?.also { index ->
-            notifyItemChanged(trackPositionAsFeedPosition(index), true)
-        }
-    }
-
-    fun pause() {
-        isPlaying = false
-
-        currentPlayingIdIndex?.also { index ->
-            notifyItemChanged(trackPositionAsFeedPosition(index), true)
-        }
-    }
-
-    fun submitTrackList(trackList: List<TrackModel>) {
-        val diffResult = DiffUtil.calculateDiff(
-            TracksCallback(oldList = this.trackList, newList = trackList)
-        )
-        this.trackList = trackList
-        diffResult.dispatchUpdatesTo(this)
-        notifyItemChanged(getSubtitleFeedPosition(Subtitle.TRACK_CHARTS))
-    }
 
     fun submitPlaylistList(playlistList: List<PlaylistModel>) {
         this.playlistList = playlistList
         notifyItemChanged(getPlaylistsFeedPosition())
-        notifyItemChanged(getSubtitleFeedPosition(Subtitle.POPULAR_PLAYLISTS))
     }
+
+    override fun onPayload(
+        payloadsDecoded: AbstractTracksAdapter.Companion.PayloadsDecoded,
+        holder: PlayableInfoViewHolder,
+        position: Int
+    ) {
+        if (holder is TrackViewHolder) {
+            when (payloadsDecoded) {
+                is AbstractTracksAdapter.Companion.PayloadsDecoded.UpdateIsPlaying -> {
+                    holder.rebind(payloadsDecoded.isPlaying)
+                }
+                is AbstractTracksAdapter.Companion.PayloadsDecoded.UpdatePlayingProgress -> {
+                    holder.rebind(payloadsDecoded.progress)
+                }
+                is AbstractTracksAdapter.Companion.PayloadsDecoded.SetNewPlayingTrack -> {
+                    holder.bind(
+                        trackList[position - 1],
+                        TrackViewHolder.Companion.TrackState.Playing(
+                            isPlaying = true, progress = 0
+                        )
+                    )
+                }
+            }
+        }
+    }
+
+    override fun getTrackGlobalPosition(localPosition: Int): Int =
+        localPosition + 1
 
     override fun getItemViewType(position: Int): Int =
         when (position) {
@@ -106,25 +63,27 @@ class FeedAdapter(
             else -> ITEM_VIEW_TYPE_PLAYLISTS
         }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedViewHolder =
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayableInfoViewHolder = run {
+        val inflater = LayoutInflater.from(context)
         when (viewType) {
-            ITEM_VIEW_TYPE_SUBTITLE -> FeedSubtitleViewHolder(
-                ItemFeedSubtitleBinding.inflate(LayoutInflater.from(context), parent, false)
+            ITEM_VIEW_TYPE_SUBTITLE -> SubtitleViewHolder(
+                ItemFeedSubtitleBinding.inflate(inflater, parent, false)
             )
             ITEM_VIEW_TYPE_TRACK -> TrackViewHolder(
-                ItemTrackBinding.inflate(LayoutInflater.from(context), parent, false),
+                ItemTrackBinding.inflate(inflater, parent, false),
                 trackInteractor
             )
             ITEM_VIEW_TYPE_PLAYLISTS -> PlaylistsViewHolder(
-                ItemPlaylistsBinding.inflate(LayoutInflater.from(context), parent, false),
+                ItemPlaylistsBinding.inflate(inflater, parent, false),
                 playlistInteractor
             )
             else -> throw IllegalStateException("Unknown view type $viewType")
         }
+    }
 
-    override fun onBindViewHolder(holder: FeedViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: PlayableInfoViewHolder, position: Int) {
         when (holder) {
-            is FeedSubtitleViewHolder -> holder.bind(
+            is SubtitleViewHolder -> holder.bind(
                 if (position == 0)
                     context.resources.getString(
                         R.string.feed_fragment_top_charts, trackList.size
@@ -136,10 +95,10 @@ class FeedAdapter(
             )
             is TrackViewHolder -> holder.bind(
                 trackList[feedPositionAsTrackPosition(position)],
-                if (feedPositionAsTrackPosition(position) == currentPlayingIdIndex) {
-                    TrackViewHolder.Companion.TrackState.Playing(isPlaying, currentProgress)
+                if (feedPositionAsTrackPosition(position) == playingTrackLocalIndex) {
+                    TrackViewHolder.Companion.TrackState.Playing(isPlaying, playingProgress)
                 } else {
-                    TrackViewHolder.Companion.TrackState.Static
+                        TrackViewHolder.Companion.TrackState.Static
                 }
             )
             is PlaylistsViewHolder -> holder.bind(
@@ -148,31 +107,8 @@ class FeedAdapter(
         }
     }
 
-    override fun onBindViewHolder(
-        holder: FeedViewHolder,
-        position: Int,
-        payloads: MutableList<Any>
-    ) {
-        if (payloads.isNotEmpty()) {
-            if (payloads.first() as? Boolean == true) {
-                if (holder is TrackViewHolder) {
-                    holder.bind(
-                        trackList[feedPositionAsTrackPosition(position)],
-                        TrackViewHolder.Companion.TrackState.Playing(
-                            isPlaying, currentProgress
-                        )
-                    )
-                }
-            }
-        } else {
-            super.onBindViewHolder(holder, position, payloads)
-        }
-    }
-
     override fun getItemCount(): Int =
         1 + trackList.size + 1 + 1
-
-    private fun trackPositionAsFeedPosition(trackPos: Int): Int = trackPos + 1
 
     private fun feedPositionAsTrackPosition(globalPos: Int): Int = globalPos - 1
 

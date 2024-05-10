@@ -1,11 +1,6 @@
 <resources>
     <string name="app_name">music-player</string>
 
-    <!-- Search fragment -->
-    <string name="search_fragment_search_hint">Введите название</string>
-    <string name="search_fragment_recently_searched">Недавно искали</string>
-    <string name="search_fragment_found">Найдено (%d + %d)</string>
-
     <!-- Upload fragment -->
     <string name="upload_fragment_upload_track">Загрузить трек</string>
     <string name="upload_fragment_upload_step1">1. Придумайте название:</string>

@@ -1,15 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.fragment.app.FragmentContainerView
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fv_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-    android:name="androidx.navigation.fragment.NavHostFragment"
-    app:defaultNavHost="true"
-    app:navGraph="@navigation/nav_graph"
+    android:orientation="vertical"
+    android:weightSum="1"
     tools:context=".presentation.view.MainActivity">
 
-</androidx.fragment.app.FragmentContainerView>
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:src="@drawable/small_cover_example"
+        android:scaleType="fitXY" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fv_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/nav_graph" />
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bnv_main"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="16dp"
+            android:layout_height="48dp"
+            android:background="@color/transparent"
+            app:itemTextColor="@color/light_text_primary_color"
+            app:menu="@menu/menu_bnv" />
+
+
+    </LinearLayout>
+
+</FrameLayout>

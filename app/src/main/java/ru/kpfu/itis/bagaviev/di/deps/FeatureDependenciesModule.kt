@@ -8,6 +8,7 @@ import ru.kpfu.itis.bagaviev.feed.impl.di.FeedComponentDependencies
 import ru.kpfu.itis.bagaviev.feature.player.impl.di.PlayerComponentDependencies
 import ru.kpfu.itis.bagaviev.common.di.connector.deps.ComponentDependencies
 import ru.kpfu.itis.bagaviev.common.di.keys.ComponentDependenciesKey
+import ru.kpfu.itis.bagaviev.feature.search.impl.di.SearchComponentDependencies
 import ru.kpfu.itis.oauth.di.OAuthComponentDependencies
 
 @Module
@@ -27,4 +28,9 @@ interface FeatureDependenciesModule {
     @IntoMap
     @ComponentDependenciesKey(FeedComponentDependencies::class)
     fun feedComponentDependencies(appComponent: AppComponent): ComponentDependencies
+
+    @Binds
+    @IntoMap
+    @ComponentDependenciesKey(SearchComponentDependencies::class)
+    fun searchComponentDependencies(appComponent: AppComponent): ComponentDependencies
 }

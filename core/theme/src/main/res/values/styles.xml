@@ -51,11 +51,12 @@
         <item name="android:progressBackgroundTint">@color/light_playing_progress_background_color</item>
         <item name="android:layout_marginStart">@dimen/playing_seekbar_fixing_margin_start</item>
     </style>
-    
-    <style name="TranslucentPopupMenu" parent="@style/Widget.AppCompat.PopupMenu">
-        <item name="android:backgroundTint">@color/surface</item>
-        <item name="android:fontFamily">sans-serif-thin</item>
-        <item name="android:textColor">@color/on_surface_light_secondary</item>
+
+    <style name="AppLightEditText" parent="@style/Widget.AppCompat.EditText">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textColor">@color/light_text_primary_color</item>
+        <item name="android:textColorHint">@color/light_text_secondary_color</item>
+        <item name="fontFamily">sans-serif-light</item>
     </style>
     
 </resources>

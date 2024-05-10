@@ -15,14 +15,14 @@ import ru.kpfu.itis.bagaviev.common.util.extensions.toUri
 import ru.kpfu.itis.bagaviev.common.util.typealiases.ViewModelFactories
 import ru.kpfu.itis.bagaviev.feed.api.domain.playlists.usecases.GetPlaylistDetailsByIdUseCase
 import ru.kpfu.itis.bagaviev.feed.api.domain.playlists.usecases.GetPopularPlaylistsUseCase
-import ru.kpfu.itis.bagaviev.feed.api.domain.tracks.usecases.GetChartTracksUseCase
+import ru.kpfu.itis.bagaviev.feed.api.domain.tracks.usecases.GetPopularTracksUseCase
 import ru.kpfu.itis.bagaviev.feed.api.domain.tracks.usecases.GetTrackDetailsByIdUseCase
 import ru.kpfu.itis.bagaviev.feed.impl.FeedRouter
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.entities.playlists.mappers.toPlaylistDetailsModel
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.entities.playlists.mappers.toPlaylistModel
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.entities.tracks.mappers.toTrackDetailsModel
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.entities.tracks.mappers.toTrackModel
-import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.state.FeedDialogState
+import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.state.DialogState
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.state.FeedUiState
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.util.toMusicItem
 import ru.kpfu.itis.bagaviev.player.api.domain.entities.PlayerCallback
@@ -30,7 +30,7 @@ import ru.kpfu.itis.bagaviev.player.api.domain.interactor.MusicPlayerInteractor
 import javax.inject.Inject
 
 class FeedViewModel @Inject constructor(
-    private val getChartTracksUseCase: GetChartTracksUseCase,
+    private val getPopularTracksUseCase: GetPopularTracksUseCase,
     private val getTrackDetailsByIdUseCase: GetTrackDetailsByIdUseCase,
     private val getPlaylistDetailsByIdUseCase: GetPlaylistDetailsByIdUseCase,
     private val getPopularPlaylistsUseCase: GetPopularPlaylistsUseCase,
@@ -43,8 +43,8 @@ class FeedViewModel @Inject constructor(
         get() = _uiState
 
 
-    private val _dialogState = MutableSharedFlow<FeedDialogState>()
-    val dialogState: SharedFlow<FeedDialogState>
+    private val _dialogState = MutableSharedFlow<DialogState>()
+    val dialogState: SharedFlow<DialogState>
         get() = _dialogState
 
 
@@ -98,7 +98,7 @@ class FeedViewModel @Inject constructor(
     }
 
     private suspend fun loadTracks() {
-        getChartTracksUseCase().fold(
+        getPopularTracksUseCase().fold(
             onSuccess = { trackResponseList ->
                 _uiState.emit(_uiState.value.copy(
                     chartTracks = trackResponseList.map { track ->
@@ -149,7 +149,7 @@ class FeedViewModel @Inject constructor(
             getTrackDetailsByIdUseCase(trackId)?.also { trackDetails ->
                 val trackDetailsModel = trackDetails.toTrackDetailsModel()
                 _dialogState.emit(
-                    FeedDialogState.TrackDetails(trackDetailsModel)
+                    DialogState.TrackDetails(trackDetailsModel)
                 )
             }
         }
@@ -179,7 +179,7 @@ class FeedViewModel @Inject constructor(
             getPlaylistDetailsByIdUseCase(playlistId)?.also { trackDetails ->
                 val playlistDetailsModel = trackDetails.toPlaylistDetailsModel()
                 _dialogState.emit(
-                    FeedDialogState.PlaylistDetails(playlistDetailsModel)
+                    DialogState.PlaylistDetails(playlistDetailsModel)
                 )
             }
         }

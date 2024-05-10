@@ -15,6 +15,9 @@ android {
         versionCode = 1
         versionName = "1.0"
 
+        renderscriptTargetApi = 34
+        renderscriptSupportModeEnabled = true
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -34,25 +37,39 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
 
     implementation(project(":data:auth"))
-    implementation(project(":data:music"))
+    implementation(project(":data:music:api"))
+    implementation(project(":data:music:impl"))
+
     implementation(project(":core:common"))
+
     implementation(project(":player:api"))
     implementation(project(":player:impl"))
+
     implementation(project(":features:oauth"))
+
     implementation(project(":features:player:api"))
     implementation(project(":features:player:impl"))
+
     implementation(project(":features:feed:api"))
     implementation(project(":features:feed:impl"))
+
+    implementation(project(":features:search:api"))
+    implementation(project(":features:search:impl"))
 
     implementation(libs.lifecycle.viewmodel)
 
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
+
+    implementation(libs.blurry)
 
     implementation(libs.dagger)
     implementation(libs.activity)

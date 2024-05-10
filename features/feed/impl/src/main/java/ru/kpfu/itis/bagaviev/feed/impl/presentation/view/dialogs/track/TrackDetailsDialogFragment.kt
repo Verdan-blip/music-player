@@ -9,12 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.ViewModelProvider
 import coil.load
 import ru.kpfu.itis.bagaviev.feed.impl.R
 import ru.kpfu.itis.bagaviev.feed.impl.databinding.FragmentTrackDetailsBinding
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.entities.tracks.TrackDetailsModel
-import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.FeedViewModel
 
 class TrackDetailsDialogFragment : DialogFragment(R.layout.fragment_track_details) {
 

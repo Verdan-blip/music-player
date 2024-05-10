@@ -1,5 +1,7 @@
 package ru.kpfu.itis.bagaviev.feed.impl.presentation.view
 
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,6 +15,7 @@ import coil.load
 import coil.memory.MemoryCache
 import coil.request.ImageRequest
 import jp.wasabeef.blurry.Blurry
+import ru.kpfu.itis.bagaviev.common.WithAdaptiveBackground
 import ru.kpfu.itis.bagaviev.common.base.BaseFragment
 import ru.kpfu.itis.bagaviev.common.util.extensions.observe
 import ru.kpfu.itis.bagaviev.common.util.listeners.setOnSeekBarChangeListener
@@ -23,9 +26,9 @@ import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.dialogs.playlist.Playli
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.dialogs.track.TrackDetailsDialogFragment
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.adapter.FeedAdapter
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.decorator.FeedItemDecorator
-import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.holder.playlist.PlaylistViewHolder
-import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.holder.track.TrackViewHolder
-import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.state.FeedDialogState
+import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.holder.PlaylistViewHolder
+import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.holder.TrackViewHolder
+import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.state.DialogState
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.state.FeedUiState
 
 class FeedFragment : BaseFragment(R.layout.fragment_feed) {
@@ -92,11 +95,8 @@ class FeedFragment : BaseFragment(R.layout.fragment_feed) {
                 .data(uri)
                 .allowHardware(false)
                 .listener { _, result ->
-                    Blurry.with(context)
-                        .sampling(getInteger(ru.kpfu.itis.bagaviev.theme.R.integer.blur_sampling))
-                        .radius(getInteger(ru.kpfu.itis.bagaviev.theme.R.integer.blur_sampling))
-                        .from(result.drawable.toBitmap())
-                        .into(viewBinding?.ivBackground)
+                    (requireContext() as WithAdaptiveBackground)
+                        .updateBackground(result.drawable)
                 }
                 .build()
             ImageLoader.Builder(requireContext())
@@ -114,7 +114,7 @@ class FeedFragment : BaseFragment(R.layout.fragment_feed) {
         with(state) {
             with(feedAdapter) {
                 if (isPlaying) play() else pause()
-                playingMusicItem?.apply { setPlayingTrack(id) }
+                playingMusicItem?.apply { play(id) }
                 submitTrackList(chartTracks)
                 submitPlaylistList(popularPlaylists)
                 loadBackgroundImage(background)
@@ -137,19 +137,19 @@ class FeedFragment : BaseFragment(R.layout.fragment_feed) {
     }
 
     private fun observeCurrentPlayingProgress(progress: Int) {
-        feedAdapter.updatePlayingProgress(progress)
+        feedAdapter.updateProgress(progress)
         viewBinding?.layoutPlayingTrack
             ?.sbPlayingTrackProgress?.progress = progress
     }
 
-    private fun observeDialogState(dialogState: FeedDialogState) {
+    private fun observeDialogState(dialogState: DialogState) {
         when (dialogState) {
-            is FeedDialogState.TrackDetails -> {
+            is DialogState.TrackDetails -> {
                 val dialogFragment = TrackDetailsDialogFragment
                     .newInstance(dialogState.trackDetails)
                 dialogFragment.show(childFragmentManager, null)
             }
-            is FeedDialogState.PlaylistDetails -> {
+            is DialogState.PlaylistDetails -> {
                 val dialogFragment = PlaylistDetailsDialogFragment
                     .newInstance(dialogState.playlistDetails)
                 dialogFragment.show(childFragmentManager, null)

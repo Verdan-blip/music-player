@@ -16,9 +16,9 @@ import ru.kpfu.itis.bagaviev.feed.impl.R
 import ru.kpfu.itis.bagaviev.feed.impl.databinding.FragmentPlaylistDetailsBinding
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.entities.playlists.PlaylistDetailsModel
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.FeedViewModel
-import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.adapter.TrackAdapter
+import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.adapter.TracksAdapter
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.decorator.TrackItemDecorator
-import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.holder.track.TrackViewHolder
+import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.holder.TrackViewHolder
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.state.FeedUiState
 
 class PlaylistDetailsDialogFragment : DialogFragment(R.layout.fragment_playlist_details) {
@@ -29,8 +29,8 @@ class PlaylistDetailsDialogFragment : DialogFragment(R.layout.fragment_playlist_
         ViewModelProvider(requireActivity())[FeedViewModel::class.java]
     }
 
-    private val trackAdapter by lazy {
-        TrackAdapter(
+    private val tracksAdapter by lazy {
+        TracksAdapter(
             context = requireContext(),
             interactor = object : TrackViewHolder.Companion.TrackInteractor {
 
@@ -60,7 +60,7 @@ class PlaylistDetailsDialogFragment : DialogFragment(R.layout.fragment_playlist_
 
     private fun observeUiState(feedUiState: FeedUiState) {
         with(feedUiState) {
-            with(trackAdapter) {
+            with(tracksAdapter) {
                 playingMusicItem?.apply{ setCurrentPlayingTrackId(id) }
                 if (isPlaying) play() else pause()
             }
@@ -68,7 +68,7 @@ class PlaylistDetailsDialogFragment : DialogFragment(R.layout.fragment_playlist_
     }
 
     private fun observeCurrentPlayingProgress(progress: Int) {
-        trackAdapter.updatePlayingProgress(progress)
+        tracksAdapter.updatePlayingProgress(progress)
     }
 
     private fun initUi(playlistDetails: PlaylistDetailsModel) {
@@ -88,7 +88,7 @@ class PlaylistDetailsDialogFragment : DialogFragment(R.layout.fragment_playlist_
                         R.string.playlist_details_fragment_release_date, createdTime
                     )
                     ivTrackCover.load(coverUri)
-                    rvPlaylistTracks.adapter = trackAdapter.apply {
+                    rvPlaylistTracks.adapter = tracksAdapter.apply {
                         submitList(tracks)
                     }
                     rvPlaylistTracks.addItemDecoration(TrackItemDecorator(requireContext()))
