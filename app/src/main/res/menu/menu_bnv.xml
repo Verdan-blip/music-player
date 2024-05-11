@@ -2,11 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@id/feedFragment"
-        android:title="Главное" />
+        android:title="Главное"
+        android:icon="@drawable/icon_home" />
 
     <item android:id="@id/searchFragment"
-        android:title="Найти" />
+        android:title="Найти"
+        android:icon="@drawable/icon_search" />
 
     <item android:id="@+id/profileFragment"
-        android:title="Профиль" />
+        android:title="Профиль"
+        android:icon="@drawable/icon_profile" />
 </menu>

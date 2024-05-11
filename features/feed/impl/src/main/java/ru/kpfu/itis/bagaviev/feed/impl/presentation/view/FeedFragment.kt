@@ -1,20 +1,17 @@
 package ru.kpfu.itis.bagaviev.feed.impl.presentation.view
 
-import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.graphics.drawable.toBitmap
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import coil.ImageLoader
 import coil.load
 import coil.memory.MemoryCache
 import coil.request.ImageRequest
-import jp.wasabeef.blurry.Blurry
 import ru.kpfu.itis.bagaviev.common.WithAdaptiveBackground
 import ru.kpfu.itis.bagaviev.common.base.BaseFragment
 import ru.kpfu.itis.bagaviev.common.util.extensions.observe
@@ -26,10 +23,12 @@ import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.dialogs.playlist.Playli
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.dialogs.track.TrackDetailsDialogFragment
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.adapter.FeedAdapter
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.decorator.FeedItemDecorator
-import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.holder.PlaylistViewHolder
-import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.holder.TrackViewHolder
+import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.mappers.toPlaylistItem
+import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.mappers.toTrackItem
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.state.DialogState
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.state.FeedUiState
+import ru.kpfu.itis.bagaviev.theme.recyclerview.interactor.PlaylistInteractor
+import ru.kpfu.itis.bagaviev.theme.recyclerview.interactor.TrackInteractor
 
 class FeedFragment : BaseFragment(R.layout.fragment_feed) {
 
@@ -37,44 +36,23 @@ class FeedFragment : BaseFragment(R.layout.fragment_feed) {
 
     private val feedAdapter by lazy {
         FeedAdapter(
-            requireContext(),
-            object : TrackViewHolder.Companion.TrackInteractor {
-
-                override fun onClick(trackId: Long) {
-                    viewModel.onTrackClick(trackId)
-                }
-
-                override fun onPlayPause() {
-                    viewModel.onPlayPause()
-                }
-
-                override fun onMoveHeldThumb(progress: Int) {
-                    viewModel.onMoveHeldSeekBar(progress)
-                }
-
-                override fun onSeekTo(progress: Int) {
-                    viewModel.onSeekTo(progress)
-                }
-
-                override fun onLongClick(trackId: Long) {
-                    viewModel.onTrackLongClick(trackId)
-                }
-            },
-            object : PlaylistViewHolder.Companion.PlaylistInteractor {
-
-                override fun onClick(playlistId: Long) {
-                    viewModel.onPlaylistClick(playlistId)
-                }
-
-                override fun onLongClick(playlistId: Long) {
-                    viewModel.onPlaylistLongClick(playlistId)
-                }
-            }
+            context = requireContext(),
+            trackInteractor = TrackInteractor.Builder()
+                .onClick(viewModel::onTrackClick)
+                .onLongClick(viewModel::onTrackLongClick)
+                .onMoveHeldThumb(viewModel::onMoveHeldSeekBar)
+                .onReleaseThumb(viewModel::onSeekTo)
+                .build(),
+            playlistInteractor = PlaylistInteractor.Builder()
+                .onClick(viewModel::onPlaylistClick)
+                .onLongClick(viewModel::onPlaylistLongClick)
+                .build()
         )
     }
 
     private val viewModel: FeedViewModel by viewModels(ownerProducer = ::requireActivity) {
-        FeedComponentHolder.createComponent(requireContext())
+        FeedComponentHolder
+            .createComponent(requireContext())
             .viewModelFactory
     }
 
@@ -114,9 +92,14 @@ class FeedFragment : BaseFragment(R.layout.fragment_feed) {
         with(state) {
             with(feedAdapter) {
                 if (isPlaying) play() else pause()
-                playingMusicItem?.apply { play(id) }
-                submitTrackList(chartTracks)
-                submitPlaylistList(popularPlaylists)
+                submitList(popularTracks.map { trackModel ->
+                    trackModel.toTrackItem()
+                }) {
+                    playingMusicItem?.apply { feedAdapter.markAsPlayable(id) }
+                }
+                submitPlaylistList(popularPlaylists.map { playlistModel ->
+                    playlistModel.toPlaylistItem()
+                })
                 loadBackgroundImage(background)
             }
 
@@ -137,7 +120,7 @@ class FeedFragment : BaseFragment(R.layout.fragment_feed) {
     }
 
     private fun observeCurrentPlayingProgress(progress: Int) {
-        feedAdapter.updateProgress(progress)
+        feedAdapter.updatePlayingProgress(progress)
         viewBinding?.layoutPlayingTrack
             ?.sbPlayingTrackProgress?.progress = progress
     }
@@ -164,16 +147,16 @@ class FeedFragment : BaseFragment(R.layout.fragment_feed) {
     ): View? {
         viewBinding = FragmentFeedBinding.inflate(inflater, container, false)
         initListeners()
-        with(viewModel) {
-            uiState.observe(viewLifecycleOwner, ::observeUiState)
-            currentPlayingProgress.observe(viewLifecycleOwner, ::observeCurrentPlayingProgress)
-            dialogState.observe(viewLifecycleOwner, ::observeDialogState)
-        }
         return viewBinding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        with(viewModel) {
+            uiState.observe(viewLifecycleOwner, ::observeUiState)
+            currentPlayingProgressState.observe(viewLifecycleOwner, ::observeCurrentPlayingProgress)
+            dialogState.observe(viewLifecycleOwner, ::observeDialogState)
+        }
         viewBinding?.apply {
             rvChartTracks.adapter = feedAdapter
             rvChartTracks.addItemDecoration(FeedItemDecorator(requireContext()))

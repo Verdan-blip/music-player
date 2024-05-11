@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    android:id="@+id/cv_root"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/SmallSquareCard"
+    tools:backgroundTint="@color/cardview_dark_background"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/small_square_card_padding"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.cardview.widget.CardView
+                style="@style/SmallSquareCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_track_small_icon"
+                    android:layout_gravity="center"
+                    android:layout_width="@dimen/small_square_card_width"
+                    android:layout_height="@dimen/small_square_card_height"
+                    tools:src="@drawable/small_cover_example" />
+
+            </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="start|center"
+                android:layout_marginStart="@dimen/track_item_info_margin_left"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_track_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/ThinTextView"
+                    android:textSize="@dimen/track_item_title_text"
+                    android:textColor="@color/light_text_primary_color"
+                    tools:text="Название песни" />
+
+                <TextView
+                    android:id="@+id/tv_track_users"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/ThinTextView"
+                    android:textSize="@dimen/track_item_authors_text"
+                    android:layout_marginTop="@dimen/track_item_authors_margin_top"
+                    android:textColor="@color/light_text_primary_color"
+                    tools:text="Авторы песни" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/iv_play_pause"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="@dimen/track_item_play_pause_margin_end"
+                android:backgroundTint="@android:color/transparent"
+                android:src="@drawable/item_paused"
+                app:tint="@color/on_surface_light_secondary" />
+
+        </LinearLayout>
+
+        <SeekBar
+            android:id="@+id/sb_track_playing"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/PlayingProgressSeekBar"
+            android:layout_marginTop="@dimen/track_playing_seekbar_margin_top"
+            android:layout_marginBottom="@dimen/track_playing_seekbar_margin_bottom"
+            tools:progress="20" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

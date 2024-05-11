@@ -40,9 +40,9 @@ dependencies {
     implementation(project(":core:theme"))
 
     implementation(libs.coil)
-    implementation(libs.media3.session)
     implementation(libs.media3.exoplayer)
-    implementation(libs.media3.dash)
+    implementation(libs.media3.exoplayer.session)
+    implementation(libs.media3.exoplayer.dash)
 
     implementation(libs.fragment.ktx)
 

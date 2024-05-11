@@ -9,10 +9,10 @@ import javax.inject.Inject
 
 class MockedPlaylistApiService @Inject constructor() : PlaylistApiService {
 
-    private val playlistDetails = listOf(
+    val playlistDetails = listOf(
         PlaylistDetailsResponse(
             id = 0,
-            title = "Нескончаемые Дожди",
+            title = "За край",
             coverUri = "https://cdns-images.dzcdn.net/images/cover/bbc9b2e880c9f522e8c8767f49fb9fab/264x264.jpg",
             user = UserResponse(id = 0, "Три дня дождя"),
             tracks = listOf(
@@ -50,7 +50,7 @@ class MockedPlaylistApiService @Inject constructor() : PlaylistApiService {
         ),
     )
 
-    private val popularPlaylists = listOf(
+    val popularPlaylists = listOf(
         PlaylistResponse(
             id = 0,
             title = "Нескончаемые Дожди",

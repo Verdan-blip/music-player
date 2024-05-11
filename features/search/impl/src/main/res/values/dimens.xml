@@ -13,8 +13,17 @@
     <dimen name="search_fragment_found_items_margin_top">32dp</dimen>
     <dimen name="search_fragment_margin_between_playlists">8dp</dimen>
 
+    <dimen name="search_fragment_subtitle_text">14sp</dimen>
+    <dimen name="search_fragment_title_text">36sp</dimen>
+    <dimen name="search_fragment_tap_to_search_text">16sp</dimen>
+    <dimen name="search_fragment_title_margin_top">56dp</dimen>
+    <dimen name="search_fragment_subtitle_margin_top">24dp</dimen>
+    <dimen name="search_fragment_playlists_margin_top">24dp</dimen>
+    <dimen name="search_fragment_tracks_margin_top">24dp</dimen>
+
     <dimen name="playlist_item_margin_between">8dp</dimen>
     <dimen name="playlist_item_margin_outside">16dp</dimen>
+    <dimen name="playlist_item_margin_top">24dp</dimen>
 
     <!-- Playlist config -->
     <dimen name="playlist_title_text">10sp</dimen>

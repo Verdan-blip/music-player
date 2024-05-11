@@ -11,5 +11,6 @@ fun TrackDetailsModel.toMusicItem(): MusicItem =
         authors = users.map { user -> user.login },
         genre = genre,
         audioFileUri = audioFileUri.toURI(),
+        videoFileUri = videoFileUri?.toURI(),
         coverUri = coverUri.toURI()
     )

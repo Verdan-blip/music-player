@@ -6,9 +6,12 @@ import dagger.Module
 import dagger.multibindings.IntoMap
 import ru.kpfu.itis.bagaviev.common.di.keys.ViewModelKey
 import ru.kpfu.itis.bagaviev.common.di.scopes.FeatureScope
+import ru.kpfu.itis.bagaviev.feature.player.impl.di.submodules.AndroidPlayerModule
 import ru.kpfu.itis.bagaviev.feature.player.impl.presentation.view.PlayerViewModel
 
-@Module
+@Module(
+    includes = [AndroidPlayerModule::class]
+)
 internal interface PlayerModule {
 
     @FeatureScope

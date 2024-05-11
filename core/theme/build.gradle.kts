@@ -30,11 +30,18 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
 
+    implementation(project(":core:common"))
+
     implementation(libs.blurry)
+
+    implementation(libs.coil)
 
     implementation(libs.android.core)
     implementation(libs.android.appcompat)

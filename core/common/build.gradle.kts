@@ -11,6 +11,9 @@ android {
     defaultConfig {
         minSdk = 21
 
+        renderscriptTargetApi = 34
+        renderscriptSupportModeEnabled = true
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -43,6 +46,8 @@ dependencies {
     implementation(libs.lifecycle.viewmodel)
 
     implementation(libs.coil)
+
+    implementation(libs.blurry)
 
     implementation(libs.android.core)
     implementation(libs.android.appcompat)

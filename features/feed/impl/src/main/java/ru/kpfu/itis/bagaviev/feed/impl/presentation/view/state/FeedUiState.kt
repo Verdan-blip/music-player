@@ -7,7 +7,7 @@ import ru.kpfu.itis.bagaviev.player.api.domain.entities.MusicItem
 
 data class FeedUiState(
     val background: Uri? = null,
-    val chartTracks: List<TrackModel> = listOf(),
+    val popularTracks: List<TrackModel> = listOf(),
     val popularPlaylists: List<PlaylistModel> = listOf(),
     val playingMusicItem: MusicItem? = null,
     val isPlaying: Boolean = false,

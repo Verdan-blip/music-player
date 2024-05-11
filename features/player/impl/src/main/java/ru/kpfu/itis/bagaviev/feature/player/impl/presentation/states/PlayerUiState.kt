@@ -7,4 +7,5 @@ data class PlayerUiState(
     val coverUri: Uri? = null,
     val authors: String = "Нет данных",
     val isPlaying: Boolean = false,
+    val videoUri: Uri? = null
 )

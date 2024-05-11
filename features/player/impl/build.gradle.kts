@@ -51,6 +51,10 @@ dependencies {
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.guava)
 
+    implementation(libs.media3.exoplayer)
+    implementation(libs.media3.exoplayer.ui)
+    implementation(libs.media3.exoplayer.dash)
+
     implementation(libs.blurry)
 
     implementation(libs.dagger)

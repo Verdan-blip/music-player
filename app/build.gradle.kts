@@ -75,7 +75,7 @@ dependencies {
     implementation(libs.activity)
     ksp(libs.dagger.compiler)
 
-    implementation(libs.media3.session)
+    implementation(libs.media3.exoplayer.session)
 
     implementation(libs.android.core)
     implementation(libs.android.appcompat)

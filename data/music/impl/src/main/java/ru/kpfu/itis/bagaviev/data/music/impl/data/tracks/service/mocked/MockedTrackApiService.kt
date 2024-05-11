@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 class MockedTrackApiService @Inject constructor() : TrackApiService {
 
-    private val chartTracksList = listOf(
+    val chartTracksList = listOf(
         TrackResponse(
             id = 0,
             title = "За край",
@@ -29,7 +29,7 @@ class MockedTrackApiService @Inject constructor() : TrackApiService {
         ),
     )
 
-    private val tracksDetailsList = listOf(
+    val tracksDetailsList = listOf(
         TrackDetailsResponse(
             id = 0,
             title = "За край",
@@ -39,7 +39,7 @@ class MockedTrackApiService @Inject constructor() : TrackApiService {
             genre = "Pop-rok",
             lyrics = null,
             audioFileUri = "https://dnl4.drivemusic.me/dl/G7W141_QUJJ4ltHx68Hy6w/1714280782/download_music/2023/04/tri-dnja-dozhdja-za-krajj.mp3",
-            videoFileUri = null,
+            videoFileUri = "https://ruvcs.cleepr.buzz/videos/tri-dnya-dozgdya-za-kray_378551.mp4",
             releaseDate = "2024-04-30",
             playsCount = 30
         ),

@@ -1,5 +1,6 @@
 package ru.kpfu.itis.bagaviev.feature.player.impl.presentation.view
 
+import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -36,6 +37,12 @@ class PlayerViewModel @Inject constructor(
         get() = _currentProgressTimeState
 
 
+    private val _currentPlayingVideoState = MutableStateFlow<Uri?>(null)
+
+    val currentPlayingVideoState: StateFlow<Uri?>
+        get() = _currentPlayingVideoState
+
+
     private var shouldStopTrackingProgress = false
 
     private var currentPlayingDuration: Long = -1
@@ -51,6 +58,10 @@ class PlayerViewModel @Inject constructor(
 
             state.currentPlayingItemDuration?.also { duration ->
                 currentPlayingDuration = duration
+            }
+
+            state.currentMusicItem?.apply {
+                _currentPlayingVideoState.emit(videoFileUri?.toUri())
             }
 
             if (!shouldStopTrackingProgress) {

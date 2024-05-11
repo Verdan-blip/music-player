@@ -16,10 +16,11 @@ import ru.kpfu.itis.bagaviev.feed.impl.R
 import ru.kpfu.itis.bagaviev.feed.impl.databinding.FragmentPlaylistDetailsBinding
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.entities.playlists.PlaylistDetailsModel
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.FeedViewModel
-import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.adapter.TracksAdapter
-import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.decorator.TrackItemDecorator
-import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.holder.TrackViewHolder
+import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.mappers.toTrackItem
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.state.FeedUiState
+import ru.kpfu.itis.bagaviev.theme.recyclerview.adapter.TrackAdapter
+import ru.kpfu.itis.bagaviev.theme.recyclerview.decorator.TrackItemDecorator
+import ru.kpfu.itis.bagaviev.theme.recyclerview.interactor.TrackInteractor
 
 class PlaylistDetailsDialogFragment : DialogFragment(R.layout.fragment_playlist_details) {
 
@@ -30,30 +31,13 @@ class PlaylistDetailsDialogFragment : DialogFragment(R.layout.fragment_playlist_
     }
 
     private val tracksAdapter by lazy {
-        TracksAdapter(
+        TrackAdapter(
             context = requireContext(),
-            interactor = object : TrackViewHolder.Companion.TrackInteractor {
-
-                override fun onClick(trackId: Long) {
-                    viewModel.onTrackClick(trackId)
-                }
-
-                override fun onLongClick(trackId: Long) {
-                    viewModel.onTrackLongClick(trackId)
-                }
-
-                override fun onPlayPause() {
-                    viewModel.onPlayPause()
-                }
-
-                override fun onSeekTo(progress: Int) {
-                    viewModel.onSeekTo(progress)
-                }
-
-                override fun onMoveHeldThumb(progress: Int) {
-                    viewModel.onMoveHeldSeekBar(progress)
-                }
-            }
+            trackInteractor = TrackInteractor.Builder()
+                .onClick(viewModel::onTrackClick)
+                .onMoveHeldThumb(viewModel::onMoveHeldSeekBar)
+                .onReleaseThumb(viewModel::onSeekTo)
+                .build()
         )
     }
 
@@ -61,7 +45,7 @@ class PlaylistDetailsDialogFragment : DialogFragment(R.layout.fragment_playlist_
     private fun observeUiState(feedUiState: FeedUiState) {
         with(feedUiState) {
             with(tracksAdapter) {
-                playingMusicItem?.apply{ setCurrentPlayingTrackId(id) }
+                playingMusicItem?.apply{ markAsPlayable(id) }
                 if (isPlaying) play() else pause()
             }
         }
@@ -89,7 +73,9 @@ class PlaylistDetailsDialogFragment : DialogFragment(R.layout.fragment_playlist_
                     )
                     ivTrackCover.load(coverUri)
                     rvPlaylistTracks.adapter = tracksAdapter.apply {
-                        submitList(tracks)
+                        submitList(tracks.map { trackModel ->
+                            trackModel.toTrackItem()
+                        })
                     }
                     rvPlaylistTracks.addItemDecoration(TrackItemDecorator(requireContext()))
                 }
@@ -121,7 +107,7 @@ class PlaylistDetailsDialogFragment : DialogFragment(R.layout.fragment_playlist_
         playlistDetails?.also(::initUi)
         viewModel.apply {
             uiState.observe(viewLifecycleOwner, ::observeUiState)
-            currentPlayingProgress.observe(viewLifecycleOwner, ::observeCurrentPlayingProgress)
+            currentPlayingProgressState.observe(viewLifecycleOwner, ::observeCurrentPlayingProgress)
         }
     }
 

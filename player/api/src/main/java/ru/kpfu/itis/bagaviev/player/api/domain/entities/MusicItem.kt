@@ -8,5 +8,6 @@ class MusicItem(
     val authors: List<String>,
     val genre: String,
     val audioFileUri: URI,
+    val videoFileUri: URI? = null,
     val coverUri: URI
 )

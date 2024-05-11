@@ -48,10 +48,10 @@ class FeedViewModel @Inject constructor(
         get() = _dialogState
 
 
-    private val _currentPlayingProgress = MutableStateFlow(0)
+    private val _currentPlayingProgressState = MutableStateFlow(0)
 
-    val currentPlayingProgress: StateFlow<Int>
-        get() = _currentPlayingProgress
+    val currentPlayingProgressState: StateFlow<Int>
+        get() = _currentPlayingProgressState
 
 
     private var currentItemDuration: Long = -1
@@ -81,7 +81,7 @@ class FeedViewModel @Inject constructor(
                 }
                 is PlayerCallback.PlayingPositionChanged -> {
                     if (shouldTrackSeekBar) {
-                        _currentPlayingProgress.emit(
+                        _currentPlayingProgressState.emit(
                             callback.positionInMs.timeAsProgress(currentItemDuration)
                         )
                     }
@@ -101,7 +101,7 @@ class FeedViewModel @Inject constructor(
         getPopularTracksUseCase().fold(
             onSuccess = { trackResponseList ->
                 _uiState.emit(_uiState.value.copy(
-                    chartTracks = trackResponseList.map { track ->
+                    popularTracks = trackResponseList.map { track ->
                         track.toTrackModel()
                     }
                 ))
@@ -181,16 +181,6 @@ class FeedViewModel @Inject constructor(
                 _dialogState.emit(
                     DialogState.PlaylistDetails(playlistDetailsModel)
                 )
-            }
-        }
-    }
-
-    fun onPlayPause() {
-        viewModelScope.launch {
-            if (_uiState.value.isPlaying) {
-                interactor.pause()
-            } else {
-                interactor.play()
             }
         }
     }
