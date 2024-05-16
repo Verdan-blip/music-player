@@ -1,8 +1,8 @@
 package ru.kpfu.itis.bagaviev.feed.impl.presentation.entities.users.mappers
 
 import androidx.core.net.toUri
-import ru.kpfu.itis.bagaviev.feed.api.domain.users.User
-import ru.kpfu.itis.bagaviev.feed.api.domain.users.UserDetails
+import ru.kpfu.itis.bagaviev.feed.api.domain.user.User
+import ru.kpfu.itis.bagaviev.feed.api.domain.user.UserDetails
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.entities.playlists.mappers.toPlaylist
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.entities.playlists.mappers.toPlaylistModel
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.entities.tracks.mappers.toTrack

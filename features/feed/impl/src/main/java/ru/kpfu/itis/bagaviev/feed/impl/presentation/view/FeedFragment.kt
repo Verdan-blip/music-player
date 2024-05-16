@@ -2,7 +2,6 @@ package ru.kpfu.itis.bagaviev.feed.impl.presentation.view
 
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -152,11 +151,13 @@ class FeedFragment : BaseFragment(R.layout.fragment_feed) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        with(viewModel) {
+
+        viewModel.apply {
             uiState.observe(viewLifecycleOwner, ::observeUiState)
             currentPlayingProgressState.observe(viewLifecycleOwner, ::observeCurrentPlayingProgress)
             dialogState.observe(viewLifecycleOwner, ::observeDialogState)
         }
+
         viewBinding?.apply {
             rvChartTracks.adapter = feedAdapter
             rvChartTracks.addItemDecoration(FeedItemDecorator(requireContext()))

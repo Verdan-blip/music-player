@@ -12,6 +12,8 @@ android {
     defaultConfig {
         minSdk = 21
 
+        buildConfigField("String", "BASE_URL", "\"http://192.168.0.192:8080\"")
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -32,6 +34,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        buildConfig = true
+    }
 }
 
 dependencies {
@@ -39,6 +44,7 @@ dependencies {
     implementation(project(":core:common"))
     implementation(project(":data:music:api"))
 
+    implementation(libs.okhttp.logginginterceptor)
     implementation(libs.retrofit)
     implementation(libs.kotlin.serialization)
     implementation(libs.retrofit.kotlin.serialization.converter)

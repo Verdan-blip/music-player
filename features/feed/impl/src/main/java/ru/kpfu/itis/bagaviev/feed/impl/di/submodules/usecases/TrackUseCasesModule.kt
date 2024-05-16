@@ -5,9 +5,9 @@ import dagger.Provides
 import kotlinx.coroutines.CoroutineDispatcher
 import ru.kpfu.itis.bagaviev.common.di.modules.CoroutineDispatcherModule
 import ru.kpfu.itis.bagaviev.common.di.modules.IODispatcher
-import ru.kpfu.itis.bagaviev.feed.api.domain.tracks.repository.TrackRepository
-import ru.kpfu.itis.bagaviev.feed.api.domain.tracks.usecases.GetPopularTracksUseCase
-import ru.kpfu.itis.bagaviev.feed.api.domain.tracks.usecases.GetTrackDetailsByIdUseCase
+import ru.kpfu.itis.bagaviev.feed.api.domain.track.repository.TrackRepository
+import ru.kpfu.itis.bagaviev.feed.api.domain.track.usecase.GetPopularTracksUseCase
+import ru.kpfu.itis.bagaviev.feed.api.domain.track.usecase.GetTrackDetailsByIdUseCase
 
 @Module(
     includes = [CoroutineDispatcherModule::class]

@@ -3,20 +3,13 @@ package ru.kpfu.itis.bagaviev.feature.player.impl.presentation.view
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.media3.common.MediaItem
 import androidx.media3.exoplayer.ExoPlayer
-import coil.ImageLoader
 import coil.load
-import coil.memory.MemoryCache
-import coil.request.ImageRequest
-import jp.wasabeef.blurry.Blurry
 import ru.kpfu.itis.bagaviev.common.base.BaseFragment
 import ru.kpfu.itis.bagaviev.common.util.extensions.blur
 import ru.kpfu.itis.bagaviev.common.util.extensions.observe
@@ -126,16 +119,18 @@ class PlayerFragment : BaseFragment(R.layout.fragment_player) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewBinding?.apply {
-            pvVideo.player = exoPlayer
-            exoPlayer.volume = 0f
-            exoPlayer.prepare()
-        }
-        with (viewModel) {
+
+        viewModel.apply {
             uiState.observe(viewLifecycleOwner, ::observeUiState)
             currentProgressState.observe(viewLifecycleOwner, ::observeCurrentPlayingProgressState)
             currentProgressTimeState.observe(viewLifecycleOwner, ::observeCurrentPlayingTimeState)
             currentPlayingVideoState.observe(viewLifecycleOwner, ::observeVideoFileUriState)
+        }
+
+        viewBinding?.apply {
+            pvVideo.player = exoPlayer
+            exoPlayer.volume = 0f
+            exoPlayer.prepare()
         }
         initListeners()
     }

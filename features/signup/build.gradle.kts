@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.android.kotlin)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -30,13 +31,26 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
 
+    implementation(project(":core:common"))
+    implementation(project(":core:theme"))
+
+    implementation(libs.dagger)
+    ksp(libs.dagger.compiler)
+
     implementation(libs.android.core)
     implementation(libs.android.appcompat)
     implementation(libs.android.material)
+    implementation(libs.legacy.support.v4)
+    implementation(libs.lifecycle.livedata.ktx)
+    implementation(libs.lifecycle.viewmodel)
+    implementation(libs.fragment.ktx)
     testImplementation(libs.juint)
     androidTestImplementation(libs.android.test.junit)
     androidTestImplementation(libs.android.test.espresso)

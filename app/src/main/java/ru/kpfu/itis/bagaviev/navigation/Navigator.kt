@@ -22,4 +22,16 @@ class Navigator : GlobalRouter {
     override fun navigateToPlayer() {
         navController?.navigate(R.id.action_feedFragment_to_playerFragment)
     }
+
+    override fun navigateToProfile() {
+        navController?.navigate(R.id.profileFragment)
+    }
+
+    override fun navigateToSignIn() {
+        navController?.navigate(R.id.signInFragment)
+    }
+
+    override fun navigateToSignUp() {
+        navController?.navigate(R.id.signUpFragment)
+    }
 }

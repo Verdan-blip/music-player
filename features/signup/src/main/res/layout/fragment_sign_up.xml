@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:background="@color/cardview_dark_background"
+    tools:context=".presentation.SignUpFragment">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/LightTextView"
+            android:text="Sign up"
+            android:textColor="@color/light_text_primary_color"
+            android:textSize="36sp" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="256dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="32dp"
+            app:cardCornerRadius="10dp"
+            style="@style/AppCard">
+
+            <EditText
+                android:id="@+id/et_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_marginStart="8dp"
+                android:inputType="textEmailAddress"
+                android:layout_gravity="center|start"
+                android:hint="Элетронная почта"
+                style="@style/AppLightEditText" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="256dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="10dp"
+            style="@style/AppCard">
+
+            <EditText
+                android:id="@+id/et_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_marginStart="8dp"
+                android:layout_gravity="center|start"
+                android:hint="Логин"
+                style="@style/AppLightEditText" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="256dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="10dp"
+            style="@style/AppCard">
+
+            <EditText
+                android:id="@+id/et_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_marginStart="8dp"
+                android:layout_gravity="center|start"
+                android:inputType="textPassword"
+                android:hint="Пароль"
+                style="@style/AppLightEditText" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="256dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="10dp"
+            style="@style/AppCard">
+
+            <EditText
+                android:id="@+id/et_confirmed_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_marginStart="8dp"
+                android:layout_gravity="center|start"
+                android:inputType="textPassword"
+                android:hint="Подтвердите пароль"
+                style="@style/AppLightEditText" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_sign_up"
+            android:layout_width="128dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:textColor="@color/light_text_primary_color"
+            android:textAllCaps="false"
+            style="@style/AppButton"
+            android:text="Sign up" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            style="@style/LightTextView"
+            android:textColor="@color/light_text_secondary_color"
+            android:text="Already have an account?" />
+
+        <TextView
+            android:id="@+id/tv_sign_in"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            style="@style/LightTextView"
+            android:textStyle="bold"
+            android:textColor="@color/light_text_secondary_color"
+            android:text="Sign in!" />
+
+    </LinearLayout>
+
+</FrameLayout>

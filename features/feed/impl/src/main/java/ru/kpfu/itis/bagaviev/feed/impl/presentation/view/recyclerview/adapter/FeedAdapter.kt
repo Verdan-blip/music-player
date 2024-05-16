@@ -1,7 +1,6 @@
 package ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import ru.kpfu.itis.bagaviev.feed.impl.R
@@ -9,7 +8,6 @@ import ru.kpfu.itis.bagaviev.feed.impl.databinding.ItemFeedSubtitleBinding
 import ru.kpfu.itis.bagaviev.feed.impl.databinding.ItemPlaylistsBinding
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.holder.PlaylistsViewHolder
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.holder.SubtitleViewHolder
-import ru.kpfu.itis.bagaviev.theme.databinding.ItemTrackBinding
 import ru.kpfu.itis.bagaviev.theme.recyclerview.adapter.TrackAdapter
 import ru.kpfu.itis.bagaviev.theme.recyclerview.interactor.PlaylistInteractor
 import ru.kpfu.itis.bagaviev.theme.recyclerview.interactor.TrackInteractor

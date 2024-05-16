@@ -13,10 +13,10 @@ import ru.kpfu.itis.bagaviev.common.util.extensions.progressAsTime
 import ru.kpfu.itis.bagaviev.common.util.extensions.timeAsProgress
 import ru.kpfu.itis.bagaviev.common.util.extensions.toUri
 import ru.kpfu.itis.bagaviev.common.util.typealiases.ViewModelFactories
-import ru.kpfu.itis.bagaviev.feed.api.domain.playlists.usecases.GetPlaylistDetailsByIdUseCase
-import ru.kpfu.itis.bagaviev.feed.api.domain.playlists.usecases.GetPopularPlaylistsUseCase
-import ru.kpfu.itis.bagaviev.feed.api.domain.tracks.usecases.GetPopularTracksUseCase
-import ru.kpfu.itis.bagaviev.feed.api.domain.tracks.usecases.GetTrackDetailsByIdUseCase
+import ru.kpfu.itis.bagaviev.feed.api.domain.playlist.usecases.GetPlaylistDetailsByIdUseCase
+import ru.kpfu.itis.bagaviev.feed.api.domain.playlist.usecases.GetPopularPlaylistsUseCase
+import ru.kpfu.itis.bagaviev.feed.api.domain.track.usecase.GetPopularTracksUseCase
+import ru.kpfu.itis.bagaviev.feed.api.domain.track.usecase.GetTrackDetailsByIdUseCase
 import ru.kpfu.itis.bagaviev.feed.impl.FeedRouter
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.entities.playlists.mappers.toPlaylistDetailsModel
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.entities.playlists.mappers.toPlaylistModel

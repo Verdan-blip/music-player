@@ -21,6 +21,10 @@
         <item name="cardElevation">0dp</item>
     </style>
 
+    <style name="AppButton" parent="@style/Widget.AppCompat.Button">
+        <item name="android:background">@drawable/app_button_background</item>
+    </style>
+
     <style name="SmallSquareCard" parent="@style/AppCard">
         <item name="android:layout_width">@dimen/small_square_card_width</item>
         <item name="android:layout_height">@dimen/small_square_card_height</item>
@@ -57,6 +61,13 @@
         <item name="android:textColor">@color/light_text_primary_color</item>
         <item name="android:textColorHint">@color/light_text_secondary_color</item>
         <item name="fontFamily">sans-serif-light</item>
+    </style>
+
+    <style name="AppThinEditText" parent="@style/Widget.AppCompat.EditText">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textColor">@color/light_text_primary_color</item>
+        <item name="android:textColorHint">@color/light_text_secondary_color</item>
+        <item name="fontFamily">sans-serif-thin</item>
     </style>
     
 </resources>

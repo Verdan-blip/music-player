@@ -1,8 +1,7 @@
 package ru.kpfu.itis.bagaviev.feed.impl.presentation.entities.tracks.mappers
 
-import androidx.core.net.toUri
-import ru.kpfu.itis.bagaviev.feed.api.domain.tracks.entites.Track
-import ru.kpfu.itis.bagaviev.feed.api.domain.tracks.entites.TrackDetails
+import ru.kpfu.itis.bagaviev.feed.api.domain.track.entity.Track
+import ru.kpfu.itis.bagaviev.feed.api.domain.track.entity.TrackDetails
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.entities.tracks.TrackDetailsModel
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.entities.tracks.TrackModel
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.entities.users.mappers.toUser

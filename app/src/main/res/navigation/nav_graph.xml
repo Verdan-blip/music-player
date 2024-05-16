@@ -25,16 +25,30 @@
         android:id="@+id/playerFragment"
         android:name="ru.kpfu.itis.bagaviev.feature.player.impl.presentation.view.PlayerFragment"
         android:label="PlayerFragment"
-        tools:layout="@layout/fragment_player"/>
+        tools:layout="@layout/fragment_player" />
+
     <fragment
         android:id="@+id/searchFragment"
         android:name="ru.kpfu.itis.bagaviev.feature.search.impl.presentation.view.SearchFragment"
         android:label="SearchFragment"
-        tools:layout="@layout/fragment_search"/>
+        tools:layout="@layout/fragment_search" />
+
     <fragment
-        android:id="@+id/OAuthFragment2"
-        android:name="ru.kpfu.itis.oauth.presentation.OAuthFragment"
-        android:label="OAuthFragment"
-        tools:layout="@layout/fragment_oauth"/>
+        android:id="@+id/profileFragment"
+        android:name="ru.kpfu.itis.bagaviev.feature.profile.presentation.view.ProfileFragment"
+        android:label="ProfileFragment"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="ru.kpfu.itis.bagaviev.feature.signup.presentation.SignUpFragment"
+        android:label="SignUpFragment"
+        tools:layout="@layout/fragment_sign_in" />
+
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="ru.kpfu.itis.bagaviev.feature.signin.presentation.view.SignInFragment"
+        android:label="SignInFragment"
+        tools:layout="@layout/fragment_sign_up" />
 
 </navigation>

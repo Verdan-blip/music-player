@@ -5,9 +5,9 @@ import dagger.Provides
 import kotlinx.coroutines.CoroutineDispatcher
 import ru.kpfu.itis.bagaviev.common.di.modules.CoroutineDispatcherModule
 import ru.kpfu.itis.bagaviev.common.di.modules.IODispatcher
-import ru.kpfu.itis.bagaviev.feed.api.domain.playlists.repository.PlaylistRepository
-import ru.kpfu.itis.bagaviev.feed.api.domain.playlists.usecases.GetPlaylistDetailsByIdUseCase
-import ru.kpfu.itis.bagaviev.feed.api.domain.playlists.usecases.GetPopularPlaylistsUseCase
+import ru.kpfu.itis.bagaviev.feed.api.domain.playlist.repository.PlaylistRepository
+import ru.kpfu.itis.bagaviev.feed.api.domain.playlist.usecases.GetPlaylistDetailsByIdUseCase
+import ru.kpfu.itis.bagaviev.feed.api.domain.playlist.usecases.GetPopularPlaylistsUseCase
 
 @Module(
     includes = [CoroutineDispatcherModule::class]

@@ -1,7 +1,6 @@
 package ru.kpfu.itis.bagaviev.theme.recyclerview.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter

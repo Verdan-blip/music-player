@@ -1,6 +1,6 @@
 package ru.kpfu.itis.bagaviev.feature.search.impl.data.playlists.repository
 
-import ru.kpfu.itis.bagaviev.data.music.api.data.playlists.repository.PlaylistsDataRepository
+import ru.kpfu.itis.bagaviev.data.music.api.data.network.playlist.repository.PlaylistsDataRepository
 import ru.kpfu.itis.bagaviev.feature.search.api.domain.playlists.entites.Playlist
 import ru.kpfu.itis.bagaviev.feature.search.api.domain.playlists.entites.PlaylistDetails
 import ru.kpfu.itis.bagaviev.feature.search.api.domain.playlists.repository.PlaylistRepository

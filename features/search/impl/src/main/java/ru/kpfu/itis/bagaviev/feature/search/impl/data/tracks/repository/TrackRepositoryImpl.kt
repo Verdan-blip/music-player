@@ -1,6 +1,6 @@
 package ru.kpfu.itis.bagaviev.feature.search.impl.data.tracks.repository
 
-import ru.kpfu.itis.bagaviev.data.music.api.data.tracks.repository.TracksDataRepository
+import ru.kpfu.itis.bagaviev.data.music.api.data.network.track.repository.TracksDataRepository
 import ru.kpfu.itis.bagaviev.feature.search.api.domain.tracks.entites.Track
 import ru.kpfu.itis.bagaviev.feature.search.api.domain.tracks.entites.TrackDetails
 import ru.kpfu.itis.bagaviev.feature.search.api.domain.tracks.repository.TrackRepository

@@ -1,7 +1,7 @@
 package ru.kpfu.itis.bagaviev.feed.impl.presentation.entities.playlists.mappers
 
-import ru.kpfu.itis.bagaviev.feed.api.domain.playlists.entites.Playlist
-import ru.kpfu.itis.bagaviev.feed.api.domain.playlists.entites.PlaylistDetails
+import ru.kpfu.itis.bagaviev.feed.api.domain.playlist.entity.Playlist
+import ru.kpfu.itis.bagaviev.feed.api.domain.playlist.entity.PlaylistDetails
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.entities.playlists.PlaylistDetailsModel
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.entities.playlists.PlaylistModel
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.entities.tracks.mappers.toTrack

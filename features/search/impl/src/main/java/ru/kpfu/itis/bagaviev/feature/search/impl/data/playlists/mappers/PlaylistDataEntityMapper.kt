@@ -1,7 +1,7 @@
 package ru.kpfu.itis.bagaviev.feature.search.impl.data.playlists.mappers
 
-import ru.kpfu.itis.bagaviev.data.music.api.data.playlists.entities.PlaylistDataEntity
-import ru.kpfu.itis.bagaviev.data.music.api.data.playlists.entities.PlaylistDetailsDataEntity
+import ru.kpfu.itis.bagaviev.data.music.api.data.network.playlist.entities.PlaylistDataEntity
+import ru.kpfu.itis.bagaviev.data.music.api.data.network.playlist.entities.PlaylistDetailsDataEntity
 import ru.kpfu.itis.bagaviev.feature.search.api.domain.playlists.entites.Playlist
 import ru.kpfu.itis.bagaviev.feature.search.api.domain.playlists.entites.PlaylistDetails
 import ru.kpfu.itis.bagaviev.feature.search.impl.data.users.mappers.toUser

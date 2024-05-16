@@ -12,6 +12,7 @@ android-test-espresso = "3.5.1"
 
 lifecycle-runtime = "2.7.0"
 dagger = "2.48"
+okhttp = "4.12.0"
 retrofit = "2.9.0"
 retrofit-kotlin-serialization-converter = "1.0.0"
 navigation = "2.7.7"
@@ -55,6 +56,7 @@ lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", versi
 dagger = { module = "com.google.dagger:dagger", version.ref = "dagger" }
 dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger" }
 
+okhttp-logginginterceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit-kotlin-serialization-converter = { module = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter", version.ref = "retrofit-kotlin-serialization-converter" }
 kotlin-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlin-serialization" }
@@ -98,4 +100,3 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 
 kotlin-jvm =  { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-

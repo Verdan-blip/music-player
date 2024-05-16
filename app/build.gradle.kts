@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.android.kotlin)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -44,7 +45,6 @@ android {
 
 dependencies {
 
-    implementation(project(":data:auth"))
     implementation(project(":data:music:api"))
     implementation(project(":data:music:impl"))
 
@@ -64,6 +64,11 @@ dependencies {
     implementation(project(":features:search:api"))
     implementation(project(":features:search:impl"))
 
+    implementation(project(":features:signin"))
+    implementation(project(":features:signup"))
+
+    implementation(project(":features:profile"))
+
     implementation(libs.lifecycle.viewmodel)
 
     implementation(libs.navigation.fragment)
@@ -76,6 +81,10 @@ dependencies {
     ksp(libs.dagger.compiler)
 
     implementation(libs.media3.exoplayer.session)
+
+    implementation(libs.retrofit)
+    implementation(libs.kotlin.serialization)
+    implementation(libs.retrofit.kotlin.serialization.converter)
 
     implementation(libs.android.core)
     implementation(libs.android.appcompat)

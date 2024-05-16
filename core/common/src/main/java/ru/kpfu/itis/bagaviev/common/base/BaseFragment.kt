@@ -1,5 +1,6 @@
 package ru.kpfu.itis.bagaviev.common.base
 
+import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import coil.ImageLoader
@@ -8,6 +9,11 @@ import coil.request.ImageRequest
 import coil.request.SuccessResult
 
 abstract class BaseFragment(@LayoutRes id: Int) : Fragment(id) {
+
+    protected fun showShortToast(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT)
+            .show()
+    }
 
     fun enqueueLoadImageRequest(
         data: Any?,

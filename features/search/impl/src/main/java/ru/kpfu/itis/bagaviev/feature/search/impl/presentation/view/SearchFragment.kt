@@ -1,7 +1,6 @@
 package ru.kpfu.itis.bagaviev.feature.search.impl.presentation.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +16,6 @@ import ru.kpfu.itis.bagaviev.feature.search.impl.presentation.view.reclycerview.
 import ru.kpfu.itis.bagaviev.feature.search.impl.presentation.view.state.SearchUiState
 import ru.kpfu.itis.bagaviev.theme.recyclerview.interactor.PlaylistInteractor
 import ru.kpfu.itis.bagaviev.theme.recyclerview.interactor.TrackInteractor
-import kotlin.math.log
 
 class SearchFragment : Fragment(R.layout.fragment_search) {
 
@@ -73,14 +71,16 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel.apply {
+            uiState.observe(viewLifecycleOwner, ::observeUiState)
+            currentPlayingProgress.observe(viewLifecycleOwner, ::observePlayingProgress)
+        }
+
         viewBinding?.apply {
             ibSearch.setOnClickListener {
                 viewModel.onSearch(etKeywords.text.toString())
             }
-        }
-        viewModel.apply {
-            uiState.observe(viewLifecycleOwner, ::observeUiState)
-            currentPlayingProgress.observe(viewLifecycleOwner, ::observePlayingProgress)
         }
     }
 
