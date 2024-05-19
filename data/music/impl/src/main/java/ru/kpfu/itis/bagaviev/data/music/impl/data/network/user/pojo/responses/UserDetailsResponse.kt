@@ -8,8 +8,8 @@ import ru.kpfu.itis.bagaviev.data.music.impl.data.network.track.pojo.responses.T
 @Serializable
 class UserDetailsResponse(
 
-    @SerialName("id")
-    val id: Long,
+    @SerialName("userId")
+    val trackId: Long,
 
     @SerialName("login")
     val login: String,

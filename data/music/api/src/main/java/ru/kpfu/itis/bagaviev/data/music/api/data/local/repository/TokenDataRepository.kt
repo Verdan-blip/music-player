@@ -2,11 +2,15 @@ package ru.kpfu.itis.bagaviev.data.music.api.data.local.repository
 
 interface TokenDataRepository {
 
-    suspend fun saveAccessToken(accessToken: String)
+    fun getAccessToken(): String?
 
-    suspend fun saveRefreshToken(refreshToken: String)
+    fun getRefreshToken(): String?
 
-    suspend fun getAccessToken(): String?
+    fun getExpiration(): Long?
 
-    suspend fun getRefreshToken(): String?
+    fun saveAccessToken(accessToken: String)
+
+    fun saveRefreshToken(refreshToken: String)
+
+    fun saveExpiration(expiresAt: Long)
 }

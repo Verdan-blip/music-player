@@ -1,7 +1,7 @@
 package ru.kpfu.itis.bagaviev.data.music.impl.data.network.track.mapper
 
-import ru.kpfu.itis.bagaviev.data.music.api.data.network.track.entities.TrackDataEntity
-import ru.kpfu.itis.bagaviev.data.music.api.data.network.track.entities.TrackDetailsDataEntity
+import ru.kpfu.itis.bagaviev.data.music.api.data.network.track.entity.TrackDataEntity
+import ru.kpfu.itis.bagaviev.data.music.api.data.network.track.entity.TrackDetailsDataEntity
 import ru.kpfu.itis.bagaviev.data.music.impl.data.network.track.pojo.responses.TrackDetailsResponse
 import ru.kpfu.itis.bagaviev.data.music.impl.data.network.track.pojo.responses.TrackResponse
 import ru.kpfu.itis.bagaviev.data.music.impl.data.network.user.mapper.toUserDataEntity
@@ -11,7 +11,7 @@ import java.util.Locale
 
 fun TrackResponse.toTrackDataEntity(): TrackDataEntity =
     TrackDataEntity(
-        id = id,
+        id = trackId,
         title = title,
         users = users.map { user -> user.toUserDataEntity() },
         smallCoverUri = URI.create(smallCoverUri)
@@ -20,7 +20,7 @@ fun TrackResponse.toTrackDataEntity(): TrackDataEntity =
 fun TrackDetailsResponse.toTrackDetailsDataEntity(): TrackDetailsDataEntity = run {
     val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
     TrackDetailsDataEntity(
-        id = id,
+        id = trackId,
         title = title,
         lyrics = lyrics,
         genre = genre,

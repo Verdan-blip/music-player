@@ -14,7 +14,7 @@ import coil.load
 import ru.kpfu.itis.bagaviev.common.util.extensions.observe
 import ru.kpfu.itis.bagaviev.feed.impl.R
 import ru.kpfu.itis.bagaviev.feed.impl.databinding.FragmentPlaylistDetailsBinding
-import ru.kpfu.itis.bagaviev.feed.impl.presentation.entities.playlists.PlaylistDetailsModel
+import ru.kpfu.itis.bagaviev.feed.impl.presentation.entity.playlist.PlaylistDetailsModel
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.FeedViewModel
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.mappers.toTrackItem
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.state.FeedUiState

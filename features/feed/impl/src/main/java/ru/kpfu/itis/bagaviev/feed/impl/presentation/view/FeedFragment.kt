@@ -139,6 +139,10 @@ class FeedFragment : BaseFragment(R.layout.fragment_feed) {
         }
     }
 
+    private fun observeErrorAlert(message: String) {
+        showErrorDialog("Ошибка", message)
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -156,6 +160,7 @@ class FeedFragment : BaseFragment(R.layout.fragment_feed) {
             uiState.observe(viewLifecycleOwner, ::observeUiState)
             currentPlayingProgressState.observe(viewLifecycleOwner, ::observeCurrentPlayingProgress)
             dialogState.observe(viewLifecycleOwner, ::observeDialogState)
+            errorAlert.observe(viewLifecycleOwner, ::observeErrorAlert)
         }
 
         viewBinding?.apply {

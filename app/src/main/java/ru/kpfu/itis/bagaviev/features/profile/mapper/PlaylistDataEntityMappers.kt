@@ -1,6 +1,6 @@
 package ru.kpfu.itis.bagaviev.features.profile.mapper
 
-import ru.kpfu.itis.bagaviev.data.music.api.data.network.playlist.entities.PlaylistDataEntity
+import ru.kpfu.itis.bagaviev.data.music.api.data.network.playlist.entity.PlaylistDataEntity
 import ru.kpfu.itis.bagaviev.feature.profile.domain.entity.playlist.MyPlaylist
 
 fun PlaylistDataEntity.toMyPlaylist(): MyPlaylist = MyPlaylist(

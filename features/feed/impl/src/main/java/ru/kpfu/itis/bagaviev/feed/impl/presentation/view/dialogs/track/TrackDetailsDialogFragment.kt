@@ -12,7 +12,7 @@ import androidx.fragment.app.DialogFragment
 import coil.load
 import ru.kpfu.itis.bagaviev.feed.impl.R
 import ru.kpfu.itis.bagaviev.feed.impl.databinding.FragmentTrackDetailsBinding
-import ru.kpfu.itis.bagaviev.feed.impl.presentation.entities.tracks.TrackDetailsModel
+import ru.kpfu.itis.bagaviev.feed.impl.presentation.entity.track.TrackDetailsModel
 
 class TrackDetailsDialogFragment : DialogFragment(R.layout.fragment_track_details) {
 

@@ -8,8 +8,8 @@ import ru.kpfu.itis.bagaviev.data.music.impl.data.network.user.pojo.responses.Us
 @Serializable
 class PlaylistResponse(
 
-    @SerialName("id")
-    val id: Long,
+    @SerialName("playlistId")
+    val playlistId: Long,
 
     @SerialName("title")
     val title: String,

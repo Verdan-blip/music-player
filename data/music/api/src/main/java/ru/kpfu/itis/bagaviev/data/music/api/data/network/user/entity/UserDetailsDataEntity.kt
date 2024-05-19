@@ -1,7 +1,7 @@
 package ru.kpfu.itis.bagaviev.data.music.api.data.network.user.entity
 
-import ru.kpfu.itis.bagaviev.data.music.api.data.network.playlist.entities.PlaylistDataEntity
-import ru.kpfu.itis.bagaviev.data.music.api.data.network.track.entities.TrackDataEntity
+import ru.kpfu.itis.bagaviev.data.music.api.data.network.playlist.entity.PlaylistDataEntity
+import ru.kpfu.itis.bagaviev.data.music.api.data.network.track.entity.TrackDataEntity
 import java.net.URI
 
 class UserDetailsDataEntity(

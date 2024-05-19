@@ -8,19 +8,8 @@ import ru.kpfu.itis.bagaviev.data.music.impl.data.network.track.pojo.responses.T
 
 interface TrackApiService {
 
-    @GET("/v1/tracks/charts")
-    suspend fun getPopularTracks(
-        @Query("page") limit: Int = 0,
-        @Query("count") offset: Int = 5
-    ): List<TrackResponse>
-
-    @GET("/v1/tracks/{id}")
+    @GET("/api/v1/tracks/{trackId}")
     suspend fun getTrackById(
-        @Path("id") trackId: Long
+        @Path("trackId") trackId: Long
     ): TrackDetailsResponse?
-
-    @GET("/v1/tracks")
-    suspend fun getAllByKeywords(
-        @Query("keys") keys: String
-    ): List<TrackResponse>
 }

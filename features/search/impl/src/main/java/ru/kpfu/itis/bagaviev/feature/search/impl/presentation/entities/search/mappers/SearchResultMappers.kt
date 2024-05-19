@@ -1,6 +1,6 @@
 package ru.kpfu.itis.bagaviev.feature.search.impl.presentation.entities.search.mappers
 
-import ru.kpfu.itis.bagaviev.feature.search.api.domain.search.entities.SearchResult
+import ru.kpfu.itis.bagaviev.feature.search.api.domain.search.entity.SearchResult
 import ru.kpfu.itis.bagaviev.feature.search.impl.presentation.entities.playlists.mappers.toPlaylistModel
 import ru.kpfu.itis.bagaviev.feature.search.impl.presentation.entities.search.SearchResultModel
 import ru.kpfu.itis.bagaviev.feature.search.impl.presentation.entities.tracks.mappers.toTrackModel

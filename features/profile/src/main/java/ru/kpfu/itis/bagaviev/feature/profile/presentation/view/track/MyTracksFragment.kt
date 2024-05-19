@@ -13,6 +13,7 @@ import ru.kpfu.itis.bagaviev.feature.profile.presentation.entity.user.UserProfil
 import ru.kpfu.itis.bagaviev.feature.profile.presentation.view.ProfileViewModel
 import ru.kpfu.itis.bagaviev.feature.profile.presentation.view.mapper.toTrackItem
 import ru.kpfu.itis.bagaviev.theme.recyclerview.adapter.TrackAdapter
+import ru.kpfu.itis.bagaviev.theme.recyclerview.decorator.TrackItemDecorator
 import ru.kpfu.itis.bagaviev.theme.recyclerview.interactor.TrackInteractor
 
 class MyTracksFragment : Fragment(R.layout.fragment_tracks) {
@@ -31,7 +32,7 @@ class MyTracksFragment : Fragment(R.layout.fragment_tracks) {
         ViewModelProvider(requireActivity())[ProfileViewModel::class.java]
     }
 
-    private fun observeMyTracks(userProfileModel: UserProfileModel?) {
+    private fun observeUserProfile(userProfileModel: UserProfileModel?) {
         userProfileModel?.apply {
             tracksAdapter.submitList(myTracks.map { myTrackModel ->
                 myTrackModel.toTrackItem()
@@ -55,10 +56,11 @@ class MyTracksFragment : Fragment(R.layout.fragment_tracks) {
 
         viewBinding?.apply {
             rvTracks.adapter = tracksAdapter
+            rvTracks.addItemDecoration(TrackItemDecorator(requireContext()))
         }
 
         viewModel.apply {
-            userProfileState.observe(viewLifecycleOwner, ::observeMyTracks)
+            userProfileState.observe(viewLifecycleOwner, ::observeUserProfile)
         }
     }
 

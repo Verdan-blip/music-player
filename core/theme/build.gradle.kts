@@ -39,6 +39,8 @@ dependencies {
 
     implementation(project(":core:common"))
 
+    implementation(libs.lifecycle.viewmodel)
+
     implementation(libs.blurry)
 
     implementation(libs.coil)

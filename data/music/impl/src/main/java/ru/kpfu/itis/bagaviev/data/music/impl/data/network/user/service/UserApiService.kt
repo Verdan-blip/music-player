@@ -8,7 +8,7 @@ import ru.kpfu.itis.bagaviev.data.music.impl.data.network.user.pojo.responses.Us
 
 interface UserApiService {
 
-    @GET("/api/v1/users/{id}")
+    @GET("/api/v1/users/{userId}")
     suspend fun getUserById(@Path("id") userId: Long): UserDetailsResponse?
 
     @GET("/api/v1/profile/me")

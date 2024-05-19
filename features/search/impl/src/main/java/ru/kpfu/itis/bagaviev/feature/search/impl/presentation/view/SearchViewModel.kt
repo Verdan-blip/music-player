@@ -12,9 +12,9 @@ import ru.kpfu.itis.bagaviev.common.base.BaseViewModel
 import ru.kpfu.itis.bagaviev.common.util.extensions.progressAsTime
 import ru.kpfu.itis.bagaviev.common.util.extensions.timeAsProgress
 import ru.kpfu.itis.bagaviev.common.util.typealiases.ViewModelFactories
-import ru.kpfu.itis.bagaviev.feature.search.api.domain.playlists.usecases.GetPlaylistDetailsByIdUseCase
-import ru.kpfu.itis.bagaviev.feature.search.api.domain.search.usecases.SearchAnythingByKeywordsUseCase
-import ru.kpfu.itis.bagaviev.feature.search.api.domain.tracks.usecases.GetTrackDetailsByIdUseCase
+import ru.kpfu.itis.bagaviev.feature.search.api.domain.playlists.usecase.GetPlaylistDetailsByIdUseCase
+import ru.kpfu.itis.bagaviev.feature.search.api.domain.search.usecase.SearchByKeywordsUseCase
+import ru.kpfu.itis.bagaviev.feature.search.api.domain.track.usecase.GetTrackDetailsByIdUseCase
 import ru.kpfu.itis.bagaviev.feature.search.impl.presentation.entities.playlists.mappers.toPlaylistDetailsModel
 import ru.kpfu.itis.bagaviev.feature.search.impl.presentation.entities.search.mappers.toSearchResultModel
 import ru.kpfu.itis.bagaviev.feature.search.impl.presentation.entities.tracks.mappers.toTrackDetailsModel
@@ -25,7 +25,7 @@ import ru.kpfu.itis.bagaviev.player.api.domain.interactor.MusicPlayerInteractor
 import javax.inject.Inject
 
 class SearchViewModel @Inject constructor(
-    private val searchAnythingByKeywordsUseCase: SearchAnythingByKeywordsUseCase,
+    private val searchByKeywordsUseCase: SearchByKeywordsUseCase,
     private val getTrackDetailsByIdUseCase: GetTrackDetailsByIdUseCase,
     private val getPlaylistDetailsByIdUseCase: GetPlaylistDetailsByIdUseCase,
     private val interactor: MusicPlayerInteractor
@@ -77,7 +77,7 @@ class SearchViewModel @Inject constructor(
     fun onSearch(text: String) {
         viewModelScope.launch {
             val keywords = text.split("\\s+")
-            val searchResult = searchAnythingByKeywordsUseCase(keywords)
+            val searchResult = searchByKeywordsUseCase(keywords)
                 .toSearchResultModel()
             _uiState.emit(_uiState.value.copy(
                 foundTracks = searchResult.tracks,

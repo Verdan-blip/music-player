@@ -8,9 +8,9 @@ import ru.kpfu.itis.bagaviev.player.api.domain.interactor.MusicPlayerInteractor
 
 interface SearchComponentDependencies : ComponentDependencies {
 
-    val trackRepository: TracksDataRepository
+    val trackDataRepository: TracksDataRepository
 
-    val playlistRepository: PlaylistsDataRepository
+    val playlistDataRepository: PlaylistsDataRepository
 
     val searchDataRepository: SearchDataRepository
 

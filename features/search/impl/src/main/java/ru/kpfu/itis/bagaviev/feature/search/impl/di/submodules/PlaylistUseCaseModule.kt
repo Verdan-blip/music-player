@@ -6,8 +6,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import ru.kpfu.itis.bagaviev.common.di.modules.CoroutineDispatcherModule
 import ru.kpfu.itis.bagaviev.common.di.modules.IODispatcher
 import ru.kpfu.itis.bagaviev.feature.search.api.domain.playlists.repository.PlaylistRepository
-import ru.kpfu.itis.bagaviev.feature.search.api.domain.playlists.usecases.GetPlaylistDetailsByIdUseCase
-import ru.kpfu.itis.bagaviev.feature.search.api.domain.playlists.usecases.GetPopularPlaylistsUseCase
+import ru.kpfu.itis.bagaviev.feature.search.api.domain.playlists.usecase.GetPlaylistDetailsByIdUseCase
 
 @Module(
     includes = [CoroutineDispatcherModule::class]
@@ -20,11 +19,4 @@ internal class PlaylistUseCaseModule {
         @IODispatcher coroutineDispatcher: CoroutineDispatcher
     ): GetPlaylistDetailsByIdUseCase =
         GetPlaylistDetailsByIdUseCase(playlistRepository, coroutineDispatcher)
-
-    @Provides
-    fun providePopularPlaylistsUseCase(
-        playlistRepository: PlaylistRepository,
-        @IODispatcher coroutineDispatcher: CoroutineDispatcher
-    ): GetPopularPlaylistsUseCase =
-        GetPopularPlaylistsUseCase(playlistRepository, coroutineDispatcher)
 }

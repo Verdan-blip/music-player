@@ -6,8 +6,8 @@ import kotlinx.serialization.Serializable
 @Serializable
 class UserResponse(
 
-    @SerialName("id")
-    val id: Long,
+    @SerialName("userId")
+    val userId: Long,
 
     @SerialName("login")
     val login: String

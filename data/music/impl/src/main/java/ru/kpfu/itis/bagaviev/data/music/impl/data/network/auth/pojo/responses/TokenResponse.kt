@@ -13,6 +13,9 @@ class TokenResponse(
     @SerialName("refreshToken")
     val refreshToken: String,
 
+    @SerialName("expiresIn")
+    val expiresIn: Int,
+
     @SerialName("type")
     val type: String
 )

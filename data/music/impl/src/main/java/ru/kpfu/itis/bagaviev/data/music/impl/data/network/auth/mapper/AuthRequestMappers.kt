@@ -1,7 +1,7 @@
 package ru.kpfu.itis.bagaviev.data.music.impl.data.network.auth.mapper
 
-import ru.kpfu.itis.bagaviev.data.music.api.data.network.auth.entities.LoginDataEntity
-import ru.kpfu.itis.bagaviev.data.music.api.data.network.auth.entities.RegisterDataEntity
+import ru.kpfu.itis.bagaviev.data.music.api.data.network.auth.entity.LoginDataEntity
+import ru.kpfu.itis.bagaviev.data.music.api.data.network.auth.entity.RegisterDataEntity
 import ru.kpfu.itis.bagaviev.data.music.impl.data.network.auth.pojo.requests.LoginRequest
 import ru.kpfu.itis.bagaviev.data.music.impl.data.network.auth.pojo.requests.RegisterRequest
 

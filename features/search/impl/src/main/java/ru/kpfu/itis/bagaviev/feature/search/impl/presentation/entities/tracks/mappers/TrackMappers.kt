@@ -2,8 +2,8 @@ package ru.kpfu.itis.bagaviev.feature.search.impl.presentation.entities.tracks.m
 
 import ru.kpfu.itis.bagaviev.common.util.extensions.toURI
 import ru.kpfu.itis.bagaviev.common.util.extensions.toUri
-import ru.kpfu.itis.bagaviev.feature.search.api.domain.tracks.entites.Track
-import ru.kpfu.itis.bagaviev.feature.search.api.domain.tracks.entites.TrackDetails
+import ru.kpfu.itis.bagaviev.feature.search.api.domain.track.entity.Track
+import ru.kpfu.itis.bagaviev.feature.search.api.domain.track.entity.TrackDetails
 import ru.kpfu.itis.bagaviev.feature.search.impl.presentation.entities.tracks.TrackDetailsModel
 import ru.kpfu.itis.bagaviev.feature.search.impl.presentation.entities.tracks.TrackModel
 import ru.kpfu.itis.bagaviev.feature.search.impl.presentation.entities.users.mappers.toUser

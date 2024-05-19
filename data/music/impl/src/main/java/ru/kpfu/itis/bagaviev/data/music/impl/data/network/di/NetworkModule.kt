@@ -1,17 +1,13 @@
 package ru.kpfu.itis.bagaviev.data.music.impl.data.network.di
 
-import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
-import dagger.Provides
-import kotlinx.serialization.json.Json
-import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Retrofit
-import ru.kpfu.itis.bagaviev.data.music.impl.data.network.ApiConfig
 import ru.kpfu.itis.bagaviev.data.music.impl.data.network.auth.di.AuthDataModule
+import ru.kpfu.itis.bagaviev.data.music.impl.data.network.core.di.ApiCoreModule
+import ru.kpfu.itis.bagaviev.data.music.impl.data.network.core.di.client.PublicClientModule
+import ru.kpfu.itis.bagaviev.data.music.impl.data.network.core.di.retrofit.PublicRetrofitModule
+import ru.kpfu.itis.bagaviev.data.music.impl.data.network.feed.di.FeedDataModule
 import ru.kpfu.itis.bagaviev.data.music.impl.data.network.playlist.di.PlaylistDataModule
-import ru.kpfu.itis.bagaviev.data.music.impl.data.network.search.di.MusicSearchDataModule
+import ru.kpfu.itis.bagaviev.data.music.impl.data.network.search.di.SearchDataModule
 import ru.kpfu.itis.bagaviev.data.music.impl.data.network.track.di.TrackDataModule
 import ru.kpfu.itis.bagaviev.data.music.impl.data.network.user.di.UserDataModule
 
@@ -19,28 +15,11 @@ import ru.kpfu.itis.bagaviev.data.music.impl.data.network.user.di.UserDataModule
     includes = [
         AuthDataModule::class,
         PlaylistDataModule::class,
-        MusicSearchDataModule::class,
+        SearchDataModule::class,
         TrackDataModule::class,
-        UserDataModule::class
+        UserDataModule::class,
+        FeedDataModule::class,
+        ApiCoreModule::class
     ]
 )
-class NetworkModule {
-
-    @Provides
-    fun provideOkHttpClient(): OkHttpClient =
-        OkHttpClient.Builder()
-            .addInterceptor(HttpLoggingInterceptor().apply {
-                setLevel(HttpLoggingInterceptor.Level.BODY)
-            })
-            .build()
-
-    @Provides
-    fun provideRetrofit(client: OkHttpClient): Retrofit =
-        Retrofit.Builder()
-            .baseUrl(ApiConfig.BASE_URL)
-            .addConverterFactory(
-                Json.asConverterFactory("application/json".toMediaType())
-            )
-            .client(client)
-            .build()
-}
+class NetworkModule

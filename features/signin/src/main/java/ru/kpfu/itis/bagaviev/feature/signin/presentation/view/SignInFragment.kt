@@ -23,7 +23,7 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
     }
 
     private fun observeErrorState(message: String) {
-        showShortToast(message)
+        showErrorDialog("Error", message)
     }
 
     override fun onCreateView(

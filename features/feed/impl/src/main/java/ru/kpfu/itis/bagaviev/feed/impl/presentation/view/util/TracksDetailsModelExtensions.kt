@@ -1,7 +1,7 @@
 package ru.kpfu.itis.bagaviev.feed.impl.presentation.view.util
 
 import ru.kpfu.itis.bagaviev.common.util.extensions.toURI
-import ru.kpfu.itis.bagaviev.feed.impl.presentation.entities.tracks.TrackDetailsModel
+import ru.kpfu.itis.bagaviev.feed.impl.presentation.entity.track.TrackDetailsModel
 import ru.kpfu.itis.bagaviev.player.api.domain.entities.MusicItem
 
 fun TrackDetailsModel.toMusicItem(): MusicItem =

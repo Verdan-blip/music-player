@@ -2,8 +2,10 @@ package ru.kpfu.itis.bagaviev.feature.profile.presentation.view
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import ru.kpfu.itis.bagaviev.common.base.BaseViewModel
 import ru.kpfu.itis.bagaviev.common.util.typealiases.ViewModelFactories
@@ -25,18 +27,20 @@ class ProfileViewModel @Inject constructor(
     val userProfileState: StateFlow<UserProfileModel?>
         get() = _userProfileState
 
-    init {
-        checkAuthentication()
-    }
 
-    private fun checkAuthentication() {
+    fun checkAuthentication() {
         runBlocking {
             if (!checkAuthenticationUseCase()) {
                 profileRouter.navigateToSignIn()
             } else {
-                _userProfileState.emit(
-                    getCurrentUserUseCase()
-                        .toUserDetailsModel()
+                getCurrentUserUseCase().fold(
+                    onSuccess = { userProfile ->
+                        val userProfileModel = userProfile.toUserDetailsModel()
+                        _userProfileState.emit(userProfileModel)
+                    },
+                    onFailure = { throwable ->
+                        showAlert(throwable.toString())
+                    }
                 )
             }
         }

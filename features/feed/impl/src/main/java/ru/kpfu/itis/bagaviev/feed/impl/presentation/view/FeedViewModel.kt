@@ -13,15 +13,15 @@ import ru.kpfu.itis.bagaviev.common.util.extensions.progressAsTime
 import ru.kpfu.itis.bagaviev.common.util.extensions.timeAsProgress
 import ru.kpfu.itis.bagaviev.common.util.extensions.toUri
 import ru.kpfu.itis.bagaviev.common.util.typealiases.ViewModelFactories
+import ru.kpfu.itis.bagaviev.feed.api.domain.feed.usecase.GetFeedUseCase
 import ru.kpfu.itis.bagaviev.feed.api.domain.playlist.usecases.GetPlaylistDetailsByIdUseCase
-import ru.kpfu.itis.bagaviev.feed.api.domain.playlist.usecases.GetPopularPlaylistsUseCase
-import ru.kpfu.itis.bagaviev.feed.api.domain.track.usecase.GetPopularTracksUseCase
 import ru.kpfu.itis.bagaviev.feed.api.domain.track.usecase.GetTrackDetailsByIdUseCase
 import ru.kpfu.itis.bagaviev.feed.impl.FeedRouter
-import ru.kpfu.itis.bagaviev.feed.impl.presentation.entities.playlists.mappers.toPlaylistDetailsModel
-import ru.kpfu.itis.bagaviev.feed.impl.presentation.entities.playlists.mappers.toPlaylistModel
-import ru.kpfu.itis.bagaviev.feed.impl.presentation.entities.tracks.mappers.toTrackDetailsModel
-import ru.kpfu.itis.bagaviev.feed.impl.presentation.entities.tracks.mappers.toTrackModel
+import ru.kpfu.itis.bagaviev.feed.impl.presentation.entity.feed.mapper.toFeedModel
+import ru.kpfu.itis.bagaviev.feed.impl.presentation.entity.playlist.mapper.toPlaylistDetailsModel
+import ru.kpfu.itis.bagaviev.feed.impl.presentation.entity.playlist.mapper.toPlaylistModel
+import ru.kpfu.itis.bagaviev.feed.impl.presentation.entity.track.mapper.toTrackDetailsModel
+import ru.kpfu.itis.bagaviev.feed.impl.presentation.entity.track.mapper.toTrackModel
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.state.DialogState
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.state.FeedUiState
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.util.toMusicItem
@@ -30,10 +30,9 @@ import ru.kpfu.itis.bagaviev.player.api.domain.interactor.MusicPlayerInteractor
 import javax.inject.Inject
 
 class FeedViewModel @Inject constructor(
-    private val getPopularTracksUseCase: GetPopularTracksUseCase,
     private val getTrackDetailsByIdUseCase: GetTrackDetailsByIdUseCase,
     private val getPlaylistDetailsByIdUseCase: GetPlaylistDetailsByIdUseCase,
-    private val getPopularPlaylistsUseCase: GetPopularPlaylistsUseCase,
+    private val getFeedUseCase: GetFeedUseCase,
     private val interactor: MusicPlayerInteractor,
     private val feedRouter: FeedRouter
 ) : BaseViewModel() {
@@ -60,8 +59,7 @@ class FeedViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            loadTracks()
-            loadPlaylists()
+            loadFeed()
             collectPlayerState()
         }
     }
@@ -97,33 +95,20 @@ class FeedViewModel @Inject constructor(
         }
     }
 
-    private suspend fun loadTracks() {
-        getPopularTracksUseCase().fold(
-            onSuccess = { trackResponseList ->
-                _uiState.emit(_uiState.value.copy(
-                    popularTracks = trackResponseList.map { track ->
-                        track.toTrackModel()
-                    }
-                ))
+    private suspend fun loadFeed() {
+        getFeedUseCase().fold(
+            onSuccess = { feed ->
+                val feedModel = feed.toFeedModel()
+                _uiState.emit(
+                    _uiState.value.copy(
+                        popularTracks = feedModel.chartTracks,
+                        popularPlaylists = feedModel.popularPlaylists
+                    )
+                )
             },
             onFailure = { throwable ->
                 showAlert(throwable.message.toString())
-            }
-        )
-    }
-
-    private suspend fun loadPlaylists() {
-        getPopularPlaylistsUseCase().fold(
-            onSuccess = { playlistList ->
-                _uiState.emit(_uiState.value.copy(
-                    popularPlaylists = playlistList.map { playlist ->
-                        playlist.toPlaylistModel()
-                    }
-                ))
             },
-            onFailure = { throwable ->
-                showAlert(throwable.message.toString())
-            }
         )
     }
 

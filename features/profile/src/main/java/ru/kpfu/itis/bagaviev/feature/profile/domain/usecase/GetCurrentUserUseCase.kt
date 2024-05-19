@@ -12,9 +12,11 @@ class GetCurrentUserUseCase @Inject constructor(
     @IODispatcher private val coroutineDispatcher: CoroutineDispatcher
 ) {
 
-    suspend operator fun invoke(): UserProfile =
-        withContext(coroutineDispatcher) {
-            userRepository.getProfile()
+    suspend operator fun invoke(): Result<UserProfile> =
+        runCatching {
+            withContext(coroutineDispatcher) {
+                userRepository.getProfile()
+            }
         }
 }
 

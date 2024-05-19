@@ -40,6 +40,7 @@ android {
 dependencies {
 
     implementation(project(":player:api"))
+
     implementation(project(":core:common"))
     implementation(project(":core:theme"))
 

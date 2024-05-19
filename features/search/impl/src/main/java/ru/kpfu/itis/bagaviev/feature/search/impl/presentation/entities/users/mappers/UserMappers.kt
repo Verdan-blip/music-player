@@ -2,8 +2,8 @@ package ru.kpfu.itis.bagaviev.feature.search.impl.presentation.entities.users.ma
 
 import ru.kpfu.itis.bagaviev.common.util.extensions.toURI
 import ru.kpfu.itis.bagaviev.common.util.extensions.toUri
-import ru.kpfu.itis.bagaviev.feature.search.api.domain.users.User
-import ru.kpfu.itis.bagaviev.feature.search.api.domain.users.UserDetails
+import ru.kpfu.itis.bagaviev.feature.search.api.domain.user.entity.User
+import ru.kpfu.itis.bagaviev.feature.search.api.domain.user.entity.UserDetails
 import ru.kpfu.itis.bagaviev.feature.search.impl.presentation.entities.playlists.mappers.toPlaylist
 import ru.kpfu.itis.bagaviev.feature.search.impl.presentation.entities.playlists.mappers.toPlaylistModel
 import ru.kpfu.itis.bagaviev.feature.search.impl.presentation.entities.tracks.mappers.toTrack

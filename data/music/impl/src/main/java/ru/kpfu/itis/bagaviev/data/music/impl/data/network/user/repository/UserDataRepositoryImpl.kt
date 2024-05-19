@@ -5,18 +5,18 @@ import ru.kpfu.itis.bagaviev.data.music.api.data.network.user.entity.UserProfile
 import ru.kpfu.itis.bagaviev.data.music.api.data.network.user.repository.UserDataRepository
 import ru.kpfu.itis.bagaviev.data.music.impl.data.network.user.mapper.toUserDetailsDataEntity
 import ru.kpfu.itis.bagaviev.data.music.impl.data.network.user.mapper.toUserProfileDataEntity
-import ru.kpfu.itis.bagaviev.data.music.impl.data.network.user.service.mocked.MockedUserApiService
+import ru.kpfu.itis.bagaviev.data.music.impl.data.network.user.service.UserApiService
 import javax.inject.Inject
 
 class UserDataRepositoryImpl @Inject constructor(
-    private val mockedUserService: MockedUserApiService
+    private val userService: UserApiService
 ) : UserDataRepository {
 
     override suspend fun getUserById(userId: Long): UserDetailsDataEntity? =
-        mockedUserService.getUserById(userId)
+        userService.getUserById(userId)
             ?.toUserDetailsDataEntity()
 
     override suspend fun getCurrentUserProfile(): UserProfileDataEntity =
-        mockedUserService.getMyUserProfile()
+        userService.getMyUserProfile()
             .toUserProfileDataEntity()
 }

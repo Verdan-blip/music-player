@@ -1,6 +1,6 @@
 package ru.kpfu.itis.bagaviev.features.signup
 
-import ru.kpfu.itis.bagaviev.data.music.api.data.network.auth.repositories.AuthDataRepository
+import ru.kpfu.itis.bagaviev.data.music.api.data.network.auth.repository.AuthDataRepository
 import ru.kpfu.itis.bagaviev.feature.signup.domain.entities.SignUpResult
 import ru.kpfu.itis.bagaviev.feature.signup.domain.entities.SignUpForm
 import ru.kpfu.itis.bagaviev.feature.signup.domain.repository.SignUpRepository

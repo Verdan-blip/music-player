@@ -1,9 +1,9 @@
 package ru.kpfu.itis.bagaviev.feature.search.impl.data.tracks.mappers
 
-import ru.kpfu.itis.bagaviev.data.music.api.data.network.track.entities.TrackDataEntity
-import ru.kpfu.itis.bagaviev.data.music.api.data.network.track.entities.TrackDetailsDataEntity
-import ru.kpfu.itis.bagaviev.feature.search.api.domain.tracks.entites.Track
-import ru.kpfu.itis.bagaviev.feature.search.api.domain.tracks.entites.TrackDetails
+import ru.kpfu.itis.bagaviev.data.music.api.data.network.track.entity.TrackDataEntity
+import ru.kpfu.itis.bagaviev.data.music.api.data.network.track.entity.TrackDetailsDataEntity
+import ru.kpfu.itis.bagaviev.feature.search.api.domain.track.entity.Track
+import ru.kpfu.itis.bagaviev.feature.search.api.domain.track.entity.TrackDetails
 import ru.kpfu.itis.bagaviev.feature.search.impl.data.users.mappers.toUser
 
 fun TrackDataEntity.toTrack(): Track = Track(

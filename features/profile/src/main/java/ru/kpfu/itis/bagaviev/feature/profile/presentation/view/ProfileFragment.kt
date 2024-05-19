@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import coil.load
 import com.google.android.material.tabs.TabLayoutMediator
+import ru.kpfu.itis.bagaviev.common.base.BaseFragment
 import ru.kpfu.itis.bagaviev.common.util.extensions.observe
 import ru.kpfu.itis.bagaviev.feature.profile.R
 import ru.kpfu.itis.bagaviev.feature.profile.databinding.FragmentProfileBinding
@@ -15,7 +16,7 @@ import ru.kpfu.itis.bagaviev.feature.profile.di.ProfileComponentHolder
 import ru.kpfu.itis.bagaviev.feature.profile.presentation.entity.user.UserProfileModel
 import ru.kpfu.itis.bagaviev.feature.profile.presentation.view.viewpager.TracksFragmentAdapter
 
-class ProfileFragment : Fragment(R.layout.fragment_profile) {
+class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
 
     private var viewBinding: FragmentProfileBinding? = null
 
@@ -35,10 +36,10 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel.errorAlert
+    private fun observeErrorAlert(message: String) {
+        showErrorDialog("Ошибка", message)
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,11 +51,19 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         return viewBinding?.root
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.checkAuthentication()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.checkAuthentication()
+
         viewModel.apply {
             userProfileState.observe(viewLifecycleOwner, ::observeUserDetails)
+            errorAlert.observe(viewLifecycleOwner, ::observeErrorAlert)
         }
 
         viewBinding?.apply {

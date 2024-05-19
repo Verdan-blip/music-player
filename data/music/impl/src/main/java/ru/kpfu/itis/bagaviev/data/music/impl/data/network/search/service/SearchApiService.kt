@@ -7,9 +7,7 @@ import ru.kpfu.itis.bagaviev.data.music.impl.data.network.search.pojo.responses.
 interface SearchApiService {
 
     @GET("/api/v1/search")
-    fun search(
-        @Query("keywords") keywords: String,
-        @Query("limit") limit: Int,
-        @Query("offset") offset: Int
+    suspend fun search(
+        @Query("keywords") keywords: String
     ): SearchResultResponse
 }

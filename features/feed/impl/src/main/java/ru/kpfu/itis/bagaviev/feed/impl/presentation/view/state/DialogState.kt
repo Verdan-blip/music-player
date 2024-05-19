@@ -1,7 +1,7 @@
 package ru.kpfu.itis.bagaviev.feed.impl.presentation.view.state
 
-import ru.kpfu.itis.bagaviev.feed.impl.presentation.entities.playlists.PlaylistDetailsModel
-import ru.kpfu.itis.bagaviev.feed.impl.presentation.entities.tracks.TrackDetailsModel
+import ru.kpfu.itis.bagaviev.feed.impl.presentation.entity.playlist.PlaylistDetailsModel
+import ru.kpfu.itis.bagaviev.feed.impl.presentation.entity.track.TrackDetailsModel
 
 sealed class DialogState {
 

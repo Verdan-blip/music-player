@@ -12,13 +12,13 @@ import ru.kpfu.itis.bagaviev.data.music.impl.data.network.user.pojo.responses.Us
 
 fun UserResponse.toUserDataEntity(): UserDataEntity =
     UserDataEntity(
-        id = id,
+        id = userId,
         login = login
     )
 
 fun UserDetailsResponse.toUserDetailsDataEntity(): UserDetailsDataEntity =
     UserDetailsDataEntity(
-        id = id,
+        id = trackId,
         login = login,
         avatarUri = avatarUri?.toURI(),
         tracks = tracks.map { track -> track.toTrackDataEntity() },
@@ -27,7 +27,7 @@ fun UserDetailsResponse.toUserDetailsDataEntity(): UserDetailsDataEntity =
 
 fun UserProfileResponse.toUserProfileDataEntity(): UserProfileDataEntity =
     UserProfileDataEntity(
-        id = id,
+        id = userId,
         login = login,
         email = email,
         avatarUri = avatarUri?.toURI(),

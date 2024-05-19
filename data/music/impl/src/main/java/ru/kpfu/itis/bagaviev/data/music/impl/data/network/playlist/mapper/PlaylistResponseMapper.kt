@@ -1,7 +1,7 @@
 package ru.kpfu.itis.bagaviev.data.music.impl.data.network.playlist.mapper
 
-import ru.kpfu.itis.bagaviev.data.music.api.data.network.playlist.entities.PlaylistDataEntity
-import ru.kpfu.itis.bagaviev.data.music.api.data.network.playlist.entities.PlaylistDetailsDataEntity
+import ru.kpfu.itis.bagaviev.data.music.api.data.network.playlist.entity.PlaylistDataEntity
+import ru.kpfu.itis.bagaviev.data.music.api.data.network.playlist.entity.PlaylistDetailsDataEntity
 import ru.kpfu.itis.bagaviev.data.music.impl.data.network.playlist.pojo.responses.PlaylistDetailsResponse
 import ru.kpfu.itis.bagaviev.data.music.impl.data.network.playlist.pojo.responses.PlaylistResponse
 import ru.kpfu.itis.bagaviev.data.music.impl.data.network.track.mapper.toTrackDataEntity
@@ -12,7 +12,7 @@ import java.util.Locale
 
 fun PlaylistResponse.toPlaylistDataEntity(): PlaylistDataEntity =
     PlaylistDataEntity(
-        id = id,
+        id = playlistId,
         title = title,
         coverUri = URI.create(coverUri),
         user = user.toUserDataEntity(),
@@ -22,7 +22,7 @@ fun PlaylistResponse.toPlaylistDataEntity(): PlaylistDataEntity =
 fun PlaylistDetailsResponse.toPlaylistDetailsDataEntity(): PlaylistDetailsDataEntity = run {
     val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
     PlaylistDetailsDataEntity(
-        id = id,
+        id = playlistId,
         title = title,
         coverUri = URI.create(coverUri),
         user = user.toUserDataEntity(),

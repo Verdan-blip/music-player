@@ -5,15 +5,15 @@ import dagger.Provides
 import kotlinx.coroutines.CoroutineDispatcher
 import ru.kpfu.itis.bagaviev.common.di.modules.IODispatcher
 import ru.kpfu.itis.bagaviev.feature.search.api.domain.search.repository.SearchRepository
-import ru.kpfu.itis.bagaviev.feature.search.api.domain.search.usecases.SearchAnythingByKeywordsUseCase
+import ru.kpfu.itis.bagaviev.feature.search.api.domain.search.usecase.SearchByKeywordsUseCase
 
 @Module
 class SearchUseCaseModule {
 
     @Provides
-    fun provideSearchAnythingByKeywords(
+    fun provideSearchByKeywords(
         searchRepository: SearchRepository,
         @IODispatcher coroutineDispatcher: CoroutineDispatcher
-    ): SearchAnythingByKeywordsUseCase =
-        SearchAnythingByKeywordsUseCase(searchRepository, coroutineDispatcher)
+    ): SearchByKeywordsUseCase =
+        SearchByKeywordsUseCase(searchRepository, coroutineDispatcher)
 }
