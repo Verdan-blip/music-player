@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/feed_fragment_title_margin_top"
-            style="@style/ThinTextView"
+            style="@style/AppThinTextView"
             android:textColor="@color/light_text_primary_color"
             android:textSize="@dimen/feed_fragment_title_text"
             android:text="@string/feed_fragment_feed"/>
@@ -33,6 +33,8 @@
             android:id="@+id/rv_chart_tracks"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/track_item_margin_outside"
+            android:paddingRight="@dimen/track_item_margin_outside"
             android:layout_marginTop="@dimen/feed_fragment_tracks_margin_top"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:orientation="vertical"

@@ -2,15 +2,15 @@ package ru.kpfu.itis.bagaviev.feature.profile.di
 
 import ru.kpfu.itis.bagaviev.common.di.connector.deps.ComponentDependencies
 import ru.kpfu.itis.bagaviev.feature.profile.ProfileRouter
-import ru.kpfu.itis.bagaviev.feature.profile.domain.repository.ProfileAuthRepository
-import ru.kpfu.itis.bagaviev.feature.profile.domain.repository.UserRepository
+import ru.kpfu.itis.bagaviev.feature.profile.domain.repository.FeatureProfileAuthRepository
+import ru.kpfu.itis.bagaviev.feature.profile.domain.repository.FeatureProfileUserRepository
 
 
 interface ProfileComponentDependencies : ComponentDependencies {
 
-    val profileAuthRepository: ProfileAuthRepository
+    val featureProfileAuthRepository: FeatureProfileAuthRepository
 
-    val userRepository: UserRepository
+    val featureProfileUserRepository: FeatureProfileUserRepository
 
     val profileRouter: ProfileRouter
 }

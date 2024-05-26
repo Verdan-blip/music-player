@@ -38,5 +38,8 @@ class TrackDetailsResponse(
     val releaseDate: String,
 
     @SerialName("playsCount")
-    val playsCount: Int
+    val playsCount: Int,
+
+    @SerialName("clipData")
+    val clipData: ClipData? = null
 )

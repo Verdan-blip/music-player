@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity(), WithAdaptiveBackground {
                     R.id.feedFragment -> navController?.navigate(R.id.feedFragment)
                     R.id.searchFragment -> navController?.navigate(R.id.searchFragment)
                     R.id.profileFragment -> navController?.navigate(R.id.profileFragment)
+                    R.id.uploadFragment -> navController?.navigate(R.id.uploadFragment)
                 }
                 true
             }

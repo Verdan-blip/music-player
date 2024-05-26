@@ -1,6 +1,6 @@
 package ru.kpfu.itis.bagaviev.feature.signup.presentation.entities.mappers
 
-import ru.kpfu.itis.bagaviev.feature.signup.domain.entities.SignUpForm
+import ru.kpfu.itis.bagaviev.feature.signup.domain.entity.SignUpForm
 import ru.kpfu.itis.bagaviev.feature.signup.presentation.entities.SignUpFormModel
 
 fun SignUpFormModel.toSignUpForm(): SignUpForm =

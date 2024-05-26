@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:background="@color/cardview_dark_background"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -24,20 +26,13 @@
 
             <EditText
                 android:id="@+id/et_keywords"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
                 style="@style/AppLightEditText"
                 android:inputType="text"
                 android:hint="@string/search_fragment_search_hint" />
 
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/ib_search"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:background="@color/transparent"
-                android:layout_marginEnd="@dimen/search_fragment_search_icon_margin_right"
-                android:src="@drawable/search" />
 
         </Toolbar>
 

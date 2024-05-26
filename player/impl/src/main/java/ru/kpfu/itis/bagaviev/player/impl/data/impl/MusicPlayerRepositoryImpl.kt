@@ -1,5 +1,6 @@
 package ru.kpfu.itis.bagaviev.player.impl.data.impl
 
+import android.util.Log
 import androidx.media3.common.Player
 import androidx.media3.session.MediaController
 import com.google.common.util.concurrent.ListenableFuture
@@ -36,7 +37,7 @@ class MusicPlayerRepositoryImpl @Inject constructor(
         get() = _playerState
 
 
-    private val _playerCallback = MutableStateFlow<PlayerCallback>(PlayerCallback.PlayerInitialized)
+    private val _playerCallback = MutableStateFlow<PlayerCallback>(PlayerCallback.PlayerInitializing)
 
     override val playerCallback: StateFlow<PlayerCallback>
         get() = _playerCallback
@@ -80,6 +81,7 @@ class MusicPlayerRepositoryImpl @Inject constructor(
             currentPlayingItemDurationAsFlow()
                 .filterNotNull()
                 .collect { duration ->
+                    Log.d("in_repos", duration.toString())
                     _playerCallback.emit(PlayerCallback.ItemDurationChanged(duration))
                     _playerState.emit(_playerState.value.copy(currentPlayingItemDuration = duration))
                 }

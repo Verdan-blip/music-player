@@ -12,6 +12,7 @@ import ru.kpfu.itis.bagaviev.feature.profile.di.ProfileComponentDependencies
 import ru.kpfu.itis.bagaviev.feature.search.impl.di.SearchComponentDependencies
 import ru.kpfu.itis.bagaviev.feature.signin.di.SignInComponentDependencies
 import ru.kpfu.itis.bagaviev.feature.signup.di.SignUpComponentDependencies
+import ru.kpfu.itis.bagaviev.feature.upload.di.UploadComponentDependencies
 import ru.kpfu.itis.oauth.di.OAuthComponentDependencies
 
 @Module
@@ -51,4 +52,9 @@ interface FeatureDependenciesModule {
     @IntoMap
     @ComponentDependenciesKey(ProfileComponentDependencies::class)
     fun profileComponentDependencies(appComponent: AppComponent): ComponentDependencies
+
+    @Binds
+    @IntoMap
+    @ComponentDependenciesKey(UploadComponentDependencies::class)
+    fun uploadComponentDependencies(appComponent: AppComponent): ComponentDependencies
 }

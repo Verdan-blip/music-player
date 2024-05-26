@@ -1,6 +1,8 @@
 package ru.kpfu.itis.bagaviev.player.impl.data.impl
 
+import kotlinx.coroutines.flow.StateFlow
 import ru.kpfu.itis.bagaviev.player.api.domain.entities.MusicItem
+import ru.kpfu.itis.bagaviev.player.api.domain.entities.PlayerState
 import ru.kpfu.itis.bagaviev.player.api.domain.interactor.MusicPlayerInteractor
 import ru.kpfu.itis.bagaviev.player.api.domain.repository.MusicPlayerRepository
 import javax.inject.Inject
@@ -11,7 +13,8 @@ class MusicPlayerInteractorImpl @Inject constructor(
 
     override val playerCallback = musicPlayerRepository.playerCallback
 
-    override val playerState = musicPlayerRepository.playerState
+    override val playerState: StateFlow<PlayerState> = musicPlayerRepository.playerState
+
 
     override fun play() {
         musicPlayerRepository.play()

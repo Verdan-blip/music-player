@@ -3,11 +3,11 @@ package ru.kpfu.itis.bagaviev.feature.signin.domain.usecase
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import ru.kpfu.itis.bagaviev.common.di.modules.IODispatcher
-import ru.kpfu.itis.bagaviev.feature.signin.domain.repository.SignInTokenRepository
+import ru.kpfu.itis.bagaviev.feature.signin.domain.repository.FeatureSignInTokenRepository
 import javax.inject.Inject
 
 class SaveTokensUseCase @Inject constructor(
-    private val tokenRepository: SignInTokenRepository,
+    private val tokenRepository: FeatureSignInTokenRepository,
     @IODispatcher private val coroutineDispatcher: CoroutineDispatcher
 ) {
 

@@ -1,5 +1,6 @@
 package ru.kpfu.itis.bagaviev.data.music.impl.data.network.user.mapper
 
+import androidx.core.net.toUri
 import ru.kpfu.itis.bagaviev.common.util.extensions.toURI
 import ru.kpfu.itis.bagaviev.data.music.api.data.network.user.entity.UserDataEntity
 import ru.kpfu.itis.bagaviev.data.music.api.data.network.user.entity.UserDetailsDataEntity
@@ -13,7 +14,8 @@ import ru.kpfu.itis.bagaviev.data.music.impl.data.network.user.pojo.responses.Us
 fun UserResponse.toUserDataEntity(): UserDataEntity =
     UserDataEntity(
         id = userId,
-        login = login
+        login = login,
+        avatarUri = avatarUri?.toUri()
     )
 
 fun UserDetailsResponse.toUserDetailsDataEntity(): UserDetailsDataEntity =

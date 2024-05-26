@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
                 android:layout_marginStart="2dp"
-                style="@style/ThinTextView"
+                style="@style/AppThinTextView"
                 android:textColor="@color/light_text_primary_color"
                 tools:text="Название трека" />
 
@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginStart="2dp"
-                style="@style/ThinTextView"
+                style="@style/AppThinTextView"
                 android:textColor="@color/light_text_primary_color"
                 tools:text="Авторы" />
 
@@ -60,7 +60,7 @@
                 android:id="@+id/sb_playing_track_progress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/PlayingProgressSeekBar" />
+                style="@style/AppPlayingProgressSeekBar" />
 
         </LinearLayout>
 

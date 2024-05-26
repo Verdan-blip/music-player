@@ -8,5 +8,5 @@ class MyTrackModel(
     val id: Long,
     val title: String,
     val users: List<UserModel>,
-    val smallCoverUri: Uri
+    val smallCoverUri: String
 )

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    style="@style/AppLargeSquareCard"
+    android:background="@drawable/card_surface"
+    tools:backgroundTint="@color/cardview_dark_background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:orientation="horizontal">
+
+        <androidx.cardview.widget.CardView
+            style="@style/AppMediumSquareCard"
+            android:layout_width="@dimen/medium_square_card_width"
+            android:layout_height="@dimen/medium_square_card_height"
+            android:layout_gravity="center|start">
+
+            <ImageView
+                android:id="@+id/iv_cover"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                tools:src="@drawable/small_cover_example" />
+
+        </androidx.cardview.widget.CardView>
+
+
+        <ImageButton
+            android:id="@+id/ib_pick_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_gravity="center|end"
+            android:background="@color/transparent"
+            android:src="@drawable/search_images" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

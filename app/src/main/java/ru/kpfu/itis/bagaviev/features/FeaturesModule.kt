@@ -8,6 +8,7 @@ import ru.kpfu.itis.bagaviev.features.profile.di.FeatureProfileModule
 import ru.kpfu.itis.bagaviev.features.search.di.FeatureSearchModule
 import ru.kpfu.itis.bagaviev.features.signin.di.FeatureSignInModule
 import ru.kpfu.itis.bagaviev.features.signup.di.FeatureSignUpModule
+import ru.kpfu.itis.bagaviev.features.upload.di.FeatureUploadModule
 
 @Module(
     includes = [
@@ -17,7 +18,8 @@ import ru.kpfu.itis.bagaviev.features.signup.di.FeatureSignUpModule
         FeatureSearchModule::class,
         FeatureSignInModule::class,
         FeatureSignUpModule::class,
-        FeatureProfileModule::class
+        FeatureProfileModule::class,
+        FeatureUploadModule::class
     ]
 )
 interface FeaturesModule

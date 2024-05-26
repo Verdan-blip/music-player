@@ -1,6 +1,6 @@
 package ru.kpfu.itis.bagaviev.feed.api.domain.track.entity
 
-import ru.kpfu.itis.bagaviev.feed.api.domain.user.User
+import ru.kpfu.itis.bagaviev.feed.api.domain.author.entity.Author
 import java.net.URI
 import java.util.Date
 
@@ -8,12 +8,11 @@ class TrackDetails(
     val id: Long,
     val title: String,
     val genre: String,
-    val users: List<User>,
+    val authors: List<Author>,
     val lyrics: String? = null,
-    val smallCoverUri: URI,
-    val coverUri: URI,
-    val audioFileUri: URI,
-    val videoFileUri: URI?,
+    val smallCoverUri: String,
+    val coverUri: String,
+    val audioFileUri: String,
     val releaseDate: Date,
     val playsCount: Int
 )

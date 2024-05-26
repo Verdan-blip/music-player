@@ -10,6 +10,11 @@
     <dimen name="small_square_card_height">44dp</dimen>
     <dimen name="small_square_card_corner_radius">8dp</dimen>
     <dimen name="small_square_card_padding">6dp</dimen>
+
+    <dimen name="normal_square_card_width">64dp</dimen>
+    <dimen name="normal_square_card_height">64dp</dimen>
+    <dimen name="normal_square_card_corner_radius">8dp</dimen>
+    <dimen name="normal_square_card_padding">8dp</dimen>
     
     <dimen name="medium_square_card_width">84dp</dimen>
     <dimen name="medium_square_card_height">84dp</dimen>
@@ -50,5 +55,9 @@
     <dimen name="playlist_item_margin_outside">16dp</dimen>
     <dimen name="playlist_title_text">10sp</dimen>
     <dimen name="playlist_title_text_margin_top">10dp</dimen>
+
+    <!-- Author item configuration -->
+    <dimen name="author_item_margin_between">8dp</dimen>
+    <dimen name="author_item_margin_outside">16dp</dimen>
 
 </resources>

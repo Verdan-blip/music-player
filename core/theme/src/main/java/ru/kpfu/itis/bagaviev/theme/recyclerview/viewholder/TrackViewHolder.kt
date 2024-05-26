@@ -5,28 +5,29 @@ import coil.load
 import ru.kpfu.itis.bagaviev.common.util.listeners.setOnSeekBarChangeListener
 import ru.kpfu.itis.bagaviev.theme.R
 import ru.kpfu.itis.bagaviev.theme.databinding.ItemTrackBinding
-import ru.kpfu.itis.bagaviev.theme.recyclerview.interactor.TrackInteractor
-import ru.kpfu.itis.bagaviev.theme.recyclerview.model.TrackItem
-import ru.kpfu.itis.bagaviev.theme.recyclerview.model.TrackState
+import ru.kpfu.itis.bagaviev.theme.recyclerview.intercator.TrackInteractor
+import ru.kpfu.itis.bagaviev.theme.recyclerview.model.TrackRvModel
 
 class TrackViewHolder(
     private val viewBinding: ItemTrackBinding,
     private val interactor: TrackInteractor
-) : PlayableViewHolder(viewBinding.root) {
+) : MusicComponentViewHolder(viewBinding.root) {
 
-    private var trackItem: TrackItem? = null
+    private var currentTrackRvModel: TrackRvModel? = null
 
     init {
         viewBinding.apply {
-            root.setOnClickListener {
-                trackItem?.apply { interactor.onClick(id) }
-            }
-            root.setOnLongClickListener {
-                trackItem?.apply { interactor.onLongClick(id) }
-                true
+            root.apply {
+                setOnClickListener {
+                    currentTrackRvModel?.apply { interactor.onClick(id) }
+                }
+                setOnLongClickListener {
+                    currentTrackRvModel?.apply { interactor.onLongClick(id) }
+                    true
+                }
             }
             ivTrackSmallIcon.setOnClickListener {
-                trackItem?.apply { interactor.onSmallCoverClick(id) }
+                currentTrackRvModel?.apply { interactor.onSmallCoverClick(id) }
             }
             sbTrackPlaying.setOnSeekBarChangeListener(
                 onStartTrackingTouch = { seekBar ->
@@ -39,40 +40,51 @@ class TrackViewHolder(
         }
     }
 
-    fun bind(trackItem: TrackItem, state: TrackState) {
-        this.trackItem = trackItem
+
+    fun bind(trackRvModel: TrackRvModel) {
+        this.currentTrackRvModel = trackRvModel
         viewBinding.apply {
-            trackItem.apply {
+            trackRvModel.apply {
                 tvTrackTitle.text = title
-                tvTrackUsers.text = users.joinToString(separator = " & ")
+                tvTrackUsers.text = authorNames.joinToString(separator = " & ")
                 ivTrackSmallIcon.load(smallCoverUri)
-                bindState(state)
+                ivPlayPause.isVisible = false
+                sbTrackPlaying.isVisible = false
             }
         }
     }
 
-    fun bindState(state: TrackState) {
+
+    fun updateAsReadyToPlay() {
         viewBinding.apply {
-            when (state) {
-                is TrackState.Static -> {
-                    ivPlayPause.isVisible = false
-                    sbTrackPlaying.isVisible = false
-                }
-                is TrackState.MarkedAsPlaying -> {
-                    ivPlayPause.isVisible = true
-                    sbTrackPlaying.isVisible = true
+            updateIsPlaying(true)
+            updateProgress(0)
+            ivPlayPause.isVisible = true
+            sbTrackPlaying.isVisible = true
+        }
+    }
 
-                    ivPlayPause.setImageResource(R.drawable.item_paused)
-                    sbTrackPlaying.progress = state.progress
-                }
-                is TrackState.MarkedAsPaused -> {
-                    ivPlayPause.isVisible = true
-                    sbTrackPlaying.isVisible = true
+    fun updateAsStatic() {
+        viewBinding.apply {
+            ivPlayPause.isVisible = false
+            sbTrackPlaying.isVisible = false
+        }
+    }
 
-                    ivPlayPause.setImageResource(R.drawable.item_playing)
-                    sbTrackPlaying.progress = state.progress
-                }
-            }
+    fun updateIsPlaying(isPlaying: Boolean) {
+        viewBinding.apply {
+            ivPlayPause.setImageResource(
+                if (isPlaying)
+                    R.drawable.item_playing
+                else
+                    R.drawable.item_paused
+            )
+        }
+    }
+
+    fun updateProgress(progress: Int) {
+        viewBinding.apply {
+            sbTrackPlaying.progress = progress
         }
     }
 }

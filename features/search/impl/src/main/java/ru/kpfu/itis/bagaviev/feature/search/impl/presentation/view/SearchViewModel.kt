@@ -15,11 +15,11 @@ import ru.kpfu.itis.bagaviev.common.util.typealiases.ViewModelFactories
 import ru.kpfu.itis.bagaviev.feature.search.api.domain.playlists.usecase.GetPlaylistDetailsByIdUseCase
 import ru.kpfu.itis.bagaviev.feature.search.api.domain.search.usecase.SearchByKeywordsUseCase
 import ru.kpfu.itis.bagaviev.feature.search.api.domain.track.usecase.GetTrackDetailsByIdUseCase
-import ru.kpfu.itis.bagaviev.feature.search.impl.presentation.entities.playlists.mappers.toPlaylistDetailsModel
+import ru.kpfu.itis.bagaviev.feature.search.impl.presentation.entities.playlist.mappers.toPlaylistDetailsModel
 import ru.kpfu.itis.bagaviev.feature.search.impl.presentation.entities.search.mappers.toSearchResultModel
-import ru.kpfu.itis.bagaviev.feature.search.impl.presentation.entities.tracks.mappers.toTrackDetailsModel
-import ru.kpfu.itis.bagaviev.feature.search.impl.presentation.view.state.DialogState
-import ru.kpfu.itis.bagaviev.feature.search.impl.presentation.view.state.SearchUiState
+import ru.kpfu.itis.bagaviev.feature.search.impl.presentation.entities.track.mappers.toTrackDetailsModel
+import ru.kpfu.itis.bagaviev.feature.search.impl.presentation.event.DialogEvent
+import ru.kpfu.itis.bagaviev.feature.search.impl.presentation.state.SearchUiState
 import ru.kpfu.itis.bagaviev.feature.search.impl.presentation.view.util.toMusicItem
 import ru.kpfu.itis.bagaviev.player.api.domain.interactor.MusicPlayerInteractor
 import javax.inject.Inject
@@ -35,16 +35,15 @@ class SearchViewModel @Inject constructor(
     val uiState: StateFlow<SearchUiState>
         get() = _uiState
 
-
     private val _currentPlayingProgressState = MutableStateFlow(0)
 
     val currentPlayingProgress: StateFlow<Int>
         get() = _currentPlayingProgressState
 
 
-    private val _dialogState = MutableSharedFlow<DialogState>()
-    val dialogState: SharedFlow<DialogState>
-        get() = _dialogState
+    private val _dialogEvent = MutableSharedFlow<DialogEvent>()
+    val dialogEvent: SharedFlow<DialogEvent>
+        get() = _dialogEvent
 
 
     private var currentItemDuration: Long = -1
@@ -65,24 +64,18 @@ class SearchViewModel @Inject constructor(
             _currentPlayingProgressState.emit(
                 state.currentPlayingProgress?.timeAsProgress(currentItemDuration) ?: 0
             )
-
-            _uiState.emit(_uiState.value.copy(
-                playingMusicItem = state.currentMusicItem,
-                isPlaying = state.isPlaying ?: false
-            ))
         }
     }
 
 
-    fun onSearch(text: String) {
+    fun onSearchQueryChange(text: String) {
         viewModelScope.launch {
             val keywords = text.split("\\s+")
             val searchResult = searchByKeywordsUseCase(keywords)
                 .toSearchResultModel()
             _uiState.emit(_uiState.value.copy(
                 foundTracks = searchResult.tracks,
-                foundPlaylists = searchResult.playlists,
-                foundUsers = searchResult.users
+                foundPlaylists = searchResult.playlists
             ))
         }
     }
@@ -90,11 +83,7 @@ class SearchViewModel @Inject constructor(
     fun onTrackClick(trackId: Long) {
         viewModelScope.launch {
             if (isPlaying(trackId)) {
-                if (_uiState.value.isPlaying) {
-                    interactor.pause()
-                } else {
-                    interactor.play()
-                }
+
             } else {
                 getTrackDetailsByIdUseCase(trackId)?.also { trackDetails ->
                     val trackDetailsModel = trackDetails.toTrackDetailsModel()
@@ -108,8 +97,8 @@ class SearchViewModel @Inject constructor(
         viewModelScope.launch {
             getTrackDetailsByIdUseCase(trackId)?.also { trackDetails ->
                 val trackDetailsModel = trackDetails.toTrackDetailsModel()
-                _dialogState.emit(
-                    DialogState.TrackDetails(trackDetailsModel)
+                _dialogEvent.emit(
+                    DialogEvent.TrackDetails(trackDetailsModel)
                 )
             }
         }
@@ -138,8 +127,8 @@ class SearchViewModel @Inject constructor(
         viewModelScope.launch {
             getPlaylistDetailsByIdUseCase(playlistId)?.also { trackDetails ->
                 val playlistDetailsModel = trackDetails.toPlaylistDetailsModel()
-                _dialogState.emit(
-                    DialogState.PlaylistDetails(playlistDetailsModel)
+                _dialogEvent.emit(
+                    DialogEvent.PlaylistDetails(playlistDetailsModel)
                 )
             }
         }
@@ -160,8 +149,10 @@ class SearchViewModel @Inject constructor(
         }
     }
 
-    private fun isPlaying(trackId: Long): Boolean =
-        _uiState.value.playingMusicItem?.id == trackId
+    private fun isPlaying(trackId: Long): Boolean {
+        /*_uiState.value.playingMusicItem?.id == trackId*/
+        return true
+    }
 
 
     companion object {

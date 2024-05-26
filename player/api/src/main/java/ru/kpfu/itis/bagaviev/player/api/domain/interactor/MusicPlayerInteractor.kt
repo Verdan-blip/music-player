@@ -1,6 +1,7 @@
 package ru.kpfu.itis.bagaviev.player.api.domain.interactor
 
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.StateFlow
 import ru.kpfu.itis.bagaviev.player.api.domain.entities.MusicItem
 import ru.kpfu.itis.bagaviev.player.api.domain.entities.PlayerCallback
 import ru.kpfu.itis.bagaviev.player.api.domain.entities.PlayerState
@@ -9,7 +10,7 @@ interface MusicPlayerInteractor {
 
     val playerCallback: Flow<PlayerCallback>
 
-    val playerState: Flow<PlayerState>
+    val playerState: StateFlow<PlayerState>
 
     fun play()
 

@@ -67,6 +67,8 @@ dependencies {
     implementation(project(":features:signin"))
     implementation(project(":features:signup"))
 
+    implementation(project(":features:upload"))
+
     implementation(project(":features:profile"))
 
     implementation(libs.lifecycle.viewmodel)

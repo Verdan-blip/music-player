@@ -34,4 +34,8 @@ class Navigator : GlobalRouter {
     override fun navigateToSignUp() {
         navController?.navigate(R.id.signUpFragment)
     }
+
+    override fun navigateToUpload() {
+        navController?.navigate(R.id.uploadFragment)
+    }
 }

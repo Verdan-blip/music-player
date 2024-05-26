@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/playing_music_title_margin_top"
-            style="@style/ThinTextView"
+            style="@style/AppThinTextView"
             android:textColor="@color/light_text_primary_color"
             android:textSize="@dimen/playing_music_title_text"
             tools:text="Название песни" />
@@ -57,7 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/playing_music_authors_margin_top"
-            style="@style/ThinTextView"
+            style="@style/AppThinTextView"
             android:textColor="@color/light_text_primary_color"
             android:textSize="@dimen/playing_music_authors_text"
             tools:text="Авторы" />
@@ -76,7 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/playing_last_time_margin_top"
-            style="@style/ThinTextView"
+            style="@style/AppThinTextView"
             android:textColor="@color/light_text_primary_color"
             tools:text="00:54" />
 

@@ -2,7 +2,7 @@ package ru.kpfu.itis.bagaviev.player.api.domain.entities
 
 sealed class PlayerCallback {
 
-    data object PlayerInitialized : PlayerCallback()
+    data object PlayerInitializing : PlayerCallback()
 
     data class IsPlayingChanged(val isPlaying: Boolean) : PlayerCallback()
 

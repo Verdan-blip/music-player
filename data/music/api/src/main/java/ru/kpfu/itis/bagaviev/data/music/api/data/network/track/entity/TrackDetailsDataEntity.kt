@@ -13,7 +13,7 @@ class TrackDetailsDataEntity(
     val smallCoverUri: URI,
     val coverUri: URI,
     val audioFileUri: URI,
-    val videoFileUri: URI?,
     val releaseDate: Date,
-    val playsCount: Int
+    val playsCount: Int,
+    val clipDataEntity: ClipDataEntity? = null
 )

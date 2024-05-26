@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Upload fragment -->
+    <string name="upload_fragment_upload_track">Загрузить трек</string>
+    <string name="upload_fragment_upload_step1">1. Придумайте название:</string>
+    <string name="upload_fragment_upload_track_title_hint">Название трека</string>
+    <string name="upload_fragment_upload_track_raw_title_hint">Файл трека</string>
+    <string name="upload_fragment_upload_clip_raw_title_hint">Файл клипа</string>
+    <string name="upload_fragment_upload_step2">2. Отметьте тех, с кем совместно был записан трек:</string>
+    <string name="upload_fragment_upload_step3">3. Добавьте трек в .mp3 формате:</string>
+    <string name="upload_fragment_upload_step4">4. Добавьте обложку (доступные форматы: .jpg):</string>
+    <string name="upload_fragment_upload_step5">5. При желании можете добавить мини-обложку:</string>
+    <string name="upload_fragment_upload_step6">6. Опционально можете добавить клип к вашему треку:</string>
+    <string name="upload_fragment_upload_step7">7. Используя нижние ползунки, Вы можете настроить начало и конец клипа:</string>
+
+    <string name="search_users_item_id_format">id: %d</string>
+    <string name="search_users_item_login_format">login: %s</string>
+
+</resources>

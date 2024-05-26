@@ -1,13 +1,3 @@
 <resources>
     <string name="app_name">music-player</string>
-
-    <!-- Upload fragment -->
-    <string name="upload_fragment_upload_track">Загрузить трек</string>
-    <string name="upload_fragment_upload_step1">1. Придумайте название:</string>
-    <string name="upload_fragment_upload_track_title_hint">Название трека</string>
-    <string name="upload_fragment_upload_track_raw_title_hint">Файл трека</string>
-    <string name="upload_fragment_upload_step2">2. Отметьте тех, с кем совместно был записан трек:</string>
-    <string name="upload_fragment_upload_step3">3. Добавьте трек в .mp3 формате:</string>
-    <string name="upload_fragment_upload_step4">4. Добавьте обложку (доступные форматы: .jpg):</string>
-
 </resources>

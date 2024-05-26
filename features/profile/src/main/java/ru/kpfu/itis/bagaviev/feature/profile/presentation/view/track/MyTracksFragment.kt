@@ -11,10 +11,10 @@ import ru.kpfu.itis.bagaviev.feature.profile.R
 import ru.kpfu.itis.bagaviev.feature.profile.databinding.FragmentTracksBinding
 import ru.kpfu.itis.bagaviev.feature.profile.presentation.entity.user.UserProfileModel
 import ru.kpfu.itis.bagaviev.feature.profile.presentation.view.ProfileViewModel
-import ru.kpfu.itis.bagaviev.feature.profile.presentation.view.mapper.toTrackItem
+import ru.kpfu.itis.bagaviev.feature.profile.presentation.view.mapper.toTrackRvModel
 import ru.kpfu.itis.bagaviev.theme.recyclerview.adapter.TrackAdapter
-import ru.kpfu.itis.bagaviev.theme.recyclerview.decorator.TrackItemDecorator
-import ru.kpfu.itis.bagaviev.theme.recyclerview.interactor.TrackInteractor
+import ru.kpfu.itis.bagaviev.theme.recyclerview.decoration.TrackItemDecoration
+import ru.kpfu.itis.bagaviev.theme.recyclerview.intercator.TrackInteractor
 
 class MyTracksFragment : Fragment(R.layout.fragment_tracks) {
 
@@ -35,7 +35,7 @@ class MyTracksFragment : Fragment(R.layout.fragment_tracks) {
     private fun observeUserProfile(userProfileModel: UserProfileModel?) {
         userProfileModel?.apply {
             tracksAdapter.submitList(myTracks.map { myTrackModel ->
-                myTrackModel.toTrackItem()
+                myTrackModel.toTrackRvModel()
             })
         }
     }
@@ -56,7 +56,7 @@ class MyTracksFragment : Fragment(R.layout.fragment_tracks) {
 
         viewBinding?.apply {
             rvTracks.adapter = tracksAdapter
-            rvTracks.addItemDecoration(TrackItemDecorator(requireContext()))
+            rvTracks.addItemDecoration(TrackItemDecoration(requireContext()))
         }
 
         viewModel.apply {

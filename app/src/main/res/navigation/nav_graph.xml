@@ -41,7 +41,7 @@
 
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="ru.kpfu.itis.bagaviev.feature.signup.presentation.SignUpFragment"
+        android:name="ru.kpfu.itis.bagaviev.feature.signup.presentation.view.SignUpFragment"
         android:label="SignUpFragment"
         tools:layout="@layout/fragment_sign_in" />
 
@@ -50,5 +50,10 @@
         android:name="ru.kpfu.itis.bagaviev.feature.signin.presentation.view.SignInFragment"
         android:label="SignInFragment"
         tools:layout="@layout/fragment_sign_up" />
+    <fragment
+        android:id="@+id/uploadFragment"
+        android:name="ru.kpfu.itis.bagaviev.feature.upload.presentation.view.UploadFragment"
+        android:label="UploadFragment"
+        tools:layout="@layout/fragment_upload" />
 
 </navigation>

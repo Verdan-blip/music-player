@@ -39,6 +39,10 @@ blurry = "4.0.0"
 shimmer = "0.5.0"
 activity = "1.8.0"
 
+room = "2.6.1"
+
+rangeseekbar = "1.0.6"
+
 [libraries]
 
 # Android standard
@@ -88,6 +92,12 @@ blurry = { group = "com.github.wasabeef", name = "blurry", version.ref = "blurry
 
 shimmer = { group = "com.facebook.shimmer", name = "shimmer", version.ref = "shimmer" }
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
+
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+
+rangeseekbar = { group = "com.github.MohammedAlaaMorsi", name = "RangeSeekBar", version.ref = "rangeseekbar" }
 
 [plugins]
 

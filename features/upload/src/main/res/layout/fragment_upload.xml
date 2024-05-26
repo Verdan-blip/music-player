@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent"
+    tools:background="@color/cardview_dark_background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/upload_fragment_upload_padding"
+        android:paddingEnd="@dimen/upload_fragment_upload_padding">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/AppLightTextView"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/upload_fragment_upload_title_margin_top"
+            android:text="@string/upload_fragment_upload_track"
+            android:textSize="@dimen/upload_fragment_upload_title_text"
+            android:textColor="@color/light_text_primary_color" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/upload_fragment_upload_step1_margin_top"
+            android:textSize="@dimen/upload_fragment_upload_step_text"
+            style="@style/AppLightTextView"
+            android:textColor="@color/light_text_primary_color"
+            android:text="@string/upload_fragment_upload_step1" />
+
+        <EditText
+            android:id="@+id/et_track_title"
+            android:layout_width="256dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:textSize="@dimen/upload_fragment_upload_track_title_text"
+            android:layout_marginTop="@dimen/upload_fragment_upload_track_title_margin_top"
+            style="@style/AppLightEditText"
+            android:hint="@string/upload_fragment_upload_track_title_hint" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/upload_fragment_upload_step2_margin_top"
+            android:textSize="@dimen/upload_fragment_upload_step_text"
+            style="@style/AppLightTextView"
+            android:textColor="@color/light_text_primary_color"
+            android:text="@string/upload_fragment_upload_step2" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_authors"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/upload_fragment_upload_authors_margin_top"
+            android:orientation="horizontal"
+            tools:listitem="@layout/item_author"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/upload_fragment_upload_step3_margin_top"
+            android:textSize="@dimen/upload_fragment_upload_step_text"
+            style="@style/AppLightTextView"
+            android:textColor="@color/light_text_primary_color"
+            android:text="@string/upload_fragment_upload_step3" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="@dimen/upload_fragment_card_track_file_width"
+            android:layout_height="@dimen/upload_fragment_card_track_file_height"
+            android:layout_gravity="center"
+            style="@style/AppCard"
+            app:cardCornerRadius="@dimen/upload_fragment_card_track_file_corner_radius"
+            android:textAlignment="center"
+            android:drawableEnd="@drawable/search_files"
+            android:layout_marginTop="@dimen/upload_fragment_upload_track_title_margin_top">
+
+            <TextView
+                android:id="@+id/tv_audio_file_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:layout_gravity="center"
+                style="@style/AppLightTextView"
+                android:textColor="@color/light_text_secondary_color"
+                android:textSize="@dimen/upload_fragment_card_track_file_text"
+                android:text="@string/upload_fragment_upload_track_raw_title_hint"/>
+
+            <ImageButton
+                android:id="@+id/ib_pick_audio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|end"
+                android:background="@color/transparent"
+                android:layout_marginEnd="@dimen/upload_fragment_card_track_file_icon_margin_right"
+                android:src="@drawable/search_files" />
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/upload_fragment_upload_step4_margin_top"
+            style="@style/AppLightTextView"
+            android:text="@string/upload_fragment_upload_step4"
+            android:textColor="@color/light_text_primary_color" />
+
+        <include
+            android:id="@+id/ll_cover"
+            android:layout_marginTop="24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="128dp"
+            android:layout_gravity="center"
+            layout="@layout/item_cover_add" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/upload_fragment_upload_step4_margin_top"
+            style="@style/AppLightTextView"
+            android:text="@string/upload_fragment_upload_step5"
+            android:textColor="@color/light_text_primary_color" />
+
+        <include
+            android:id="@+id/ll_small_cover"
+            android:layout_marginTop="24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="128dp"
+            android:layout_gravity="center"
+            layout="@layout/item_cover_add" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/upload_fragment_upload_step4_margin_top"
+            style="@style/AppLightTextView"
+            android:text="@string/upload_fragment_upload_step6"
+            android:textColor="@color/light_text_primary_color" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="@dimen/upload_fragment_card_track_file_width"
+            android:layout_height="@dimen/upload_fragment_card_track_file_height"
+            android:layout_gravity="center"
+            style="@style/AppCard"
+            app:cardCornerRadius="@dimen/upload_fragment_card_track_file_corner_radius"
+            android:textAlignment="center"
+            android:drawableEnd="@drawable/search_files"
+            android:layout_marginTop="@dimen/upload_fragment_upload_track_title_margin_top">
+
+            <TextView
+                android:id="@+id/tv_track_clip_file_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:layout_gravity="center"
+                style="@style/AppLightTextView"
+                android:textColor="@color/light_text_secondary_color"
+                android:textSize="@dimen/upload_fragment_card_track_file_text"
+                android:text="@string/upload_fragment_upload_clip_raw_title_hint"/>
+
+            <ImageButton
+                android:id="@+id/ib_pick_clip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:layout_gravity="center|end"
+                android:layout_marginEnd="@dimen/upload_fragment_card_track_file_icon_margin_right"
+                android:src="@drawable/search_files" />
+
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:id="@+id/ll_clip_duration_correction"
+            android:layout_marginTop="@dimen/upload_fragment_upload_step4_margin_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/AppLightTextView"
+                android:text="@string/upload_fragment_upload_step7"
+                android:textColor="@color/light_text_primary_color" />
+
+            <com.mohammedalaa.seekbar.DoubleValueSeekBarView
+                android:id="@+id/double_value_sb_clip_duration"
+                android:layout_width="256dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="24dp"
+
+                app:r2circleTextColor="@color/light_text_primary_color"
+                app:r2circleRadius="8dp"
+                app:r2circleFillColor="@color/light_playing_thumb_color"
+                app:r2baseColor="@color/light_playing_progress_background_color"
+                app:r2fillColor="@color/light_playing_progress_color"
+                app:r2barHeight="4dp"
+                app:r2CurrentMinValue="10"
+                app:r2CurrentMaxValue="75"
+                app:r2maxValue="100"
+                app:r2minValue="0" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/tv_clip_start_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/AppLightTextView"
+                    android:textColor="@color/light_text_primary_color"
+                    android:layout_marginEnd="96dp"
+                    tools:text="00:00" />
+
+                <TextView
+                    android:id="@+id/tv_clip_end_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/light_text_primary_color"
+                    style="@style/AppLightTextView"
+                    android:layout_marginStart="96dp"
+                    tools:text="02:34" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:layout_marginTop="32dp"
+            android:padding="16dp"
+            android:layout_gravity="center"
+            style="@style/AppButton"
+            android:textColor="@color/light_text_primary_color"
+            android:textAllCaps="false"
+            android:text="Отправить" />
+
+    </LinearLayout>
+
+</ScrollView>

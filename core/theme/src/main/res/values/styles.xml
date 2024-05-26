@@ -7,11 +7,12 @@
         <item name="android:layout_height">@dimen/poster_card_height</item>
     </style>
 
-    <style name="ThinTextView" parent="@style/Widget.AppCompat.TextView">
+    <style name="AppThinTextView" parent="@style/Widget.AppCompat.TextView">
         <item name="android:fontFamily">sans-serif-thin</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
-    <style name="LightTextView" parent="@style/Widget.AppCompat.TextView">
+    <style name="AppLightTextView" parent="@style/Widget.AppCompat.TextView">
         <item name="android:fontFamily">sans-serif-light</item>
     </style>
 
@@ -21,35 +22,46 @@
         <item name="cardElevation">0dp</item>
     </style>
 
-    <style name="AppButton" parent="@style/Widget.AppCompat.Button">
-        <item name="android:background">@drawable/app_button_background</item>
+    <style name="AppCardWithImageIcon" parent="@style/AppCard">
+        <item name="endIconDrawable">@drawable/search_images</item>
     </style>
 
-    <style name="SmallSquareCard" parent="@style/AppCard">
+    <style name="AppButton" parent="@style/Widget.AppCompat.Button">
+        <item name="android:background">@drawable/app_button_background</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="AppSmallSquareCard" parent="@style/AppCard">
         <item name="android:layout_width">@dimen/small_square_card_width</item>
         <item name="android:layout_height">@dimen/small_square_card_height</item>
         <item name="cardCornerRadius">@dimen/small_square_card_corner_radius</item>
     </style>
 
-    <style name="MediumSquareCard" parent="@style/AppCard">
+    <style name="AppNormalSquareCard" parent="@style/AppCard">
+        <item name="android:layout_width">@dimen/normal_square_card_width</item>
+        <item name="android:layout_height">@dimen/normal_square_card_height</item>
+        <item name="cardCornerRadius">@dimen/normal_square_card_corner_radius</item>
+    </style>
+
+    <style name="AppMediumSquareCard" parent="@style/AppCard">
         <item name="android:layout_width">@dimen/medium_square_card_width</item>
         <item name="android:layout_height">@dimen/medium_square_card_height</item>
         <item name="cardCornerRadius">@dimen/medium_square_card_corner_radius</item>
     </style>
 
-    <style name="LargeSquareCard" parent="@style/AppCard">
+    <style name="AppLargeSquareCard" parent="@style/AppCard">
         <item name="android:layout_width">@dimen/large_square_card_width</item>
         <item name="android:layout_height">@dimen/large_square_card_height</item>
         <item name="cardCornerRadius">@dimen/large_square_card_corner_radius</item>
     </style>
 
-    <style name="ExtraLargeSquareCard" parent="@style/AppCard">
+    <style name="AppExtraLargeSquareCard" parent="@style/AppCard">
         <item name="android:layout_width">@dimen/extra_large_square_card_width</item>
         <item name="android:layout_height">@dimen/extra_large_square_card_height</item>
         <item name="cardCornerRadius">@dimen/extra_large_square_card_corner_radius</item>
     </style>
 
-    <style name="PlayingProgressSeekBar" parent="@style/Widget.AppCompat.SeekBar">
+    <style name="AppPlayingProgressSeekBar" parent="@style/Widget.AppCompat.SeekBar">
         <item name="android:thumb">@drawable/playing_progress_thumb</item>
         <item name="android:progressTint">@color/light_playing_progress_color</item>
         <item name="android:progressBackgroundTint">@color/light_playing_progress_background_color</item>
@@ -57,16 +69,18 @@
     </style>
 
     <style name="AppLightEditText" parent="@style/Widget.AppCompat.EditText">
-        <item name="android:background">@android:color/transparent</item>
+        <item name="android:background">@drawable/card_surface</item>
         <item name="android:textColor">@color/light_text_primary_color</item>
         <item name="android:textColorHint">@color/light_text_secondary_color</item>
+        <item name="android:inputType">text</item>
         <item name="fontFamily">sans-serif-light</item>
     </style>
 
     <style name="AppThinEditText" parent="@style/Widget.AppCompat.EditText">
-        <item name="android:background">@android:color/transparent</item>
+        <item name="android:background">@drawable/card_surface</item>
         <item name="android:textColor">@color/light_text_primary_color</item>
         <item name="android:textColorHint">@color/light_text_secondary_color</item>
+        <item name="android:inputType">text</item>
         <item name="fontFamily">sans-serif-thin</item>
     </style>
     

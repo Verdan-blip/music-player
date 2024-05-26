@@ -9,4 +9,6 @@ interface GlobalRouter {
     fun navigateToSignIn()
 
     fun navigateToSignUp()
+
+    fun navigateToUpload()
 }

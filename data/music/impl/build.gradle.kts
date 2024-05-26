@@ -44,6 +44,10 @@ dependencies {
     implementation(project(":core:common"))
     implementation(project(":data:music:api"))
 
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    ksp(libs.room.compiler)
+
     implementation(libs.okhttp.logginginterceptor)
     implementation(libs.retrofit)
     implementation(libs.kotlin.serialization)

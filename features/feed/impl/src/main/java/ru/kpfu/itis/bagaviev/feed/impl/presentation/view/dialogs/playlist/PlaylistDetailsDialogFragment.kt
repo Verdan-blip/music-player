@@ -15,12 +15,12 @@ import ru.kpfu.itis.bagaviev.common.util.extensions.observe
 import ru.kpfu.itis.bagaviev.feed.impl.R
 import ru.kpfu.itis.bagaviev.feed.impl.databinding.FragmentPlaylistDetailsBinding
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.entity.playlist.PlaylistDetailsModel
+import ru.kpfu.itis.bagaviev.feed.impl.presentation.entity.track.TrackModel
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.FeedViewModel
-import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.mappers.toTrackItem
-import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.state.FeedUiState
+import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.mapper.toTrackRvModel
 import ru.kpfu.itis.bagaviev.theme.recyclerview.adapter.TrackAdapter
-import ru.kpfu.itis.bagaviev.theme.recyclerview.decorator.TrackItemDecorator
-import ru.kpfu.itis.bagaviev.theme.recyclerview.interactor.TrackInteractor
+import ru.kpfu.itis.bagaviev.theme.recyclerview.decoration.TrackItemDecoration
+import ru.kpfu.itis.bagaviev.theme.recyclerview.intercator.TrackInteractor
 
 class PlaylistDetailsDialogFragment : DialogFragment(R.layout.fragment_playlist_details) {
 
@@ -30,7 +30,7 @@ class PlaylistDetailsDialogFragment : DialogFragment(R.layout.fragment_playlist_
         ViewModelProvider(requireActivity())[FeedViewModel::class.java]
     }
 
-    private val tracksAdapter by lazy {
+    private val trackAdapter by lazy {
         TrackAdapter(
             context = requireContext(),
             trackInteractor = TrackInteractor.Builder()
@@ -42,17 +42,18 @@ class PlaylistDetailsDialogFragment : DialogFragment(R.layout.fragment_playlist_
     }
 
 
-    private fun observeUiState(feedUiState: FeedUiState) {
-        with(feedUiState) {
-            with(tracksAdapter) {
-                playingMusicItem?.apply{ markAsPlayable(id) }
-                if (isPlaying) play() else pause()
-            }
-        }
+    private fun observeCurrentPlayingProgressState(progress: Int) {
+        trackAdapter.updatePlayingProgress(progress)
     }
 
-    private fun observeCurrentPlayingProgress(progress: Int) {
-        tracksAdapter.updatePlayingProgress(progress)
+    private fun observeCurrentIsPlayingState(isPlaying: Boolean) {
+        trackAdapter.updateIsPlaying(isPlaying)
+    }
+
+    private fun observeCurrentPlayingTrackItemState(trackModel: TrackModel?) {
+        trackModel?.also { track ->
+            trackAdapter.prepareToPlay(track.toTrackRvModel())
+        }
     }
 
     private fun initUi(playlistDetails: PlaylistDetailsModel) {
@@ -63,7 +64,7 @@ class PlaylistDetailsDialogFragment : DialogFragment(R.layout.fragment_playlist_
                         R.string.playlist_details_fragment_title, title
                     )
                     tvTrackAuthor.text = getString(
-                        R.string.playlist_details_fragment_authors, user.login
+                        R.string.playlist_details_fragment_authors, author.login
                     )
                     tvTrackPlaysCount.text = getString(
                         R.string.playlist_details_fragment_plays_count, playsCount
@@ -72,12 +73,10 @@ class PlaylistDetailsDialogFragment : DialogFragment(R.layout.fragment_playlist_
                         R.string.playlist_details_fragment_release_date, createdTime
                     )
                     ivTrackCover.load(coverUri)
-                    rvPlaylistTracks.adapter = tracksAdapter.apply {
-                        submitList(tracks.map { trackModel ->
-                            trackModel.toTrackItem()
-                        })
+                    rvPlaylistTracks.adapter = trackAdapter.apply {
+                        submitList(tracks.map { trackModel -> trackModel.toTrackRvModel() })
                     }
-                    rvPlaylistTracks.addItemDecoration(TrackItemDecorator(requireContext()))
+                    rvPlaylistTracks.addItemDecoration(TrackItemDecoration(requireContext()))
                 }
             }
         }
@@ -105,9 +104,20 @@ class PlaylistDetailsDialogFragment : DialogFragment(R.layout.fragment_playlist_
         }
 
         playlistDetails?.also(::initUi)
+
         viewModel.apply {
-            uiState.observe(viewLifecycleOwner, ::observeUiState)
-            currentPlayingProgressState.observe(viewLifecycleOwner, ::observeCurrentPlayingProgress)
+            currentIsPlayingState.observe(
+                viewLifecycleOwner,
+                ::observeCurrentIsPlayingState
+            )
+            currentPlayingProgressState.observe(
+                viewLifecycleOwner,
+                ::observeCurrentPlayingProgressState
+            )
+            currentPlayingTrackModelState.observe(
+                viewLifecycleOwner,
+                ::observeCurrentPlayingTrackItemState
+            )
         }
     }
 

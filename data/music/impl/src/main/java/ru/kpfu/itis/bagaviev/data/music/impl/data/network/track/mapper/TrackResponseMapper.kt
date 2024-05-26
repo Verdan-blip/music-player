@@ -28,9 +28,9 @@ fun TrackDetailsResponse.toTrackDetailsDataEntity(): TrackDetailsDataEntity = ru
         smallCoverUri = URI.create(smallCoverUri),
         coverUri = URI.create(coverUri),
         audioFileUri = URI.create(audioFileUri),
-        videoFileUri = videoFileUri?.let(URI::create),
         releaseDate = dateFormat.parse(releaseDate)
             ?: throw IllegalStateException("Unknown release date format: $releaseDate"),
-        playsCount = playsCount
+        playsCount = playsCount,
+        clipDataEntity = clipData?.toClipDataEntity()
     )
 }

@@ -37,7 +37,7 @@
             android:layout_marginTop="16dp"
             tools:text="Название плейлиста"
             android:textColor="@color/on_surface_light_primary"
-            style="@style/ThinTextView" />
+            style="@style/AppThinTextView" />
 
         <TextView
             android:id="@+id/tv_track_author"
@@ -46,7 +46,7 @@
             android:layout_marginTop="8dp"
             tools:text="Автор"
             android:textColor="@color/on_surface_light_primary"
-            style="@style/ThinTextView" />
+            style="@style/AppThinTextView" />
 
         <TextView
             android:id="@+id/tv_track_release_date"
@@ -55,7 +55,7 @@
             android:layout_marginTop="8dp"
             tools:text="Время выпуска"
             android:textColor="@color/on_surface_light_primary"
-            style="@style/ThinTextView" />
+            style="@style/AppThinTextView" />
 
         <TextView
             android:id="@+id/tv_track_plays_count"
@@ -64,7 +64,7 @@
             android:layout_marginTop="8dp"
             tools:text="Количество проигрываний"
             android:textColor="@color/on_surface_light_primary"
-            style="@style/ThinTextView" />
+            style="@style/AppThinTextView" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_playlist_tracks"

@@ -4,7 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    style="@style/SmallSquareCard"
+    style="@style/AppSmallSquareCard"
     tools:backgroundTint="@color/cardview_dark_background"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -20,7 +20,7 @@
             android:layout_height="match_parent">
 
             <androidx.cardview.widget.CardView
-                style="@style/SmallSquareCard"
+                style="@style/AppSmallSquareCard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
@@ -45,7 +45,7 @@
                     android:id="@+id/tv_track_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/ThinTextView"
+                    style="@style/AppThinTextView"
                     android:textSize="@dimen/track_item_title_text"
                     android:textColor="@color/light_text_primary_color"
                     tools:text="Название песни" />
@@ -54,7 +54,7 @@
                     android:id="@+id/tv_track_users"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/ThinTextView"
+                    style="@style/AppThinTextView"
                     android:textSize="@dimen/track_item_authors_text"
                     android:layout_marginTop="@dimen/track_item_authors_margin_top"
                     android:textColor="@color/light_text_primary_color"
@@ -69,7 +69,7 @@
                 android:layout_gravity="center"
                 android:layout_marginEnd="@dimen/track_item_play_pause_margin_end"
                 android:backgroundTint="@android:color/transparent"
-                android:src="@drawable/item_paused"
+                android:src="@drawable/item_playing"
                 app:tint="@color/on_surface_light_secondary" />
 
         </LinearLayout>
@@ -78,7 +78,7 @@
             android:id="@+id/sb_track_playing"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/PlayingProgressSeekBar"
+            style="@style/AppPlayingProgressSeekBar"
             android:layout_marginTop="@dimen/track_playing_seekbar_margin_top"
             android:layout_marginBottom="@dimen/track_playing_seekbar_margin_bottom"
             tools:progress="20" />

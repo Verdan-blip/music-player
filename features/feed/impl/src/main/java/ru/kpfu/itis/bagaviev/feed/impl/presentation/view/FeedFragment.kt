@@ -18,16 +18,17 @@ import ru.kpfu.itis.bagaviev.common.util.listeners.setOnSeekBarChangeListener
 import ru.kpfu.itis.bagaviev.feed.impl.R
 import ru.kpfu.itis.bagaviev.feed.impl.databinding.FragmentFeedBinding
 import ru.kpfu.itis.bagaviev.feed.impl.di.FeedComponentHolder
+import ru.kpfu.itis.bagaviev.feed.impl.presentation.entity.track.TrackModel
+import ru.kpfu.itis.bagaviev.feed.impl.presentation.event.DialogEvent
+import ru.kpfu.itis.bagaviev.feed.impl.presentation.state.FeedUiState
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.dialogs.playlist.PlaylistDetailsDialogFragment
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.dialogs.track.TrackDetailsDialogFragment
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.adapter.FeedAdapter
-import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.decorator.FeedItemDecorator
-import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.mappers.toPlaylistItem
-import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.mappers.toTrackItem
-import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.state.DialogState
-import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.state.FeedUiState
-import ru.kpfu.itis.bagaviev.theme.recyclerview.interactor.PlaylistInteractor
-import ru.kpfu.itis.bagaviev.theme.recyclerview.interactor.TrackInteractor
+import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.decorator.FeedItemDecoration
+import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.mapper.toPlaylistRvModel
+import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.mapper.toTrackRvModel
+import ru.kpfu.itis.bagaviev.theme.recyclerview.intercator.PlaylistInteractor
+import ru.kpfu.itis.bagaviev.theme.recyclerview.intercator.TrackInteractor
 
 class FeedFragment : BaseFragment(R.layout.fragment_feed) {
 
@@ -67,73 +68,94 @@ class FeedFragment : BaseFragment(R.layout.fragment_feed) {
     }
 
     private fun loadBackgroundImage(uri: Uri?) {
-        with(requireContext().resources) {
-            val imageRequest = ImageRequest.Builder(requireContext())
-                .data(uri)
-                .allowHardware(false)
-                .listener { _, result ->
-                    (requireContext() as WithAdaptiveBackground)
-                        .updateBackground(result.drawable)
-                }
-                .build()
-            ImageLoader.Builder(requireContext())
-                .memoryCache {
-                    MemoryCache.Builder(requireContext())
-                        .maxSizePercent(0.25)
-                        .build()
-                }
-                .build()
-                .enqueue(imageRequest)
-        }
+        val imageRequest = ImageRequest.Builder(requireContext())
+            .data(uri)
+            .allowHardware(false)
+            .listener { _, result ->
+                (requireContext() as WithAdaptiveBackground)
+                    .updateBackground(result.drawable)
+            }
+            .build()
+        ImageLoader.Builder(requireContext())
+            .memoryCache {
+                MemoryCache.Builder(requireContext())
+                    .maxSizePercent(0.25)
+                    .build()
+            }
+            .build()
+            .enqueue(imageRequest)
     }
 
     private fun observeUiState(state: FeedUiState) {
         with(state) {
             with(feedAdapter) {
-                if (isPlaying) play() else pause()
-                submitList(popularTracks.map { trackModel ->
-                    trackModel.toTrackItem()
-                }) {
-                    playingMusicItem?.apply { feedAdapter.markAsPlayable(id) }
-                }
-                submitPlaylistList(popularPlaylists.map { playlistModel ->
-                    playlistModel.toPlaylistItem()
-                })
+                submitData(
+                    tracks = popularTracks.map { trackModel ->
+                        trackModel.toTrackRvModel()
+                    },
+                    playlists = popularPlaylists.map { playlistModel ->
+                        playlistModel.toPlaylistRvModel()
+                    },
+                    users = listOf(),
+                    ::observePlayingTrackData
+                )
                 loadBackgroundImage(background)
             }
+        }
+    }
 
+    private fun observeCurrentPlayingTrackItemState(trackRvModel: TrackModel?) {
+        trackRvModel?.also { track ->
+            feedAdapter.prepareToPlay(track.toTrackRvModel())
             viewBinding?.apply {
                 layoutPlayingTrack.apply {
-                    if (playingMusicItem != null) {
-                        root.isVisible = true
-                        tvPlayingTrackTitle.text = playingMusicItem.title
-                        tvPlayingTrackAuthors.text = playingMusicItem
-                            .authors.joinToString(separator = " & ")
-                        ivPlayingTrackCover.load(background)
-                    } else {
-                        root.isVisible = false
-                    }
+                    root.isVisible = true
+                    tvPlayingTrackTitle.text = track.title
+                    tvPlayingTrackAuthors.text = track
+                        .authorNames.joinToString(separator = " & ")
+                    ivPlayingTrackCover.load(track.smallCoverUri)
                 }
             }
         }
     }
 
-    private fun observeCurrentPlayingProgress(progress: Int) {
+    private fun observeCurrentPlayingProgressState(progress: Int) {
         feedAdapter.updatePlayingProgress(progress)
-        viewBinding?.layoutPlayingTrack
-            ?.sbPlayingTrackProgress?.progress = progress
     }
 
-    private fun observeDialogState(dialogState: DialogState) {
-        when (dialogState) {
-            is DialogState.TrackDetails -> {
+    private fun observeCurrentIsPlayingState(isPlaying: Boolean) {
+        feedAdapter.updateIsPlaying(isPlaying)
+    }
+
+    private fun observePlayingTrackData() {
+        viewModel.apply {
+            currentPlayingTrackModelState.observe(
+                viewLifecycleOwner,
+                ::observeCurrentPlayingTrackItemState
+            )
+            currentPlayingProgressState.observe(
+                viewLifecycleOwner,
+                ::observeCurrentPlayingProgressState
+            )
+            currentIsPlayingState.observe(
+                viewLifecycleOwner,
+                ::observeCurrentIsPlayingState
+            )
+        }
+    }
+
+
+    private fun observeDialogEvent(dialogEvent: DialogEvent) {
+        when (dialogEvent) {
+            is DialogEvent.TrackDetails -> {
                 val dialogFragment = TrackDetailsDialogFragment
-                    .newInstance(dialogState.trackDetails)
+                    .newInstance(dialogEvent.trackDetails)
                 dialogFragment.show(childFragmentManager, null)
             }
-            is DialogState.PlaylistDetails -> {
+
+            is DialogEvent.PlaylistDetails -> {
                 val dialogFragment = PlaylistDetailsDialogFragment
-                    .newInstance(dialogState.playlistDetails)
+                    .newInstance(dialogEvent.playlistDetails)
                 dialogFragment.show(childFragmentManager, null)
             }
         }
@@ -158,14 +180,13 @@ class FeedFragment : BaseFragment(R.layout.fragment_feed) {
 
         viewModel.apply {
             uiState.observe(viewLifecycleOwner, ::observeUiState)
-            currentPlayingProgressState.observe(viewLifecycleOwner, ::observeCurrentPlayingProgress)
-            dialogState.observe(viewLifecycleOwner, ::observeDialogState)
+            dialogEvent.observe(viewLifecycleOwner, ::observeDialogEvent)
             errorAlert.observe(viewLifecycleOwner, ::observeErrorAlert)
         }
 
         viewBinding?.apply {
             rvChartTracks.adapter = feedAdapter
-            rvChartTracks.addItemDecoration(FeedItemDecorator(requireContext()))
+            rvChartTracks.addItemDecoration(FeedItemDecoration(requireContext()))
             layoutPlayingTrack.root.setOnClickListener {
                 viewModel.onFloatingTrackClick()
             }

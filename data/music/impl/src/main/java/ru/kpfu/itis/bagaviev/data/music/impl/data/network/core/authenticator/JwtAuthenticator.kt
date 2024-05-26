@@ -5,7 +5,7 @@ import okhttp3.Authenticator
 import okhttp3.Request
 import okhttp3.Response
 import okhttp3.Route
-import ru.kpfu.itis.bagaviev.data.music.api.data.local.repository.TokenDataRepository
+import ru.kpfu.itis.bagaviev.data.music.api.data.local.token.repository.TokenDataRepository
 import ru.kpfu.itis.bagaviev.data.music.api.data.network.auth.entity.TokenDataEntity
 import ru.kpfu.itis.bagaviev.data.music.api.data.network.auth.repository.AuthDataRepository
 import ru.kpfu.itis.bagaviev.data.music.impl.data.network.core.ApiConfig
@@ -42,7 +42,7 @@ class JwtAuthenticator @Inject constructor(
             }
             return accessToken?.let { token ->
                 response.request.newBuilder()
-                    .addHeader(ApiConfig.HEADER_AUTHORIZATION, "Bearer $token")
+                    .header(ApiConfig.HEADER_AUTHORIZATION, "Bearer $token")
                     .build()
             }
         }

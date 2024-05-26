@@ -51,32 +51,6 @@
     <dimen name="playing_pause_or_play_margin_top">32dp</dimen>
     <dimen name="playing_pause_or_play_radius">64dp</dimen>
 
-    <!-- Upload track fragment config -->
-    <dimen name="upload_fragment_upload_title_text">36sp</dimen>
-    <dimen name="upload_fragment_upload_padding">16dp</dimen>
-    <dimen name="upload_fragment_upload_step_text">14sp</dimen>
-    <dimen name="upload_fragment_upload_title_margin_top">56dp</dimen>
-    <dimen name="upload_fragment_upload_step1_margin_top">24dp</dimen>
-    <dimen name="upload_fragment_upload_track_title_text">14dp</dimen>
-    <dimen name="upload_fragment_upload_track_title_margin_top">24dp</dimen>
-    <dimen name="upload_fragment_upload_step2_margin_top">24dp</dimen>
-    <dimen name="upload_fragment_upload_authors_margin_top">24dp</dimen>
-    <dimen name="upload_fragment_upload_step3_margin_top">24dp</dimen>
-    <dimen name="upload_fragment_upload_track_margin_top">24dp</dimen>
-    <dimen name="upload_fragment_card_track_file_width">256dp</dimen>
-    <dimen name="upload_fragment_card_track_file_height">56dp</dimen>
-    <dimen name="upload_fragment_card_track_file_corner_radius">8dp</dimen>
-    <dimen name="upload_fragment_card_track_file_text">14sp</dimen>
-    <dimen name="upload_fragment_card_track_file_icon_margin_right">12dp</dimen>
-    <dimen name="upload_fragment_upload_step4_margin_top">24dp</dimen>
-    <dimen name="upload_fragment_card_cover_file_width">168dp</dimen>
-    <dimen name="upload_fragment_card_cover_file_height">128dp</dimen>
-    <dimen name="upload_fragment_card_cover_file_corner_radius">8dp</dimen>
-    <dimen name="upload_fragment_card_cover_file_margin_top">24dp</dimen>
-    <dimen name="upload_fragment_card_cover_image_width">96dp</dimen>
-    <dimen name="upload_fragment_card_cover_image_height">96dp</dimen>
-    <dimen name="upload_fragment_card_cover_image_margin_start">16dp</dimen>
-    <dimen name="upload_fragment_card_cover_image_icon_margin_right">16dp</dimen>
 
     <!-- Recently searched text config -->
     <dimen name="recently_searched_item_text">14sp</dimen>

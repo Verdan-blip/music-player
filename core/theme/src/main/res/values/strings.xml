@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Search fragment -->
-    <string name="search_fragment_search_hint">Введите название</string>
+    <string name="search_fragment_search_hint">Начинайте вводить название</string>
     <string name="search_fragment_recently_searched">Недавно искали</string>
     <string name="search_fragment_found">Найдено (%d + %d)</string>
 

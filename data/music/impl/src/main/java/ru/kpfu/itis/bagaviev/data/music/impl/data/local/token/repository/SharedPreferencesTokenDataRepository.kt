@@ -1,6 +1,6 @@
 package ru.kpfu.itis.bagaviev.data.music.impl.data.local.token.repository
 
-import ru.kpfu.itis.bagaviev.data.music.api.data.local.repository.TokenDataRepository
+import ru.kpfu.itis.bagaviev.data.music.api.data.local.token.repository.TokenDataRepository
 import ru.kpfu.itis.bagaviev.data.music.impl.data.local.token.datasource.TokenDataSource
 import javax.inject.Inject
 

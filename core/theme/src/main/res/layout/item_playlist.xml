@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     tools:backgroundTint="@color/cardview_dark_background"
     app:contentPadding="@dimen/large_square_card_padding"
-    style="@style/LargeSquareCard">
+    style="@style/AppLargeSquareCard">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:cardCornerRadius="@dimen/medium_square_card_corner_radius"
-            style="@style/MediumSquareCard">
+            style="@style/AppMediumSquareCard">
 
             <ImageView
                 android:id="@+id/iv_cover"
@@ -42,7 +42,7 @@
             android:maxLines="1"
             android:maxLength="10"
             android:textSize="@dimen/playlist_title_text"
-            style="@style/ThinTextView"
+            style="@style/AppThinTextView"
             tools:text="Название плейлиста" />
 
     </LinearLayout>

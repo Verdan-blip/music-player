@@ -9,6 +9,10 @@
         android:title="Search"
         android:icon="@drawable/icon_search" />
 
+    <item android:id="@+id/uploadFragment"
+        android:title="Upload"
+        android:icon="@drawable/icon_upload" />
+
     <item android:id="@+id/profileFragment"
         android:title="Profile"
         android:icon="@drawable/icon_profile" />

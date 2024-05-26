@@ -5,7 +5,7 @@ import dagger.Module
 
 @Module(
     includes = [
-        FeatureOAuthRepositoriesModule::class,
+        FeatureOAuthRepositoryModule::class,
         FeatureOAuthRouterModule::class
     ]
 )

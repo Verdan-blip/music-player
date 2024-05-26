@@ -4,7 +4,7 @@ import dagger.Component
 import ru.kpfu.itis.bagaviev.common.di.DiComponent
 import ru.kpfu.itis.bagaviev.common.di.modules.CoroutineDispatcherModule
 import ru.kpfu.itis.bagaviev.common.di.scopes.FeatureScope
-import ru.kpfu.itis.bagaviev.feature.signup.presentation.SignUpViewModel
+import ru.kpfu.itis.bagaviev.feature.signup.presentation.view.SignUpViewModel
 
 @FeatureScope
 @Component(

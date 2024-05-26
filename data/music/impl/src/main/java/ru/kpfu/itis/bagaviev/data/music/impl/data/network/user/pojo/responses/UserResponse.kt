@@ -10,5 +10,8 @@ class UserResponse(
     val userId: Long,
 
     @SerialName("login")
-    val login: String
+    val login: String,
+
+    @SerialName("avatarUri")
+    val avatarUri: String? = null
 )
