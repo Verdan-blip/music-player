@@ -6,6 +6,6 @@ import ru.kpfu.itis.bagaviev.feature.profile.domain.entity.track.MyTrack
 fun TrackDataEntity.toMyTrack(): MyTrack = MyTrack(
     id = id,
     title = title,
-    smallCoverUri = smallCoverUri,
+    smallCoverUri = smallCoverUri.toString(),
     users = users.map { user -> user.toUser() }
 )

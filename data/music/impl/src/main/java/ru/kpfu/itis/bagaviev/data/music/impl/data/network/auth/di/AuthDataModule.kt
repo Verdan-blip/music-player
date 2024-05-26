@@ -5,7 +5,6 @@ import ru.kpfu.itis.bagaviev.data.music.impl.data.network.auth.di.submodules.Acc
 import ru.kpfu.itis.bagaviev.data.music.impl.data.network.auth.di.submodules.AuthApiServiceModule
 import ru.kpfu.itis.bagaviev.data.music.impl.data.network.auth.di.submodules.AuthDataRepositoryModule
 import ru.kpfu.itis.bagaviev.data.music.impl.data.network.auth.di.submodules.RefreshTokenApiServiceModule
-import ru.kpfu.itis.bagaviev.data.music.impl.data.network.auth.service.RefreshTokenApiService
 
 @Module(
     includes = [

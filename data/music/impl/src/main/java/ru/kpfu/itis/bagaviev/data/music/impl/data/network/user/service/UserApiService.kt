@@ -1,7 +1,6 @@
 package ru.kpfu.itis.bagaviev.data.music.impl.data.network.user.service
 
 import retrofit2.http.GET
-import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
 import ru.kpfu.itis.bagaviev.data.music.impl.data.network.user.pojo.responses.UserCollectionResponse

@@ -1,6 +1,5 @@
 package ru.kpfu.itis.bagaviev.feature.search.impl.presentation.state
 
-import ru.kpfu.itis.bagaviev.feature.search.impl.presentation.entities.author.AuthorModel
 import ru.kpfu.itis.bagaviev.feature.search.impl.presentation.entities.playlist.PlaylistModel
 import ru.kpfu.itis.bagaviev.feature.search.impl.presentation.entities.track.TrackModel
 

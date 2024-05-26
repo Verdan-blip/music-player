@@ -20,7 +20,6 @@ rootProject.name = "music-player"
 include(":app")
 include(":core")
 include(":features")
-include(":features:oauth")
 include(":data")
 include(":data:auth")
 include(":core:common")

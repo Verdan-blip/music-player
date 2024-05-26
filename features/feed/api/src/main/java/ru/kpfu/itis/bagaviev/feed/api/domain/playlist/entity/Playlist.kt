@@ -1,8 +1,7 @@
 package ru.kpfu.itis.bagaviev.feed.api.domain.playlist.entity
 
-import ru.kpfu.itis.bagaviev.feed.api.domain.track.entity.Track
 import ru.kpfu.itis.bagaviev.feed.api.domain.author.entity.Author
-import java.net.URI
+import ru.kpfu.itis.bagaviev.feed.api.domain.track.entity.Track
 
 class Playlist(
     val id: Long,

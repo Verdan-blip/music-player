@@ -1,7 +1,5 @@
 package ru.kpfu.itis.bagaviev.feature.upload.presentation.view
 
-import android.util.Log
-import androidx.core.net.toFile
 import androidx.core.net.toUri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -16,12 +14,10 @@ import ru.kpfu.itis.bagaviev.common.base.BaseViewModel
 import ru.kpfu.itis.bagaviev.common.util.extensions.progressAsTime
 import ru.kpfu.itis.bagaviev.common.util.extensions.timeAsMmSs
 import ru.kpfu.itis.bagaviev.common.util.typealiases.ViewModelFactories
-import ru.kpfu.itis.bagaviev.feature.upload.domain.entity.TrackUploadForm
 import ru.kpfu.itis.bagaviev.feature.upload.domain.usecase.SearchUsersByKeywordsUseCase
 import ru.kpfu.itis.bagaviev.feature.upload.domain.usecase.UploadTrackUseCase
 import ru.kpfu.itis.bagaviev.feature.upload.presentation.entity.UserModel
 import ru.kpfu.itis.bagaviev.feature.upload.presentation.event.PickMediaEvent
-import ru.kpfu.itis.bagaviev.feature.upload.presentation.mapper.toUser
 import ru.kpfu.itis.bagaviev.feature.upload.presentation.mapper.toUserModel
 import ru.kpfu.itis.bagaviev.feature.upload.presentation.state.UiState
 import ru.kpfu.itis.bagaviev.feature.upload.presentation.state.UploadState
