@@ -14,5 +14,5 @@ data class UserWithTracks(
         entityColumn = "id",
         associateBy = Junction(value = TrackUserCrossRef::class)
     )
-    var tracks: List<TrackDbEntity>
+    var tracks: List<DownloadedTrackDbEntity>
 )

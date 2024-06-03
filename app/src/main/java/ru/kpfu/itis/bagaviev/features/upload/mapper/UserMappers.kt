@@ -1,19 +1,24 @@
 package ru.kpfu.itis.bagaviev.features.upload.mapper
 
-import ru.kpfu.itis.bagaviev.common.util.extensions.toURI
-import ru.kpfu.itis.bagaviev.common.util.extensions.toUri
 import ru.kpfu.itis.bagaviev.data.music.api.data.network.user.entity.UserDataEntity
-import ru.kpfu.itis.bagaviev.feature.upload.domain.entity.User
+import ru.kpfu.itis.bagaviev.data.music.api.data.network.user.entity.UserProfileDataEntity
+import ru.kpfu.itis.bagaviev.feature.upload.domain.entity.AuthorFeed
 
-fun User.toUserDataEntity(): UserDataEntity =
+fun AuthorFeed.toUserDataEntity(): UserDataEntity =
     UserDataEntity(
         id = id,
         login = login,
-        avatarUri = avatarUri?.toUri()
+        avatarUri = avatarUri
     )
 
-fun UserDataEntity.toUser(): User = User(
+fun UserDataEntity.toUser(): AuthorFeed = AuthorFeed(
     id = id,
     login = login,
-    avatarUri = avatarUri?.toURI()
+    avatarUri = avatarUri
+)
+
+fun UserProfileDataEntity.toUser(): AuthorFeed = AuthorFeed(
+    id = id,
+    login = login,
+    avatarUri = avatarUri.toString()
 )

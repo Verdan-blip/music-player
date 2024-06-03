@@ -7,6 +7,6 @@ fun Track.toTrackRvModel(): TrackRvModel =
     TrackRvModel(
         id = id,
         title = title,
-        authorNames = authors.map { userModel -> userModel.login },
-        smallCoverUri = smallCoverUri.toString()
+        authorNames = authorNames,
+        smallCoverUri = smallCoverUri
     )

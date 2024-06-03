@@ -5,21 +5,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import ru.kpfu.itis.bagaviev.common.base.music.BaseMusicFragment
 import ru.kpfu.itis.bagaviev.common.util.extensions.observe
 import ru.kpfu.itis.bagaviev.feature.search.impl.R
 import ru.kpfu.itis.bagaviev.feature.search.impl.databinding.FragmentSearchBinding
 import ru.kpfu.itis.bagaviev.feature.search.impl.di.SearchComponentHolder
+import ru.kpfu.itis.bagaviev.feature.search.impl.presentation.entities.track.TrackDetailsModel
 import ru.kpfu.itis.bagaviev.feature.search.impl.presentation.state.SearchUiState
 import ru.kpfu.itis.bagaviev.feature.search.impl.presentation.view.mapper.toPlaylistRvModel
 import ru.kpfu.itis.bagaviev.feature.search.impl.presentation.view.mapper.toTrackRvModel
 import ru.kpfu.itis.bagaviev.feature.search.impl.presentation.view.reclycerview.adapter.FoundAdapter
 import ru.kpfu.itis.bagaviev.feature.search.impl.presentation.view.reclycerview.decorator.FoundItemDecoration
+import ru.kpfu.itis.bagaviev.feature.search.impl.presentation.view.util.toMusicData
+import ru.kpfu.itis.bagaviev.feature.search.impl.presentation.view.util.toTrackRvModel
 import ru.kpfu.itis.bagaviev.theme.recyclerview.intercator.PlaylistInteractor
 import ru.kpfu.itis.bagaviev.theme.recyclerview.intercator.TrackInteractor
 
-class SearchFragment : Fragment(R.layout.fragment_search) {
+class SearchFragment : BaseMusicFragment(R.layout.fragment_search) {
 
     private var viewBinding: FragmentSearchBinding? = null
 
@@ -34,8 +37,9 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             context = requireContext(),
             trackInteractor = TrackInteractor.Builder()
                 .onClick(viewModel::onTrackClick)
-                .onMoveHeldThumb(viewModel::onMoveHeldSeekBar)
-                .onReleaseThumb(viewModel::onSeekTo)
+                .onMoveThumb(musicViewModel::onSeeking)
+                .onReleaseThumb(musicViewModel::onSeekTo)
+                .onPlayPauseClick(musicViewModel::onPlayPause)
                 .build(),
             playlistInteractor = PlaylistInteractor.Builder()
                 .onClick(viewModel::onPlaylistClick)
@@ -58,9 +62,21 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         }
     }
 
-    private fun observePlayingProgress(progress: Int) {
+    private fun observeSelectedTrackDetailsEvent(trackDetailsModel: TrackDetailsModel) {
+        trackDetailsModel.apply {
+            musicViewModel.onPlay(toMusicData())
+            foundAdapter.prepareToPlay(toTrackRvModel())
+        }
+    }
+
+    private fun observePlayingProgressState(progress: Int) {
         foundAdapter.updatePlayingProgress(progress)
     }
+
+    private fun observeIsPlayingState(isPlaying: Boolean) {
+        foundAdapter.updateIsPlaying(isPlaying)
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -81,7 +97,12 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
         viewModel.apply {
             uiState.observe(viewLifecycleOwner, ::observeUiState)
-            currentPlayingProgress.observe(viewLifecycleOwner, ::observePlayingProgress)
+            selectedTrackDetailsEvent.observe(viewLifecycleOwner, ::observeSelectedTrackDetailsEvent)
+        }
+
+        musicViewModel.apply {
+            playingProgressState.observe(viewLifecycleOwner, ::observePlayingProgressState)
+            isPlayingState.observe(viewLifecycleOwner, ::observeIsPlayingState)
         }
 
         viewBinding?.apply {

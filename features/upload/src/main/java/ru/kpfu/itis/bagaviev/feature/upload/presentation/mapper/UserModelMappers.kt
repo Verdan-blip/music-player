@@ -1,17 +1,16 @@
 package ru.kpfu.itis.bagaviev.feature.upload.presentation.mapper
 
-import ru.kpfu.itis.bagaviev.common.util.extensions.toURI
-import ru.kpfu.itis.bagaviev.feature.upload.domain.entity.User
-import ru.kpfu.itis.bagaviev.feature.upload.presentation.entity.UserModel
+import ru.kpfu.itis.bagaviev.feature.upload.domain.entity.AuthorFeed
+import ru.kpfu.itis.bagaviev.feature.upload.presentation.entity.UserFeedModel
 
-fun UserModel.toUser(): User = User(
+fun UserFeedModel.toUser(): AuthorFeed = AuthorFeed(
     id = id,
     login = login,
-    avatarUri = avatarUri.toURI()
+    avatarUri = avatarUri
 )
 
-fun User.toUserModel(): UserModel = UserModel(
+fun AuthorFeed.toUserModel(): UserFeedModel = UserFeedModel(
     id = id,
     login = login,
-    avatarUri = avatarUri.toString()
+    avatarUri = avatarUri
 )

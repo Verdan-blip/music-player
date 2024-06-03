@@ -18,7 +18,7 @@ class UserProfileResponse(
     val email: String,
 
     @SerialName("avatarUri")
-    val avatarUri: String? = null,
+    val avatarUri: String,
 
     @SerialName("tracks")
     val tracks: List<TrackResponse>,

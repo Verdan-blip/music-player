@@ -13,5 +13,5 @@ class UserResponse(
     val login: String,
 
     @SerialName("avatarUri")
-    val avatarUri: String? = null
+    val avatarUri: String
 )

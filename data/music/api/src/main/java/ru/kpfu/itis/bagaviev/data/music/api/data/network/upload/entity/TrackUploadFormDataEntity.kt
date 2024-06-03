@@ -5,10 +5,11 @@ import java.io.File
 
 data class TrackUploadFormDataEntity(
     val title: String,
+    val genre: String,
     val lyrics: String? = null,
     val users: List<UserDataEntity>,
     val coverFile: File,
-    val smallCoverFile: File,
+    val smallCoverFile: File?,
     val audioFile: File,
     val clipData: ClipFormDataEntity? = null
 )

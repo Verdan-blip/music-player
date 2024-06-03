@@ -71,8 +71,14 @@ dependencies {
 
     implementation(libs.lifecycle.viewmodel)
 
+    implementation(libs.media3.exoplayer)
+    implementation(libs.media3.exoplayer.ui)
+    implementation(libs.media3.exoplayer.dash)
+
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
+
+    implementation(libs.coil)
 
     implementation(libs.blurry)
 

@@ -31,4 +31,8 @@
     <dimen name="upload_fragment_search_users_margin_between">8dp</dimen>
     <dimen name="upload_fragment_search_users_margin_outside">8dp</dimen>
 
+    <dimen name="go_authorize_fragment_padding">24dp</dimen>
+    <dimen name="go_authorize_fragment_press_to_continue_margin_top">24dp</dimen>
+    <dimen name="go_authorize_fragment_press_to_continue_width">256dp</dimen>
+
 </resources>

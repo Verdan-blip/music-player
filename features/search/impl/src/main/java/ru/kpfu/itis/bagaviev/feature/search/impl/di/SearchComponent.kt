@@ -1,9 +1,9 @@
 package ru.kpfu.itis.bagaviev.feature.search.impl.di
 
 import dagger.Component
+import ru.kpfu.itis.bagaviev.common.base.BaseViewModel
 import ru.kpfu.itis.bagaviev.common.di.DiComponent
 import ru.kpfu.itis.bagaviev.common.di.scopes.FeatureScope
-import ru.kpfu.itis.bagaviev.feature.search.impl.presentation.view.SearchViewModel
 
 @FeatureScope
 @Component(
@@ -12,7 +12,7 @@ import ru.kpfu.itis.bagaviev.feature.search.impl.presentation.view.SearchViewMod
 )
 interface SearchComponent : DiComponent {
 
-    val viewModelFactory: SearchViewModel.Companion.Factory
+    val viewModelFactory: BaseViewModel.Companion.Factory
 
     @Component.Factory
     interface Factory {

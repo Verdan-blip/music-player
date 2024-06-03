@@ -5,14 +5,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import ru.kpfu.itis.bagaviev.common.base.BaseFragment
+import ru.kpfu.itis.bagaviev.common.base.music.BaseMusicFragment
 import ru.kpfu.itis.bagaviev.common.util.extensions.observe
 import ru.kpfu.itis.bagaviev.feature.signin.R
 import ru.kpfu.itis.bagaviev.feature.signin.databinding.FragmentSignInBinding
 import ru.kpfu.itis.bagaviev.feature.signin.di.SignInComponentHolder
 import ru.kpfu.itis.bagaviev.feature.signin.presentation.entity.SignInFormModel
 
-class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
+class SignInFragment : BaseMusicFragment(R.layout.fragment_sign_in) {
 
     private var viewBinding: FragmentSignInBinding? = null
 

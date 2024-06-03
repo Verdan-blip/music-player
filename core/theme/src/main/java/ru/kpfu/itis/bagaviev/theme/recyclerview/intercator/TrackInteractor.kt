@@ -8,9 +8,13 @@ interface TrackInteractor {
 
     fun onSmallCoverClick(trackId: Long)
 
-    fun onMoveHeldThumb(progress: Int)
+    fun onMoveThumb(progress: Int)
 
     fun onReleaseThumb(progress: Int)
+
+    fun onPlayPauseClick()
+
+    fun onDownloadClick(trackId: Long)
 
     class Builder {
 
@@ -20,9 +24,13 @@ interface TrackInteractor {
 
         private var onSmallCoverClick: (Long) -> Unit = { }
 
-        private var onMoveHeldThumb: (Int) -> Unit = { }
+        private var onMoveThumb: (Int) -> Unit = { }
 
         private var onReleaseThumb: (Int) -> Unit = { }
+
+        private var onPlayPauseClick: () -> Unit = { }
+
+        private var onDownloadClick: (Long) -> Unit = { }
 
         fun onClick(block: (trackId: Long) -> Unit): Builder {
             onClick = block
@@ -39,8 +47,18 @@ interface TrackInteractor {
             return this
         }
 
-        fun onMoveHeldThumb(block: (progress: Int) -> Unit): Builder {
-            onMoveHeldThumb = block
+        fun onDownloadClick(block: (trackId: Long) -> Unit): Builder {
+            onDownloadClick = block
+            return this
+        }
+
+        fun onPlayPauseClick(block: () -> Unit): Builder {
+            onPlayPauseClick = block
+            return this
+        }
+
+        fun onMoveThumb(block: (progress: Int) -> Unit): Builder {
+            onMoveThumb = block
             return this
         }
 
@@ -63,12 +81,20 @@ interface TrackInteractor {
                 this@Builder.onSmallCoverClick(trackId)
             }
 
-            override fun onMoveHeldThumb(progress: Int) {
-                this@Builder.onMoveHeldThumb(progress)
+            override fun onMoveThumb(progress: Int) {
+                this@Builder.onMoveThumb(progress)
             }
 
             override fun onReleaseThumb(progress: Int) {
                 this@Builder.onReleaseThumb(progress)
+            }
+
+            override fun onPlayPauseClick() {
+                this@Builder.onPlayPauseClick()
+            }
+
+            override fun onDownloadClick(trackId: Long) {
+                this@Builder.onDownloadClick(trackId)
             }
         }
     }

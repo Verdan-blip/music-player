@@ -13,41 +13,60 @@ class UploadTrackDataRepositoryImpl @Inject constructor(
 ) : UploadTrackDataRepository {
 
     override suspend fun uploadTrack(trackUploadForm: TrackUploadFormDataEntity) {
-        val multipartBodyBuilder = MultipartBody.Builder().apply {
-            trackUploadForm.apply {
-                addFormDataPart(NAME_TITLE, title)
-                addFormDataPart(
-                    NAME_SMALL_COVER,
-                    smallCoverFile.name,
-                    smallCoverFile.asRequestBody("image/*".toMediaType())
+        trackUploadForm.apply {
+
+            var clipMultipartBody: MultipartBody.Part? = null
+            var clipEndMultipartBody: MultipartBody.Part? = null
+            var clipStartMultipartBody: MultipartBody.Part? = null
+
+            var smallCover: MultipartBody.Part? = null
+
+            clipData?.apply {
+                clipMultipartBody = MultipartBody.Part.createFormData(
+                    NAME_CLIP_FILE, clipData?.clipFile?.name, clipFile.asRequestBody("video/*".toMediaType())
                 )
-                addFormDataPart(
-                    NAME_COVER,
-                    coverFile.name,
-                    coverFile.asRequestBody("image/*".toMediaType())
+                clipStartMultipartBody = MultipartBody.Part.createFormData(
+                    NAME_CLIP_START, clipStartMs.toString()
                 )
-                addFormDataPart(
-                    NAME_AUDIO_FILE,
-                    audioFile.name,
-                    audioFile.asRequestBody("audio/*".toMediaType())
+                clipEndMultipartBody = MultipartBody.Part.createFormData(
+                    NAME_CLIP_END, clipEndMs.toString()
                 )
-                clipData?.apply {
-                    addFormDataPart(
-                        NAME_CLIP_FILE,
-                        coverFile.name,
-                        coverFile.asRequestBody("video/*".toMediaType())
-                    )
-                    addFormDataPart(NAME_CLIP_START, clipStartMs.toString())
-                    addFormDataPart(NAME_CLIP_END, clipEndMs.toString())
-                }
             }
+
+            smallCover = smallCoverFile?.let { file ->
+                MultipartBody.Part.createFormData(
+                    NAME_COVER, file.name, file.asRequestBody("image/*".toMediaType())
+                )
+            }
+
+            trackUploadApiService.uploadTrack(
+                title = MultipartBody.Part.createFormData(NAME_TITLE, title),
+                genre = MultipartBody.Part.createFormData(NAME_GENRE, genre),
+                authorIds = MultipartBody.Part.createFormData(
+                    NAME_AUTHOR_IDS,
+                    users.joinToString(separator = ",") { userDataEntity ->
+                        userDataEntity.id.toString()
+                    }
+                ),
+                cover = MultipartBody.Part.createFormData(
+                    NAME_COVER, coverFile.name, coverFile.asRequestBody("image/*".toMediaType())
+                ),
+                smallCover = smallCover,
+                audioFile = MultipartBody.Part.createFormData(
+                    NAME_AUDIO_FILE, audioFile.name, audioFile.asRequestBody("audio/*".toMediaType())
+                ),
+                clipFile = clipMultipartBody,
+                clipStart = clipStartMultipartBody,
+                clipEnd = clipEndMultipartBody,
+            )
         }
-        trackUploadApiService.uploadTrack(multipartBodyBuilder.build())
     }
 
     companion object {
 
         const val NAME_TITLE = "title"
+        const val NAME_GENRE = "genre"
+        const val NAME_AUTHOR_IDS = "authorIds"
         const val NAME_SMALL_COVER = "smallCover"
         const val NAME_COVER = "cover"
         const val NAME_AUDIO_FILE = "audioFile"

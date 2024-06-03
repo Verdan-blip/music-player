@@ -12,8 +12,10 @@ class SearchByKeywordsUseCase(
 
     suspend operator fun invoke(
         keywords: List<String>
-    ): SearchResult =
-        withContext(coroutineDispatcher) {
-            featureSearchSearchRepository.searchByKeywords(keywords)
+    ): Result<SearchResult> =
+        runCatching {
+            withContext(coroutineDispatcher) {
+                featureSearchSearchRepository.searchByKeywords(keywords)
+            }
         }
 }

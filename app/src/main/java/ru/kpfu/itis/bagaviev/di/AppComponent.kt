@@ -3,27 +3,27 @@ package ru.kpfu.itis.bagaviev.di
 import dagger.BindsInstance
 import dagger.Component
 import ru.kpfu.itis.bagaviev.App
+import ru.kpfu.itis.bagaviev.common.base.BaseViewModel
 import ru.kpfu.itis.bagaviev.common.di.scopes.ApplicationScope
-import ru.kpfu.itis.bagaviev.data.music.impl.di.DataModule
 import ru.kpfu.itis.bagaviev.di.deps.FeatureComponentsDependencies
-import ru.kpfu.itis.bagaviev.di.deps.FeatureDependenciesModule
-import ru.kpfu.itis.bagaviev.features.FeaturesModule
+import ru.kpfu.itis.bagaviev.navigation.presentation.view.MainFragment
 import ru.kpfu.itis.bagaviev.presentation.view.MainActivity
 
 @ApplicationScope
 @Component(
     modules = [
-        AppModule::class,
-        FeatureDependenciesModule::class,
-        FeaturesModule::class,
-        DataModule::class
+        AppModule::class
     ]
 )
 interface AppComponent : FeatureComponentsDependencies {
 
+    val mainActivityViewModelFactory: BaseViewModel.Companion.Factory
+
     fun inject(application: App)
 
-    fun inject(activity: MainActivity)
+    fun inject(mainActivity: MainActivity)
+
+    fun inject(mainFragment: MainFragment)
 
     @Component.Factory
     interface Factory {

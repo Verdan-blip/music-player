@@ -2,15 +2,12 @@ package ru.kpfu.itis.bagaviev.feature.player.impl.presentation.view
 
 import android.net.Uri
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import ru.kpfu.itis.bagaviev.common.util.extensions.progressAsTime
 import ru.kpfu.itis.bagaviev.common.util.extensions.timeAsProgress
-import ru.kpfu.itis.bagaviev.common.util.extensions.toUri
-import ru.kpfu.itis.bagaviev.common.util.typealiases.ViewModelFactories
 import ru.kpfu.itis.bagaviev.feature.player.impl.presentation.states.PlayerUiState
 import ru.kpfu.itis.bagaviev.feature.player.impl.presentation.util.TimeFormatter
 import ru.kpfu.itis.bagaviev.player.api.domain.interactor.MusicPlayerInteractor
@@ -60,10 +57,6 @@ class PlayerViewModel @Inject constructor(
                 currentPlayingDuration = duration
             }
 
-            state.currentMusicItem?.apply {
-                _currentPlayingVideoState.emit(videoFileUri?.toUri())
-            }
-
             if (!shouldStopTrackingProgress) {
                 state.currentPlayingProgress?.also { progressInMs->
                     _currentProgressState.emit(
@@ -79,8 +72,7 @@ class PlayerViewModel @Inject constructor(
                 _uiState.emit(
                     _uiState.value.copy(
                         title = title,
-                        coverUri = coverUri.toUri(),
-                        authors = authors.joinToString(separator = " & "),
+                        coverUri = coverUri,
                         isPlaying = state.isPlaying ?: false
                     )
                 )
@@ -88,7 +80,7 @@ class PlayerViewModel @Inject constructor(
         }
     }
 
-    fun onPlayPauseButtonPress() {
+    fun onPlayPauseButtonClick() {
         viewModelScope.launch {
             if (_uiState.value.isPlaying)
                 interactor.pause()
@@ -109,19 +101,6 @@ class PlayerViewModel @Inject constructor(
         viewModelScope.launch {
             shouldStopTrackingProgress = false
             interactor.seekTo(progress.progressAsTime(currentPlayingDuration))
-        }
-    }
-
-    companion object {
-
-        class Factory @Inject constructor(
-            private val viewModelFactories: ViewModelFactories
-        ) : ViewModelProvider.Factory {
-
-            @Suppress("UNCHECKED_CAST")
-            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return viewModelFactories.getValue(modelClass).get() as T
-            }
         }
     }
 }

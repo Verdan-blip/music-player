@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="download_notification_channel_name">Загрузка треков</string>
+    <string name="download_notification_channel_description">Здесь вы можете настроить уведомления загрузки треков</string>
+    <string name="download_notification_channel_message">Загрука…</string>
+</resources>

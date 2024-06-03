@@ -4,7 +4,8 @@ import dagger.Module
 
 @Module(
     includes = [
-        FeatureUploadRepositoryModule::class
+        FeatureUploadRepositoryModule::class,
+        FeatureUploadRouterModule::class
     ]
 )
 interface FeatureUploadModule

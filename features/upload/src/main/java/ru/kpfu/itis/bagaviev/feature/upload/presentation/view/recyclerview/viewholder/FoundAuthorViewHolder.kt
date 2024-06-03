@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import ru.kpfu.itis.bagaviev.feature.upload.R
 import ru.kpfu.itis.bagaviev.feature.upload.databinding.ItemFoundAuthorBinding
-import ru.kpfu.itis.bagaviev.feature.upload.presentation.entity.UserModel
+import ru.kpfu.itis.bagaviev.feature.upload.presentation.entity.UserFeedModel
 import ru.kpfu.itis.bagaviev.feature.upload.presentation.view.recyclerview.interactor.FoundAuthorInteractor
 
 class FoundAuthorViewHolder(
@@ -12,7 +12,7 @@ class FoundAuthorViewHolder(
     private val interactor: FoundAuthorInteractor
 ) : RecyclerView.ViewHolder(viewBinding.root) {
 
-    private var currentUser: UserModel? = null
+    private var currentUser: UserFeedModel? = null
 
     init {
         viewBinding.root.setOnClickListener {
@@ -22,14 +22,14 @@ class FoundAuthorViewHolder(
         }
     }
 
-    fun bind(userModel: UserModel) {
-        currentUser = userModel
+    fun bind(userFeedModel: UserFeedModel) {
+        currentUser = userFeedModel
         viewBinding.apply {
             root.context.resources.apply {
-                tvAuthorId.text = getString(R.string.search_users_item_id_format, userModel.id)
-                tvAuthorLogin.text = getString(R.string.search_users_item_login_format, userModel.login)
+                tvAuthorId.text = getString(R.string.search_users_item_id_format, userFeedModel.id)
+                tvAuthorLogin.text = getString(R.string.search_users_item_login_format, userFeedModel.login)
             }
-            ivAuthorAvatar.load(userModel.avatarUri)
+            ivAuthorAvatar.load(userFeedModel.avatarUri)
         }
     }
 }

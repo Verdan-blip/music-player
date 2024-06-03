@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import ru.kpfu.itis.bagaviev.common.util.extensions.observe
 import ru.kpfu.itis.bagaviev.feature.upload.R
 import ru.kpfu.itis.bagaviev.feature.upload.databinding.DialogFragmentSearchUsersBinding
-import ru.kpfu.itis.bagaviev.feature.upload.presentation.entity.UserModel
+import ru.kpfu.itis.bagaviev.feature.upload.presentation.entity.UserFeedModel
 import ru.kpfu.itis.bagaviev.feature.upload.presentation.view.UploadViewModel
 import ru.kpfu.itis.bagaviev.feature.upload.presentation.view.recyclerview.adapter.FoundAuthorsAdapter
 import ru.kpfu.itis.bagaviev.feature.upload.presentation.view.recyclerview.decorator.FoundUsersItemDecorator
@@ -35,7 +35,7 @@ class SearchUsersDialogFragment : DialogFragment(R.layout.dialog_fragment_search
         )
     }
 
-    private fun observeFoundUsers(users: List<UserModel>) {
+    private fun observeFoundUsers(users: List<UserFeedModel>) {
         viewBinding?.apply {
             foundUsersAdapter.submitList(users)
         }

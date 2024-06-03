@@ -10,8 +10,10 @@ class GetTrackDetailsByIdUseCase(
     private val coroutineDispatcher: CoroutineDispatcher
 ) {
 
-    suspend operator fun invoke(trackId: Long): TrackDetails? =
-        withContext(coroutineDispatcher) {
-            featureFeedTrackRepository.getById(trackId)
+    suspend operator fun invoke(trackId: Long): Result<TrackDetails?> =
+        runCatching {
+            withContext(coroutineDispatcher) {
+                featureFeedTrackRepository.getById(trackId)
+            }
         }
 }

@@ -9,5 +9,16 @@ interface TrackUploadApiService {
 
     @Multipart
     @POST("/api/v1/tracks/upload")
-    suspend fun uploadTrack(@Part multipart: MultipartBody)
+    suspend fun uploadTrack(
+        @Part title: MultipartBody.Part,
+        @Part genre: MultipartBody.Part,
+        @Part authorIds: MultipartBody.Part? = null,
+        @Part cover: MultipartBody.Part,
+        @Part smallCover: MultipartBody.Part? = null,
+        @Part lyrics: MultipartBody.Part? = null,
+        @Part audioFile: MultipartBody.Part,
+        @Part clipFile: MultipartBody.Part? = null,
+        @Part clipStart: MultipartBody.Part? = null,
+        @Part clipEnd: MultipartBody.Part? = null
+    )
 }

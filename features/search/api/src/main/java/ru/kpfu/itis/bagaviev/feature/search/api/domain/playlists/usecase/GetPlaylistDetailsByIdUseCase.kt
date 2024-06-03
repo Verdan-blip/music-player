@@ -11,8 +11,10 @@ class GetPlaylistDetailsByIdUseCase(
     @IODispatcher private val coroutineDispatcher: CoroutineDispatcher
 ) {
 
-    suspend operator fun invoke(playlistId: Long): PlaylistDetails? =
-        withContext(coroutineDispatcher) {
-            featureSearchPlaylistRepository.getById(playlistId)
+    suspend operator fun invoke(playlistId: Long): Result<PlaylistDetails?> =
+        runCatching {
+            withContext(coroutineDispatcher) {
+                featureSearchPlaylistRepository.getById(playlistId)
+            }
         }
 }

@@ -60,4 +60,9 @@
     <dimen name="author_item_margin_between">8dp</dimen>
     <dimen name="author_item_margin_outside">16dp</dimen>
 
+    <dimen name="text_size_small">14sp</dimen>
+    <dimen name="text_size_normal">16sp</dimen>
+    <dimen name="text_size_medium">18sp</dimen>
+    <dimen name="text_size_large">24sp</dimen>
+
 </resources>

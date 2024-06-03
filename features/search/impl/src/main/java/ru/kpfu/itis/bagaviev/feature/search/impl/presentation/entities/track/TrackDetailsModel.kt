@@ -7,7 +7,7 @@ class TrackDetailsModel(
     val id: Long,
     val title: String,
     val genre: String,
-    val users: List<AuthorModel>,
+    val authors: List<AuthorModel>,
     val smallCoverUri: String,
     val coverUri: String,
     val audioFileUri: String,

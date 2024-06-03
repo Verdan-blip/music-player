@@ -31,12 +31,18 @@ class TrackViewHolder(
             }
             sbTrackPlaying.setOnSeekBarChangeListener(
                 onStartTrackingTouch = { seekBar ->
-                    seekBar?.apply { interactor.onMoveHeldThumb(progress) }
+                    seekBar?.apply { interactor.onMoveThumb(progress) }
                 },
                 onStopTrackingTouch = { seekBar ->
                     seekBar?.apply { interactor.onReleaseThumb(progress) }
                 }
             )
+            ivPlayPause.setOnClickListener {
+                interactor.onPlayPauseClick()
+            }
+            ivDownloadTrack.setOnClickListener {
+                currentTrackRvModel?.apply { interactor.onDownloadClick(id) }
+            }
         }
     }
 

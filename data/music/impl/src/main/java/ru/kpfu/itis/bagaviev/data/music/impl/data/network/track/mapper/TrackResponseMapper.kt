@@ -13,8 +13,8 @@ fun TrackResponse.toTrackDataEntity(): TrackDataEntity =
     TrackDataEntity(
         id = trackId,
         title = title,
-        users = users.map { user -> user.toUserDataEntity() },
-        smallCoverUri = URI.create(smallCoverUri)
+        usersNames = users.map { user -> user.login },
+        smallCoverUri = smallCoverUri
     )
 
 fun TrackDetailsResponse.toTrackDetailsDataEntity(): TrackDetailsDataEntity = run {

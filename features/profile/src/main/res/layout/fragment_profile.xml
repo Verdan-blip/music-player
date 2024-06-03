@@ -4,27 +4,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="16dp"
+    android:padding="@dimen/profile_fragment_padding"
     android:orientation="vertical"
     tools:background="#000000"
     tools:context=".presentation.view.ProfileFragment">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/fragment_profile_user_details_card_width"
+        android:layout_gravity="center"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="@dimen/fragment_profile_credentials_card_margin_start"
         style="@style/AppLargeSquareCard">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:orientation="horizontal">
+            android:padding="@dimen/fragment_profile_user_details_card_padding"
+            android:gravity="center"
+            android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="@dimen/large_square_card_width"
                 android:layout_height="@dimen/large_square_card_height"
-                app:cardCornerRadius="10dp"
+                app:cardCornerRadius="@dimen/large_square_card_corner_radius"
                 style="@style/AppCard">
 
                 <ImageView
@@ -37,18 +39,20 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/fragment_profile_credentials_margin_start"
+                android:layout_marginTop="16dp"
                 android:layout_gravity="center"
+                android:gravity="center|start"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tv_login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/light_text_primary_color"
-                    android:textSize="16sp"
-                    style="@style/AppThinEditText"
+                    android:textColor="@color/light_text_secondary_color"
+                    android:textSize="@dimen/text_size_small"
+                    style="@style/AppLightTextView"
                     tools:text="Login" />
 
                 <TextView
@@ -56,9 +60,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:textColor="@color/light_text_primary_color"
-                    android:textSize="16sp"
-                    style="@style/AppThinEditText"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:textColor="@color/light_text_secondary_color"
+                    android:textSize="@dimen/text_size_small"
+                    style="@style/AppLightTextView"
                     tools:text="Email" />
 
                 <TextView
@@ -66,9 +72,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:textColor="@color/light_text_primary_color"
-                    android:textSize="16sp"
-                    style="@style/AppThinEditText"
+                    android:textColor="@color/light_text_secondary_color"
+                    android:textSize="@dimen/text_size_small"
+                    style="@style/AppLightTextView"
                     tools:text="Name" />
 
                 <TextView
@@ -76,9 +82,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:textColor="@color/light_text_primary_color"
-                    android:textSize="16sp"
-                    style="@style/AppThinEditText"
+                    android:textColor="@color/light_text_secondary_color"
+                    android:textSize="@dimen/text_size_small"
+                    style="@style/AppLightTextView"
                     tools:text="Lastname" />
 
             </LinearLayout>

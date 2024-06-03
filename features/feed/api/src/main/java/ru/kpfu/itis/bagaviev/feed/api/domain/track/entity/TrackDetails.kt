@@ -13,5 +13,6 @@ class TrackDetails(
     val coverUri: String,
     val audioFileUri: String,
     val releaseDate: Date,
-    val playsCount: Int
+    val playsCount: Int,
+    val trackClipData: TrackClipData? = null
 )

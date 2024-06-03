@@ -6,11 +6,16 @@ import ru.kpfu.itis.bagaviev.presentation.GlobalRouter
 
 class Navigator : GlobalRouter {
 
+    private var rootNavController: NavController? = null
+
     private var navController: NavController? = null
 
-    fun attachNavController(navController: NavController, graph: Int) {
-        navController.setGraph(graph)
+    fun attachNavController(navController: NavController) {
         this.navController = navController
+    }
+
+    fun attachRootNavController(navController: NavController) {
+        this.rootNavController = navController
     }
 
     fun detachNavController(navController: NavController) {
@@ -19,8 +24,14 @@ class Navigator : GlobalRouter {
         }
     }
 
+    fun detachRootNavController(navController: NavController) {
+        if (this.rootNavController == navController) {
+            this.rootNavController = null
+        }
+    }
+
     override fun navigateToPlayer() {
-        navController?.navigate(R.id.action_feedFragment_to_playerFragment)
+        rootNavController?.navigate(R.id.playerFragment)
     }
 
     override fun navigateToProfile() {

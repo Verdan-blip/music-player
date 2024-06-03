@@ -48,11 +48,31 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/upload_fragment_upload_step2_margin_top"
+            android:layout_marginTop="@dimen/upload_fragment_upload_step1_margin_top"
             android:textSize="@dimen/upload_fragment_upload_step_text"
             style="@style/AppLightTextView"
             android:textColor="@color/light_text_primary_color"
             android:text="@string/upload_fragment_upload_step2" />
+
+        <EditText
+            android:id="@+id/et_track_genre"
+            android:layout_width="256dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:textSize="@dimen/upload_fragment_upload_track_title_text"
+            android:layout_marginTop="@dimen/upload_fragment_upload_track_title_margin_top"
+            style="@style/AppLightEditText"
+            android:hint="@string/upload_fragment_upload_track_title_hint" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/upload_fragment_upload_step2_margin_top"
+            android:textSize="@dimen/upload_fragment_upload_step_text"
+            style="@style/AppLightTextView"
+            android:textColor="@color/light_text_primary_color"
+            android:text="@string/upload_fragment_upload_step3" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_authors"
@@ -71,7 +91,7 @@
             android:textSize="@dimen/upload_fragment_upload_step_text"
             style="@style/AppLightTextView"
             android:textColor="@color/light_text_primary_color"
-            android:text="@string/upload_fragment_upload_step3" />
+            android:text="@string/upload_fragment_upload_step4" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="@dimen/upload_fragment_card_track_file_width"
@@ -88,6 +108,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
+                android:maxLength="15"
                 android:maxLines="1"
                 android:layout_gravity="center"
                 style="@style/AppLightTextView"
@@ -111,7 +132,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/upload_fragment_upload_step4_margin_top"
             style="@style/AppLightTextView"
-            android:text="@string/upload_fragment_upload_step4"
+            android:text="@string/upload_fragment_upload_step5"
             android:textColor="@color/light_text_primary_color" />
 
         <include
@@ -127,7 +148,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/upload_fragment_upload_step4_margin_top"
             style="@style/AppLightTextView"
-            android:text="@string/upload_fragment_upload_step5"
+            android:text="@string/upload_fragment_upload_step6"
             android:textColor="@color/light_text_primary_color" />
 
         <include
@@ -143,7 +164,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/upload_fragment_upload_step4_margin_top"
             style="@style/AppLightTextView"
-            android:text="@string/upload_fragment_upload_step6"
+            android:text="@string/upload_fragment_upload_step7"
             android:textColor="@color/light_text_primary_color" />
 
         <androidx.cardview.widget.CardView
@@ -161,6 +182,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
+                android:maxLength="15"
                 android:maxLines="1"
                 android:layout_gravity="center"
                 style="@style/AppLightTextView"
@@ -190,7 +212,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/AppLightTextView"
-                android:text="@string/upload_fragment_upload_step7"
+                android:text="@string/upload_fragment_upload_step8"
                 android:textColor="@color/light_text_primary_color" />
 
             <com.mohammedalaa.seekbar.DoubleValueSeekBarView

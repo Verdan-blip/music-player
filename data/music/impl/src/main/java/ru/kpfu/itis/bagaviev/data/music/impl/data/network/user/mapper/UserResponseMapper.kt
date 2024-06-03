@@ -1,6 +1,5 @@
 package ru.kpfu.itis.bagaviev.data.music.impl.data.network.user.mapper
 
-import androidx.core.net.toUri
 import ru.kpfu.itis.bagaviev.common.util.extensions.toURI
 import ru.kpfu.itis.bagaviev.data.music.api.data.network.user.entity.UserDataEntity
 import ru.kpfu.itis.bagaviev.data.music.api.data.network.user.entity.UserDetailsDataEntity
@@ -15,7 +14,7 @@ fun UserResponse.toUserDataEntity(): UserDataEntity =
     UserDataEntity(
         id = userId,
         login = login,
-        avatarUri = avatarUri?.toUri()
+        avatarUri = avatarUri
     )
 
 fun UserDetailsResponse.toUserDetailsDataEntity(): UserDetailsDataEntity =
@@ -32,7 +31,7 @@ fun UserProfileResponse.toUserProfileDataEntity(): UserProfileDataEntity =
         id = userId,
         login = login,
         email = email,
-        avatarUri = avatarUri?.toURI(),
+        avatarUri = avatarUri.toURI(),
         tracks = tracks.map { track -> track.toTrackDataEntity() },
         playlists = playlists.map { playlist -> playlist.toPlaylistDataEntity() }
     )

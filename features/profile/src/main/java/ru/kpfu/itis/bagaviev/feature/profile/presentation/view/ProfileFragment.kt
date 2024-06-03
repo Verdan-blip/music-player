@@ -4,11 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import coil.load
 import com.google.android.material.tabs.TabLayoutMediator
-import ru.kpfu.itis.bagaviev.common.base.BaseFragment
+import ru.kpfu.itis.bagaviev.common.base.music.BaseMusicFragment
 import ru.kpfu.itis.bagaviev.common.util.extensions.observe
 import ru.kpfu.itis.bagaviev.feature.profile.R
 import ru.kpfu.itis.bagaviev.feature.profile.databinding.FragmentProfileBinding
@@ -16,7 +15,7 @@ import ru.kpfu.itis.bagaviev.feature.profile.di.ProfileComponentHolder
 import ru.kpfu.itis.bagaviev.feature.profile.presentation.entity.user.UserProfileModel
 import ru.kpfu.itis.bagaviev.feature.profile.presentation.view.viewpager.TracksFragmentAdapter
 
-class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
+class ProfileFragment : BaseMusicFragment(R.layout.fragment_profile) {
 
     private var viewBinding: FragmentProfileBinding? = null
 
@@ -29,9 +28,21 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
     private fun observeUserDetails(userProfile: UserProfileModel?) {
         viewBinding?.apply {
             userProfile?.apply {
-                tvLogin.text = login
-                tvEmail.text = email
-                ivAvatar.load(userProfile.avatarUri)
+                with (requireContext().resources) {
+                    tvLogin.text = getString(R.string.profile_fragment_login_format, login)
+                    tvEmail.text = getString(R.string.profile_fragment_email_format, email)
+                    tvName.text = getString(
+                        R.string.profile_fragment_name_format,
+                        name
+                            ?: getString(R.string.profile_fragment_credential_placeholder)
+                    )
+                    tvLastname.text = getString(
+                        R.string.profile_fragment_lastname_format,
+                        lastname
+                            ?: getString(R.string.profile_fragment_credential_placeholder)
+                    )
+                    ivAvatar.load(userProfile.avatarUri)
+                }
             }
         }
     }
@@ -45,15 +56,11 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        viewModel.checkAuthentication()
         viewBinding = FragmentProfileBinding.inflate(
             inflater, container, false
         )
         return viewBinding?.root
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel.checkAuthentication()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

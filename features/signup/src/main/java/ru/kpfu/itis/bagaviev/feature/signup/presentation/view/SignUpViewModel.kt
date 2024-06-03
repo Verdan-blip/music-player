@@ -3,6 +3,8 @@ package ru.kpfu.itis.bagaviev.feature.signup.presentation.view
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.kpfu.itis.bagaviev.common.base.BaseViewModel
 import ru.kpfu.itis.bagaviev.common.util.typealiases.ViewModelFactories
@@ -17,8 +19,10 @@ class SignUpViewModel @Inject constructor(
     private val signUpRouter: SignUpRouter
 ) : BaseViewModel() {
 
+    override val coroutineDispatcher: CoroutineDispatcher = Dispatchers.IO
+
     fun onSignUpPress(signUpFormModel: SignUpFormModel) {
-        viewModelScope.launch {
+        viewModelScope.launch(coroutineDispatcher) {
             val authResult = signUpUseCase(signUpFormModel.toSignUpForm())
             authResult.fold(
                 onSuccess = {

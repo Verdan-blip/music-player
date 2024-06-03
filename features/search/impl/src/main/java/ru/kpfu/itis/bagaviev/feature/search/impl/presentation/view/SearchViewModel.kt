@@ -1,27 +1,27 @@
 package ru.kpfu.itis.bagaviev.feature.search.impl.presentation.view
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import ru.kpfu.itis.bagaviev.common.base.BaseViewModel
-import ru.kpfu.itis.bagaviev.common.util.extensions.progressAsTime
-import ru.kpfu.itis.bagaviev.common.util.extensions.timeAsProgress
-import ru.kpfu.itis.bagaviev.common.util.typealiases.ViewModelFactories
 import ru.kpfu.itis.bagaviev.feature.search.api.domain.playlists.usecase.GetPlaylistDetailsByIdUseCase
 import ru.kpfu.itis.bagaviev.feature.search.api.domain.search.usecase.SearchByKeywordsUseCase
 import ru.kpfu.itis.bagaviev.feature.search.api.domain.track.usecase.GetTrackDetailsByIdUseCase
+import ru.kpfu.itis.bagaviev.feature.search.impl.presentation.entities.playlist.PlaylistDetailsModel
 import ru.kpfu.itis.bagaviev.feature.search.impl.presentation.entities.playlist.mappers.toPlaylistDetailsModel
 import ru.kpfu.itis.bagaviev.feature.search.impl.presentation.entities.search.mappers.toSearchResultModel
+import ru.kpfu.itis.bagaviev.feature.search.impl.presentation.entities.track.TrackDetailsModel
 import ru.kpfu.itis.bagaviev.feature.search.impl.presentation.entities.track.mappers.toTrackDetailsModel
 import ru.kpfu.itis.bagaviev.feature.search.impl.presentation.event.DialogEvent
 import ru.kpfu.itis.bagaviev.feature.search.impl.presentation.state.SearchUiState
-import ru.kpfu.itis.bagaviev.feature.search.impl.presentation.view.util.toMusicItem
 import ru.kpfu.itis.bagaviev.player.api.domain.interactor.MusicPlayerInteractor
+import java.util.LinkedList
+import java.util.Queue
 import javax.inject.Inject
 
 class SearchViewModel @Inject constructor(
@@ -31,14 +31,12 @@ class SearchViewModel @Inject constructor(
     private val interactor: MusicPlayerInteractor
 ) : BaseViewModel() {
 
+    override val coroutineDispatcher: CoroutineDispatcher = Dispatchers.IO
+
+
     private val _uiState = MutableStateFlow(SearchUiState())
     val uiState: StateFlow<SearchUiState>
         get() = _uiState
-
-    private val _currentPlayingProgressState = MutableStateFlow(0)
-
-    val currentPlayingProgress: StateFlow<Int>
-        get() = _currentPlayingProgressState
 
 
     private val _dialogEvent = MutableSharedFlow<DialogEvent>()
@@ -46,48 +44,50 @@ class SearchViewModel @Inject constructor(
         get() = _dialogEvent
 
 
-    private var currentItemDuration: Long = -1
+    private val _selectedTrackDetailsEvent = MutableSharedFlow<TrackDetailsModel>()
+    val selectedTrackDetailsEvent: SharedFlow<TrackDetailsModel>
+        get() = _selectedTrackDetailsEvent
 
-    private var shouldTrackSeekBar: Boolean = true
 
-    init {
-        viewModelScope.launch {
-            collectPlayerState()
-        }
-    }
+    private val _trackDetailsQueueState = MutableStateFlow<Queue<TrackDetailsModel>>(LinkedList())
+    val trackDetailsQueueState: StateFlow<Queue<TrackDetailsModel>>
+        get() = _trackDetailsQueueState
 
-    private suspend fun collectPlayerState() {
-        interactor.playerState.collect { state ->
 
-            currentItemDuration = state.currentPlayingItemDuration ?: -1L
-
-            _currentPlayingProgressState.emit(
-                state.currentPlayingProgress?.timeAsProgress(currentItemDuration) ?: 0
-            )
-        }
-    }
+    private var trackDetailsModelInCache: TrackDetailsModel? = null
 
 
     fun onSearchQueryChange(text: String) {
+        if (text.isBlank()) return
+
         viewModelScope.launch {
             val keywords = text.split("\\s+")
-            val searchResult = searchByKeywordsUseCase(keywords)
-                .toSearchResultModel()
-            _uiState.emit(_uiState.value.copy(
-                foundTracks = searchResult.tracks,
-                foundPlaylists = searchResult.playlists
-            ))
+            searchByKeywordsUseCase(keywords).fold(
+                onSuccess = { searchResult ->
+                    val searchResultModel = searchResult.toSearchResultModel()
+                    _uiState.emit(
+                        _uiState.value.copy(
+                            foundTracks = searchResultModel.tracks,
+                            foundPlaylists = searchResultModel.playlists
+                        )
+                    )
+                },
+                onFailure = { throwable ->
+                    showAlert(throwable.message.toString())
+                }
+            )
         }
     }
 
     fun onTrackClick(trackId: Long) {
         viewModelScope.launch {
-            if (isPlaying(trackId)) {
-
-            } else {
-                getTrackDetailsByIdUseCase(trackId)?.also { trackDetails ->
-                    val trackDetailsModel = trackDetails.toTrackDetailsModel()
-                    interactor.play(trackDetailsModel.toMusicItem())
+            if (trackDetailsModelInCache?.id != trackId) {
+                loadTrackDetails(trackId)?.also { trackDetailsModel ->
+                    _selectedTrackDetailsEvent.emit(trackDetailsModel)
+                    _uiState.emit(_uiState.value.copy(
+                        backgroundUri = trackDetailsModel.coverUri)
+                    )
+                    trackDetailsModelInCache = trackDetailsModel
                 }
             }
         }
@@ -95,76 +95,57 @@ class SearchViewModel @Inject constructor(
 
     fun onTrackLongClick(trackId: Long) {
         viewModelScope.launch {
-            getTrackDetailsByIdUseCase(trackId)?.also { trackDetails ->
-                val trackDetailsModel = trackDetails.toTrackDetailsModel()
-                _dialogEvent.emit(
-                    DialogEvent.TrackDetails(trackDetailsModel)
-                )
+            trackDetailsModelInCache = if (trackDetailsModelInCache?.id != trackId) {
+                loadTrackDetails(trackId)
+            } else {
+                trackDetailsModelInCache
+            }
+            trackDetailsModelInCache?.also { trackDetails ->
+                _dialogEvent.emit(DialogEvent.TrackDetails(trackDetails))
             }
         }
     }
 
     fun onPlaylistClick(playlistId: Long) {
         viewModelScope.launch {
-            getPlaylistDetailsByIdUseCase(playlistId)?.also { playlistDetails ->
-                val playlistDetailsModel = playlistDetails.toPlaylistDetailsModel()
+            loadPlaylistDetails(playlistId)?.also { playlistDetailsModel ->
+                val tracksDetailsQueue: Queue<TrackDetailsModel> = LinkedList()
                 playlistDetailsModel.tracks.forEachIndexed { index, trackModel ->
-                    getTrackDetailsByIdUseCase(trackModel.id)?.also { trackDetails ->
-                        val trackDetailsModel = trackDetails.toTrackDetailsModel()
-                        val musicItem = trackDetailsModel.toMusicItem()
+                    loadTrackDetails(trackModel.id)?.also { trackDetailsModel ->
                         if (index == 0) {
-                            interactor.play(musicItem)
+                            _selectedTrackDetailsEvent.emit(trackDetailsModel)
                         } else {
-                            interactor.add(musicItem)
+                            tracksDetailsQueue.add(trackDetailsModel)
                         }
                     }
                 }
+                _trackDetailsQueueState.emit(tracksDetailsQueue)
             }
         }
     }
 
     fun onPlaylistLongClick(playlistId: Long) {
         viewModelScope.launch {
-            getPlaylistDetailsByIdUseCase(playlistId)?.also { trackDetails ->
-                val playlistDetailsModel = trackDetails.toPlaylistDetailsModel()
-                _dialogEvent.emit(
-                    DialogEvent.PlaylistDetails(playlistDetailsModel)
-                )
+            loadPlaylistDetails(playlistId)?.also { playlistDetailsModel ->
+                _dialogEvent.emit(DialogEvent.PlaylistDetails(playlistDetailsModel))
             }
         }
     }
 
-    fun onMoveHeldSeekBar(progress: Int) {
-        viewModelScope.launch {
-            shouldTrackSeekBar = false
-        }
-    }
-
-    fun onSeekTo(progress: Int) {
-        viewModelScope.launch {
-            shouldTrackSeekBar = true
-            interactor.seekTo(progress.progressAsTime(
-                currentItemDuration
-            ))
-        }
-    }
-
-    private fun isPlaying(trackId: Long): Boolean {
-        /*_uiState.value.playingMusicItem?.id == trackId*/
-        return true
-    }
-
-
-    companion object {
-
-        class Factory @Inject constructor(
-            private val viewModelFactories: ViewModelFactories
-        ) : ViewModelProvider.Factory {
-
-            @Suppress("UNCHECKED_CAST")
-            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return viewModelFactories.getValue(modelClass).get() as T
+    private suspend fun loadTrackDetails(trackId: Long): TrackDetailsModel? =
+        getTrackDetailsByIdUseCase(trackId)
+            .onFailure { throwable ->
+                showAlert(throwable.message.toString())
             }
-        }
-    }
+            .map { trackDetails -> trackDetails?.toTrackDetailsModel() }
+            .getOrNull()
+
+    private suspend fun loadPlaylistDetails(playlistId: Long): PlaylistDetailsModel? =
+        getPlaylistDetailsByIdUseCase(playlistId)
+            .onFailure { throwable ->
+                showAlert(throwable.message.toString())
+            }
+            .map { playlistDetails -> playlistDetails?.toPlaylistDetailsModel() }
+            .getOrNull()
+
 }

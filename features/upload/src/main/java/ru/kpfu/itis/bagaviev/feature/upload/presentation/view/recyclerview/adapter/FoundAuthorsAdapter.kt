@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import ru.kpfu.itis.bagaviev.feature.upload.databinding.ItemFoundAuthorBinding
-import ru.kpfu.itis.bagaviev.feature.upload.presentation.entity.UserModel
+import ru.kpfu.itis.bagaviev.feature.upload.presentation.entity.UserFeedModel
 import ru.kpfu.itis.bagaviev.feature.upload.presentation.view.recyclerview.diffutil.FoundAuthorItemCallback
 import ru.kpfu.itis.bagaviev.feature.upload.presentation.view.recyclerview.interactor.FoundAuthorInteractor
 import ru.kpfu.itis.bagaviev.feature.upload.presentation.view.recyclerview.viewholder.FoundAuthorViewHolder
@@ -13,7 +13,7 @@ import ru.kpfu.itis.bagaviev.feature.upload.presentation.view.recyclerview.viewh
 class FoundAuthorsAdapter(
     private val context: Context,
     private val interactor: FoundAuthorInteractor
-) : ListAdapter<UserModel, FoundAuthorViewHolder>(FoundAuthorItemCallback()) {
+) : ListAdapter<UserFeedModel, FoundAuthorViewHolder>(FoundAuthorItemCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoundAuthorViewHolder {
         return FoundAuthorViewHolder(

@@ -12,7 +12,7 @@ fun TrackModel.toTrackRvModel(): TrackRvModel =
         id = id,
         title = title,
         smallCoverUri = smallCoverUri,
-        authorNames = authors.map { authorModel -> authorModel.login }
+        authorNames = authorNames
     )
 
 fun PlaylistModel.toPlaylistRvModel(): PlaylistRvModel =

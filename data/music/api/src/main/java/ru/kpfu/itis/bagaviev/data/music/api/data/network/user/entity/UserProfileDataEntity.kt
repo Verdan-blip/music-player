@@ -8,7 +8,7 @@ class UserProfileDataEntity(
     val id: Long,
     val login: String,
     val email: String,
-    val avatarUri: URI?,
+    val avatarUri: URI,
     val tracks: List<TrackDataEntity>,
     val playlists: List<PlaylistDataEntity>
 )

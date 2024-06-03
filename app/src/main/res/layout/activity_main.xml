@@ -1,46 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:weightSum="1"
     tools:context=".presentation.view.MainActivity">
+
+    <androidx.media3.ui.PlayerView
+        android:id="@+id/pv_video"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        app:resize_mode="zoom"
+        app:use_controller="false"
+        android:visibility="invisible" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:src="@drawable/small_cover_example"
-        android:scaleType="fitXY" />
+        android:scaleType="centerCrop" />
 
-    <LinearLayout
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fv_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
 
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fv_container"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-
-            android:name="androidx.navigation.fragment.NavHostFragment"
-            app:defaultNavHost="true"
-            app:navGraph="@navigation/nav_graph" />
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bnv_main"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:background="@color/transparent"
-            app:itemTextColor="@color/light_text_primary_color"
-            app:menu="@menu/menu_bnv" />
-
-
-    </LinearLayout>
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/root_nav_graph" />
 
 </FrameLayout>

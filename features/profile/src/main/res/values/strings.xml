@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="profile_fragment_login_format">Логин: %s</string>
+    <string name="profile_fragment_email_format">Почта: %s</string>
+    <string name="profile_fragment_name_format">Имя: %s</string>
+    <string name="profile_fragment_lastname_format">Фамилия: %s</string>
+
+    <string name="profile_fragment_credential_placeholder">Не задано</string>
+
+</resources>

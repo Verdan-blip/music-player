@@ -62,15 +62,26 @@
 
             </LinearLayout>
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_download_track"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:scaleType="fitXY"
+                android:layout_gravity="center"
+                android:layout_marginEnd="24dp"
+                android:backgroundTint="@android:color/transparent"
+                android:src="@drawable/icon_download_track"
+                app:tint="@color/light_drawable_icon_tint" />
+
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_play_pause"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
                 android:layout_gravity="center"
                 android:layout_marginEnd="@dimen/track_item_play_pause_margin_end"
                 android:backgroundTint="@android:color/transparent"
                 android:src="@drawable/item_playing"
-                app:tint="@color/on_surface_light_secondary" />
+                app:tint="@color/light_drawable_icon_tint" />
 
         </LinearLayout>
 

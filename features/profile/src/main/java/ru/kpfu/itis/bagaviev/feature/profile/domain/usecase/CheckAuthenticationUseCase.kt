@@ -11,8 +11,10 @@ class CheckAuthenticationUseCase @Inject constructor(
     @IODispatcher private val coroutineDispatcher: CoroutineDispatcher
 ) {
 
-    suspend operator fun invoke(): Boolean =
-        withContext(coroutineDispatcher) {
-            featureProfileAuthRepository.isAuthenticated()
+    suspend operator fun invoke(): Result<Boolean> =
+        runCatching {
+            withContext(coroutineDispatcher) {
+                featureProfileAuthRepository.isAuthenticated()
+            }
         }
 }

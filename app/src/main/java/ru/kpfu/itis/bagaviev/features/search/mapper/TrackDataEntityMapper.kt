@@ -8,8 +8,8 @@ import ru.kpfu.itis.bagaviev.feature.search.api.domain.track.entity.TrackDetails
 fun TrackDataEntity.toTrack(): Track = Track(
     id = id,
     title = title,
-    authors = users.map { user -> user.toUser() },
-    smallCoverUri = smallCoverUri.toString()
+    authorNames = usersNames,
+    smallCoverUri = smallCoverUri
 )
 
 fun TrackDetailsDataEntity.toTrackDetails(): TrackDetails = TrackDetails(

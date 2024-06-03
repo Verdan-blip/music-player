@@ -8,7 +8,7 @@ import androidx.room.Relation
 data class TrackWithUsers(
 
     @Embedded
-    var track: TrackDbEntity,
+    var track: DownloadedTrackDbEntity,
 
     @Relation(
         parentColumn = "id",

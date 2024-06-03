@@ -5,6 +5,7 @@ import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import ru.kpfu.itis.bagaviev.common.di.scopes.ApplicationScope
+import ru.kpfu.itis.bagaviev.data.music.impl.data.network.core.interceptor.StatusCodeInterceptor
 import javax.inject.Qualifier
 
 @Qualifier
@@ -16,8 +17,11 @@ class PublicClientModule {
 
     @ApplicationScope
     @[Provides PublicClient]
-    fun providePublicClient(): OkHttpClient =
+    fun providePublicClient(
+        statusCodeInterceptor: StatusCodeInterceptor
+    ): OkHttpClient =
         OkHttpClient.Builder()
+            .addInterceptor(statusCodeInterceptor)
             .addInterceptor(HttpLoggingInterceptor().apply {
                 setLevel(HttpLoggingInterceptor.Level.BODY)
             })

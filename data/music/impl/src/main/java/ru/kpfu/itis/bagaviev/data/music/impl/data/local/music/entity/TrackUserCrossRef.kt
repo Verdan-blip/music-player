@@ -14,7 +14,7 @@ import androidx.room.PrimaryKey
             childColumns = ["user_id"],
         ),
         ForeignKey(
-            entity = TrackDbEntity::class,
+            entity = DownloadedTrackDbEntity::class,
             parentColumns = ["id"],
             childColumns = ["track_id"]
         )

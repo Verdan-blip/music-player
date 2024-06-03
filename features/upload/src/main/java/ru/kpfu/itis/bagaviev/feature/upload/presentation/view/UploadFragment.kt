@@ -7,8 +7,9 @@ import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.net.toUri
 import androidx.core.view.isVisible
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.activityViewModels
-import ru.kpfu.itis.bagaviev.common.base.BaseFragment
+import ru.kpfu.itis.bagaviev.common.base.music.BaseMusicFragment
 import ru.kpfu.itis.bagaviev.common.util.extensions.observe
 import ru.kpfu.itis.bagaviev.feature.upload.R
 import ru.kpfu.itis.bagaviev.feature.upload.databinding.FragmentUploadBinding
@@ -17,15 +18,16 @@ import ru.kpfu.itis.bagaviev.feature.upload.presentation.event.PickMediaEvent
 import ru.kpfu.itis.bagaviev.feature.upload.presentation.state.UiState
 import ru.kpfu.itis.bagaviev.feature.upload.presentation.util.MimeTypes
 import ru.kpfu.itis.bagaviev.feature.upload.presentation.view.dialog.SearchUsersDialogFragment
-import ru.kpfu.itis.bagaviev.feature.upload.presentation.view.recyclerview.adapter.AddUsersAdapter
+import ru.kpfu.itis.bagaviev.feature.upload.presentation.view.recyclerview.adapter.AddAuthorAdapter
 import ru.kpfu.itis.bagaviev.feature.upload.presentation.view.recyclerview.interactor.AuthorPlaceholderInteractor
 import ru.kpfu.itis.bagaviev.feature.upload.presentation.view.recyclerview.mapper.toAuthorRvModel
+import ru.kpfu.itis.bagaviev.feature.upload.presentation.view.util.FileHelper
 import ru.kpfu.itis.bagaviev.feature.upload.presentation.view.util.setOnRangeSeekBarViewChangeListener
 import ru.kpfu.itis.bagaviev.theme.recyclerview.decoration.AuthorItemDecoration
 import ru.kpfu.itis.bagaviev.theme.recyclerview.intercator.AuthorInteractor
 
 
-class UploadFragment : BaseFragment(R.layout.fragment_upload) {
+class UploadFragment : BaseMusicFragment(R.layout.fragment_upload) {
 
     private var viewBinding: FragmentUploadBinding? = null
 
@@ -38,29 +40,45 @@ class UploadFragment : BaseFragment(R.layout.fragment_upload) {
     private val getCoverUri = registerForActivityResult(
         ActivityResultContracts.GetContent()
     ) { coverUri ->
-        viewModel.onCoverPicked(coverUri?.toString())
+        coverUri?.also { androidUri ->
+            viewModel.onCoverPicked(
+                FileHelper.getRealPathFromUri(requireContext(), androidUri)
+            )
+        }
     }
 
     private val getSmallUri = registerForActivityResult(
         ActivityResultContracts.GetContent()
     ) { smallCoverUri ->
-        viewModel.onSmallCoverPicked(smallCoverUri?.toString())
+        smallCoverUri?.also { androidUri ->
+            viewModel.onSmallCoverPicked(
+                FileHelper.getRealPathFromUri(requireContext(), androidUri)
+            )
+        }
     }
 
     private val getAudioUri = registerForActivityResult(
         ActivityResultContracts.GetContent()
     ) { audioUri ->
-        viewModel.onAudioPicked(audioUri?.toString())
+        audioUri?.also { androidUri ->
+            viewModel.onAudioPicked(
+                FileHelper.getRealPathFromUri(requireContext(), androidUri)
+            )
+        }
     }
 
     private val getVideoUri = registerForActivityResult(
         ActivityResultContracts.GetContent()
     ) { videoUri ->
-        viewModel.onVideoClipPicked(videoUri?.toString())
+        videoUri?.also { androidUri ->
+            viewModel.onVideoClipPicked(
+                FileHelper.getRealPathFromUri(requireContext(), androidUri)
+            )
+        }
     }
 
-    private val authorAdapter: AddUsersAdapter by lazy {
-        AddUsersAdapter(
+    private val authorAdapter: AddAuthorAdapter by lazy {
+        AddAuthorAdapter(
             context = requireContext(),
             authorInteractor = AuthorInteractor.Builder()
                 .onLongClick(viewModel::onAuthorLongClick)
@@ -95,6 +113,19 @@ class UploadFragment : BaseFragment(R.layout.fragment_upload) {
             ibPickClip.setOnClickListener {
                 viewModel.onPickVideoClipClick()
             }
+            btnSubmit.setOnClickListener {
+                viewModel.onUploadClick()
+            }
+            etTrackTitle.doOnTextChanged { text, _, _, _ ->
+                text?.also { titleText ->
+                    viewModel.onTrackTitleConfirm(titleText.toString())
+                }
+            }
+            etTrackGenre.doOnTextChanged { text, _, _, _ ->
+                text?.also { genreText ->
+                    viewModel.onTrackGenreConfirm(genreText.toString())
+                }
+            }
         }
     }
 
@@ -106,24 +137,33 @@ class UploadFragment : BaseFragment(R.layout.fragment_upload) {
     }
 
     private fun observeErrorEvents(message: String) {
-        showErrorDialog("Ошибка", message)
+        showErrorDialog(
+            requireContext().getString(ru.kpfu.itis.bagaviev.theme.R.string.error_dialog_title),
+            message
+        )
     }
 
     private fun observeUiState(uiState: UiState) {
         viewBinding?.apply {
             uiState.apply {
-                etTrackTitle.setText(trackTitle ?: "")
-                tvAudioFileName.text = audioFileName ?: "Выберите файл"
-                tvTrackClipFileName.text = clipFileName ?: "Выберите файл"
-                llCover.ivCover.setImageURI(uiState.coverUri?.toUri())
-                llSmallCover.ivCover.setImageURI(uiState.smallCoverUri?.toUri())
-                tvClipStartTime.text = uiState.clipStartTime ?: "С начала"
-                tvClipEndTime.text = uiState.clipEndTime ?: "До конца"
-                llClipDurationCorrection.isVisible = isClipCorrectionActive
+                with (requireContext().resources) {
+                    etTrackTitle.setText(trackTitle ?: "")
+                    tvAudioFileName.text = audioFileName
+                        ?: getString(R.string.upload_fragment_select_file_text)
+                    tvTrackClipFileName.text = clipFileName
+                        ?: getString(R.string.upload_fragment_select_file_text)
+                    llCover.ivCover.setImageURI(uiState.coverUri?.toUri())
+                    llSmallCover.ivCover.setImageURI(uiState.smallCoverUri?.toUri())
+                    tvClipStartTime.text = uiState.clipStartTime
+                        ?: getString(R.string.upload_fragment_clip_start_text_placeholder)
+                    tvClipEndTime.text = uiState.clipEndTime
+                        ?: getString(R.string.upload_fragment_clip_end_text_placeholder)
+                    llClipDurationCorrection.isVisible = isClipCorrectionActive
 
-                authorAdapter.submitList(uiState.authors.map { userModel ->
-                    userModel.toAuthorRvModel()
-                })
+                    authorAdapter.submitData(uiState.authors.map { userModel ->
+                        userModel.toAuthorRvModel()
+                    })
+                }
             }
         }
     }
@@ -149,6 +189,11 @@ class UploadFragment : BaseFragment(R.layout.fragment_upload) {
                 getVideoUri.launch(MimeTypes.ANY_VIDEO)
             }
         }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.checkIsAuthenticated()
     }
 
     override fun onCreateView(

@@ -3,6 +3,7 @@ package ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import ru.kpfu.itis.bagaviev.feed.impl.R
 import ru.kpfu.itis.bagaviev.feed.impl.databinding.ItemPlaylistsBinding
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.holder.PlaylistGroupViewHolder
 import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.recyclerview.holder.SubtitleViewHolder
@@ -79,17 +80,53 @@ class FeedAdapter(
     fun submitData(
         tracks: List<TrackRvModel>,
         playlists: List<PlaylistRvModel>,
-        users: List<AuthorRvModel>,
+        authors: List<AuthorRvModel>,
         commitCallback: () -> Unit = { }
     ) {
-        val newList = mutableListOf<MusicComponentRvModel>()
-        newList.add(SubtitleRvModel(SUBTITLE_TYPE_TRACKS, "Популярные треки: ${tracks.count()}"))
-        newList.addAll(tracks)
-        newList.add(SubtitleRvModel(SUBTITLE_TYPE_PLAYLISTS, text = "Популярные плейлисты: ${playlists.count()}"))
-        newList.add(PlaylistGroupRvModel(0, playlists))
-        newList.add(SubtitleRvModel(SUBTITLE_TYPE_USERS, text = "Популярные авторы: ${users.count()}"))
-        newList.addAll(users)
-        super.submitList(newList, commitCallback)
+        with(context.resources) {
+            val newList = mutableListOf<MusicComponentRvModel>()
+            newList.add(SubtitleRvModel(
+                SUBTITLE_TYPE_TRACKS,
+                getString(R.string.feed_fragment_top_charts, tracks.count()))
+            )
+            if (tracks.isEmpty()) {
+                newList.add(
+                    SubtitleRvModel(
+                        SUBTITLE_TYPE_TRACKS_NOT_FOUND,
+                        getString(R.string.feed_fragment_not_found_text))
+                )
+            }
+            else {
+                newList.addAll(tracks)
+            }
+            newList.add(SubtitleRvModel(
+                SUBTITLE_TYPE_PLAYLISTS,
+                getString(R.string.feed_fragment_popular_playlists, playlists.count()))
+            )
+            if (playlists.isEmpty()) {
+                newList.add(
+                    SubtitleRvModel(
+                        SUBTITLE_TYPE_PLAYLISTS_NOT_FOUND,
+                        getString(R.string.feed_fragment_not_found_text))
+                )
+            } else {
+                newList.add(PlaylistGroupRvModel(SUBTITLE_TYPE_PLAYLISTS, playlists))
+            }
+            newList.add(SubtitleRvModel(
+                SUBTITLE_TYPE_USERS,
+                getString(R.string.feed_fragment_top_authors, authors.count()))
+            )
+            if (authors.isEmpty()) {
+                newList.add(
+                    SubtitleRvModel(
+                        SUBTITLE_TYPE_USERS_NOT_FOUND,
+                        getString(R.string.feed_fragment_not_found_text))
+                )
+            } else {
+                newList.addAll(authors)
+            }
+            super.submitList(newList, commitCallback)
+        }
     }
 
 
@@ -97,6 +134,10 @@ class FeedAdapter(
         const val SUBTITLE_TYPE_TRACKS = 0
         const val SUBTITLE_TYPE_PLAYLISTS = 1
         const val SUBTITLE_TYPE_USERS = 2
+
+        const val SUBTITLE_TYPE_TRACKS_NOT_FOUND = 3
+        const val SUBTITLE_TYPE_PLAYLISTS_NOT_FOUND = 4
+        const val SUBTITLE_TYPE_USERS_NOT_FOUND = 5
 
         const val VIEW_TYPE_SUBTITLE = 0
         const val VIEW_TYPE_TRACK = 1

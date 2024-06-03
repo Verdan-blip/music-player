@@ -3,11 +3,16 @@ plugins {
     alias(libs.plugins.android.kotlin)
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.serialization)
+    id("androidx.room")
 }
 
 android {
     namespace = "ru.kpfu.itis.bagaviev.data.music.impl"
     compileSdk = 34
+
+    room {
+        schemaDirectory("$projectDir/schemas")
+    }
 
     defaultConfig {
         minSdk = 21

@@ -35,6 +35,7 @@ class FoundItemDecoration(
                         bottom = getDimension(R.dimen.track_item_margin_between).toInt()
                     }
                     is PlaylistGroupRvModel -> {
+                        top = getDimension(R.dimen.playlist_item_margin_top).toInt()
                         bottom = getDimension(R.dimen.playlist_item_margin_between).toInt()
                     }
                 }

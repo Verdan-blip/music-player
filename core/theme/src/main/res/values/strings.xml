@@ -5,4 +5,7 @@
     <string name="search_fragment_recently_searched">Недавно искали</string>
     <string name="search_fragment_found">Найдено (%d + %d)</string>
 
+    <!-- Error dialog configuration -->
+    <string name="error_dialog_title">Произошла ошибка!</string>
+
 </resources>

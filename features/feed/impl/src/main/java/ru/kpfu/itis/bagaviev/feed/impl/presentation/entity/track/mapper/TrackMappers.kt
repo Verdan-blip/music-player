@@ -11,7 +11,7 @@ fun Track.toTrackModel(): TrackModel =
         id=  id,
         title = title,
         smallCoverUri = smallCoverUri,
-        authorNames = authors.map { user -> user.login }
+        authorNames = authorsNames
     )
 
 
@@ -25,5 +25,6 @@ fun TrackDetails.toTrackDetailsModel(): TrackDetailsModel =
         releaseDate = releaseDate,
         playsCount = playsCount,
         genre = genre,
-        users = authors.map { user -> user.toAuthorModel() },
+        authors = authors.map { user -> user.toAuthorModel() },
+        clipData = trackClipData?.toTrackClipDataModel()
     )

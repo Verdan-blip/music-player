@@ -4,6 +4,7 @@
     <string name="feed_fragment_feed">Популярное</string>
     <string name="feed_fragment_popular_playlists">Популярные плейлисты (%d)</string>
     <string name="feed_fragment_top_charts">Топ чарты (%d)</string>
+    <string name="feed_fragment_top_authors">Топ авторы (%d)</string>
     <string name="feed_fragment_tap_to_search">Нажмите для поиска</string>
     
     <string name="item_track_menu_add_to_favourites">Добавить в избранное</string>
@@ -18,5 +19,7 @@
     <string name="playlist_details_fragment_authors">Автор: %s</string>
     <string name="playlist_details_fragment_release_date">Дата релиза: %s</string>
     <string name="playlist_details_fragment_plays_count">Количество прослушиваний: %d</string>
+
+    <string name="feed_fragment_not_found_text">Не найдено >:(</string>
 
 </resources>

@@ -6,7 +6,8 @@ import ru.kpfu.itis.bagaviev.feature.upload.domain.entity.TrackUploadForm
 fun TrackUploadForm.toTrackUploadFormDataEntity(): TrackUploadFormDataEntity =
     TrackUploadFormDataEntity(
         title = title,
-        users = users.map { user -> user.toUserDataEntity() },
+        genre = genre,
+        users = authors.map { user -> user.toUserDataEntity() },
         audioFile = audioFile,
         coverFile = coverFile,
         smallCoverFile = smallCoverFile,

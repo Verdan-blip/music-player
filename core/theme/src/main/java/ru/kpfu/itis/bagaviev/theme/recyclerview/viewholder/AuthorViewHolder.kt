@@ -10,7 +10,7 @@ class AuthorViewHolder(
     private val interactor: AuthorInteractor
 ) : MusicComponentViewHolder(viewBinding.root) {
 
-    private val currentAuthor: AuthorRvModel? = null
+    private var currentAuthor: AuthorRvModel? = null
 
     init {
         viewBinding.root.apply {
@@ -24,6 +24,7 @@ class AuthorViewHolder(
     }
 
     fun bind(authorModel: AuthorRvModel) {
+        currentAuthor = authorModel
         viewBinding.ivAuthor.load(authorModel.avatarUri)
     }
 }

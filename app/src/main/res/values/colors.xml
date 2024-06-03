@@ -2,14 +2,4 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-
-    <color name="surface">#0DFFFFFF</color>
-
-    <color name="primary_text_light">#FFFFFF</color>
-    <color name="secondary_text_light">#999999</color>
-    <color name="on_surface_light">#FFFFFF</color>
-
-    <color name="primary_text_dark">#191919</color>
-    <color name="secondary_text_dark">#5B5B5B</color>
-
 </resources>

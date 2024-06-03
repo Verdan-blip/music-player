@@ -5,5 +5,6 @@ import ru.kpfu.itis.bagaviev.feature.search.impl.presentation.entities.track.Tra
 
 data class SearchUiState(
     val foundTracks: List<TrackModel> = listOf(),
-    val foundPlaylists: List<PlaylistModel> = listOf()
+    val foundPlaylists: List<PlaylistModel> = listOf(),
+    val backgroundUri: String? = null
 )

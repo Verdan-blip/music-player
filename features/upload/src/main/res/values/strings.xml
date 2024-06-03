@@ -7,14 +7,30 @@
     <string name="upload_fragment_upload_track_title_hint">Название трека</string>
     <string name="upload_fragment_upload_track_raw_title_hint">Файл трека</string>
     <string name="upload_fragment_upload_clip_raw_title_hint">Файл клипа</string>
-    <string name="upload_fragment_upload_step2">2. Отметьте тех, с кем совместно был записан трек:</string>
-    <string name="upload_fragment_upload_step3">3. Добавьте трек в .mp3 формате:</string>
-    <string name="upload_fragment_upload_step4">4. Добавьте обложку (доступные форматы: .jpg):</string>
-    <string name="upload_fragment_upload_step5">5. При желании можете добавить мини-обложку:</string>
-    <string name="upload_fragment_upload_step6">6. Опционально можете добавить клип к вашему треку:</string>
-    <string name="upload_fragment_upload_step7">7. Используя нижние ползунки, Вы можете настроить начало и конец клипа:</string>
+    <string name="upload_fragment_upload_step2">2. Выберите жанр:</string>
+    <string name="upload_fragment_upload_step3">3. Отметьте тех, с кем совместно был записан трек:</string>
+    <string name="upload_fragment_upload_step4">4. Добавьте трек в .mp3 формате:</string>
+    <string name="upload_fragment_upload_step5">5. Добавьте обложку (доступные форматы: .jpg):</string>
+    <string name="upload_fragment_upload_step6">6. При желании можете добавить мини-обложку:</string>
+    <string name="upload_fragment_upload_step7">7. Опционально можете добавить клип к вашему треку:</string>
+    <string name="upload_fragment_upload_step8">8. Используя нижние ползунки, Вы можете настроить начало и конец клипа:</string>
 
     <string name="search_users_item_id_format">id: %d</string>
     <string name="search_users_item_login_format">login: %s</string>
 
+    <string name="go_to_authorize_fragment_text">Чтобы продолжить, Вам нужно будет авторизоваться</string>
+    <string name="go_to_authorize_fragment_press_to_continue_text">Нажмите сюда, чтобы продолжить</string>
+
+    <string name="upload_fragment_select_file_text">Выберите файл</string>
+    <string name="upload_fragment_clip_start_text_placeholder">С начала</string>
+    <string name="upload_fragment_clip_end_text_placeholder">До конца</string>
+
+    <string name="upload_fragment_submit_result_success">Данные успешно отправлены</string>
+
+    <string name="upload_fragment_submit_result_failure">Произошла какая-то ошибка. На непонятном языке она выглядит так: %s</string>
+
+    <string name="upload_fragment_missing_track_title">Упс, похоже, что вы забыли определить название Вашего трека!</string>
+    <string name="upload_fragment_missing_track_audio_file">Как же будет играть музыка, если вы не указали файл проигрывания?</string>
+    <string name="upload_fragment_missing_track_genre">Эх Вы, даже жанр трека не определили!</string>
+    <string name="upload_fragment_missing_track_cover">Не хотите, чтобы у Вашего трека не было обложки? Нет, Вы хотите!</string>
 </resources>

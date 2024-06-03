@@ -1,78 +1,37 @@
 package ru.kpfu.itis.bagaviev.feature.player.impl.presentation.view
 
 import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
-import androidx.media3.common.MediaItem
-import androidx.media3.exoplayer.ExoPlayer
 import coil.load
-import ru.kpfu.itis.bagaviev.common.base.BaseFragment
-import ru.kpfu.itis.bagaviev.common.util.extensions.blur
+import ru.kpfu.itis.bagaviev.common.base.BaseViewModel
+import ru.kpfu.itis.bagaviev.common.base.music.BaseMusicFragment
+import ru.kpfu.itis.bagaviev.common.base.music.BaseMusicViewModel
 import ru.kpfu.itis.bagaviev.common.util.extensions.observe
 import ru.kpfu.itis.bagaviev.common.util.listeners.setOnSeekBarChangeListener
 import ru.kpfu.itis.bagaviev.feature.player.impl.R
 import ru.kpfu.itis.bagaviev.feature.player.impl.databinding.FragmentPlayerBinding
 import ru.kpfu.itis.bagaviev.feature.player.impl.di.PlayerComponentHolder
-import ru.kpfu.itis.bagaviev.feature.player.impl.presentation.states.PlayerUiState
 import ru.kpfu.itis.bagaviev.feature.player.impl.presentation.view.custom.PlayPauseButton
-import javax.inject.Inject
 
-class PlayerFragment : BaseFragment(R.layout.fragment_player) {
+class PlayerFragment : BaseMusicFragment(R.layout.fragment_player) {
 
-    @Inject lateinit var exoPlayer: ExoPlayer
-
-    private lateinit var viewModelFactory: PlayerViewModel.Companion.Factory
+    private lateinit var viewModelFactory: BaseViewModel.Companion.Factory
 
     private var viewBinding: FragmentPlayerBinding? = null
 
-    private val viewModel: PlayerViewModel by activityViewModels {
-        viewModelFactory
-    }
-
-    private fun observeUiState(state: PlayerUiState) {
+    private fun observeMusicDataState(musicData: BaseMusicViewModel.MusicData?) {
         viewBinding?.apply {
-            state.apply {
+            musicData?.apply {
                 tvTitle.text = title
-                tvAuthors.text = authors
-
-                btnPlayOrPause.state = if (isPlaying) {
-                    exoPlayer.play()
-                    PlayPauseButton.ButtonState.PLAY
-                }
-                else {
-                    exoPlayer.pause()
-                    PlayPauseButton.ButtonState.PAUSE
-                }
-
-                ivCover.load(
-                    data = coverUri,
-                    builder = {
-                        allowHardware(false)
-                        listener { _, result ->
-                            val drawable = result.drawable
-                            ivCover.setImageDrawable(drawable)
-                            ivCoverBlurred.setImageDrawable(drawable)
-                            ivCoverBlurred.blur(
-                                radius = ru.kpfu.itis.bagaviev.theme.R.integer.blur_radius,
-                                sampling = ru.kpfu.itis.bagaviev.theme.R.integer.blur_sampling
-                            )
-                        }
-                    }
-                )
+                tvAuthors.text = authors.joinToString(separator = " &")
+                ivCover.load(musicData.coverUri)
             }
         }
     }
 
-    private fun observeVideoFileUriState(videoFileUri: Uri?) {
-        videoFileUri?.also {
-            exoPlayer.setMediaItem(MediaItem.fromUri(videoFileUri))
-            exoPlayer.play()
-        }
-    }
 
     private fun observeCurrentPlayingTimeState(currentPlayingTime: String) {
         viewBinding?.tvPlayingTime?.text = currentPlayingTime
@@ -82,18 +41,27 @@ class PlayerFragment : BaseFragment(R.layout.fragment_player) {
         viewBinding?.sbPlayingProgress?.progress = progress
     }
 
+    private fun observeIsPlaying(isPlaying: Boolean) {
+        viewBinding?.apply {
+            btnPlayOrPause.state = if (isPlaying)
+                PlayPauseButton.ButtonState.PLAY
+            else
+                PlayPauseButton.ButtonState.PAUSE
+        }
+    }
+
 
     private fun initListeners() {
         viewBinding?.apply {
             btnPlayOrPause.setOnClickListener {
-                viewModel.onPlayPauseButtonPress()
+                musicViewModel.onPlayPause()
             }
             sbPlayingProgress.setOnSeekBarChangeListener(
                 onStopTrackingTouch = { seekBar ->
-                    seekBar?.apply { viewModel.onSeekTo(progress) }
+                    seekBar?.apply { musicViewModel.onSeekTo(progress) }
                 },
                 onStartTrackingTouch = { seekBar ->
-                    seekBar?.apply { viewModel.onMoveHeldSeekBarThumb(progress) }
+                    seekBar?.apply { musicViewModel.onSeeking(progress) }
                 }
             )
         }
@@ -120,17 +88,11 @@ class PlayerFragment : BaseFragment(R.layout.fragment_player) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.apply {
-            uiState.observe(viewLifecycleOwner, ::observeUiState)
-            currentProgressState.observe(viewLifecycleOwner, ::observeCurrentPlayingProgressState)
-            currentProgressTimeState.observe(viewLifecycleOwner, ::observeCurrentPlayingTimeState)
-            currentPlayingVideoState.observe(viewLifecycleOwner, ::observeVideoFileUriState)
-        }
-
-        viewBinding?.apply {
-            pvVideo.player = exoPlayer
-            exoPlayer.volume = 0f
-            exoPlayer.prepare()
+        with (musicViewModel) {
+            playingProgressState.observe(viewLifecycleOwner, ::observeCurrentPlayingProgressState)
+            formattedPlayingTimeState.observe(viewLifecycleOwner, ::observeCurrentPlayingTimeState)
+            isPlayingState.observe(viewLifecycleOwner, ::observeIsPlaying)
+            currentMusicData.observe(viewLifecycleOwner, ::observeMusicDataState)
         }
         initListeners()
     }
@@ -142,7 +104,6 @@ class PlayerFragment : BaseFragment(R.layout.fragment_player) {
 
     override fun onDestroy() {
         super.onDestroy()
-        exoPlayer.release()
         PlayerComponentHolder.releaseComponent()
     }
 }

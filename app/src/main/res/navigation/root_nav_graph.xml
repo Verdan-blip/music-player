@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_nav_graph"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/playerFragment"
+        android:name="ru.kpfu.itis.bagaviev.feature.player.impl.presentation.view.PlayerFragment"
+        android:label="PlayerFragment"
+        tools:layout="@layout/fragment_player" />
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:label="fragment_main"
+        android:name="ru.kpfu.itis.bagaviev.navigation.presentation.view.MainFragment"
+        tools:layout="@layout/fragment_main" />
+</navigation>

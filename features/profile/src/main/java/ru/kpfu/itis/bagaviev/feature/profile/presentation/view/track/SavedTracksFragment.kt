@@ -6,16 +6,36 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import ru.kpfu.itis.bagaviev.common.util.extensions.observe
 import ru.kpfu.itis.bagaviev.feature.profile.R
 import ru.kpfu.itis.bagaviev.feature.profile.databinding.FragmentTracksBinding
+import ru.kpfu.itis.bagaviev.feature.profile.presentation.entity.track.DownloadedTrackModel
 import ru.kpfu.itis.bagaviev.feature.profile.presentation.view.ProfileViewModel
+import ru.kpfu.itis.bagaviev.feature.profile.presentation.view.mapper.toTrackRvModel
+import ru.kpfu.itis.bagaviev.theme.recyclerview.adapter.TrackAdapter
+import ru.kpfu.itis.bagaviev.theme.recyclerview.decoration.TrackItemDecoration
+import ru.kpfu.itis.bagaviev.theme.recyclerview.intercator.TrackInteractor
 
 class SavedTracksFragment : Fragment(R.layout.fragment_tracks) {
 
     private var viewBinding: FragmentTracksBinding? = null
 
+    private val tracksAdapter by lazy {
+        TrackAdapter(
+            context = requireContext(),
+            trackInteractor = TrackInteractor.Builder()
+                .build()
+        )
+    }
+
     private val viewModel by lazy {
         ViewModelProvider(requireActivity())[ProfileViewModel::class.java]
+    }
+
+    private fun observeSavedTracksState(savedTracks: List<DownloadedTrackModel>) {
+            tracksAdapter.submitList(savedTracks.map {
+                downloadedTrackModel -> downloadedTrackModel.toTrackRvModel()
+            })
     }
 
     override fun onCreateView(
@@ -31,6 +51,13 @@ class SavedTracksFragment : Fragment(R.layout.fragment_tracks) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewBinding?.apply {
+            rvTracks.adapter = tracksAdapter
+            rvTracks.addItemDecoration(TrackItemDecoration(requireContext()))
+        }
+
+        viewModel.savedTracksState.observe(viewLifecycleOwner, ::observeSavedTracksState)
     }
 
     override fun onDestroyView() {

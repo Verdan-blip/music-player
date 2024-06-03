@@ -3,8 +3,8 @@ package ru.kpfu.itis.bagaviev.feature.signin.domain.usecase
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import ru.kpfu.itis.bagaviev.common.di.modules.IODispatcher
-import ru.kpfu.itis.bagaviev.feature.signin.domain.entities.SignInResult
-import ru.kpfu.itis.bagaviev.feature.signin.domain.entities.SignInForm
+import ru.kpfu.itis.bagaviev.feature.signin.domain.entity.SignInResult
+import ru.kpfu.itis.bagaviev.feature.signin.domain.entity.SignInForm
 import ru.kpfu.itis.bagaviev.feature.signin.domain.repository.FeatureSignInAuthRepository
 import javax.inject.Inject
 

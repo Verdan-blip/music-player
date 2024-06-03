@@ -3,6 +3,8 @@ package ru.kpfu.itis.bagaviev.feature.signin.presentation.view
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.kpfu.itis.bagaviev.common.base.BaseViewModel
 import ru.kpfu.itis.bagaviev.common.util.typealiases.ViewModelFactories
@@ -18,6 +20,8 @@ class SignInViewModel @Inject constructor(
     private val saveTokensUseCase: SaveTokensUseCase,
     private val signInRouter: SignInRouter
 ) : BaseViewModel() {
+
+    override val coroutineDispatcher: CoroutineDispatcher = Dispatchers.IO
 
     fun onSignUpPress() {
         signInRouter.navigateToSignUp()

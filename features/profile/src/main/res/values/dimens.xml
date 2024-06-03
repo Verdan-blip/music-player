@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="fragment_profile_credentials_margin_start">16dp</dimen>
+    <dimen name="fragment_profile_credentials_card_margin_start">32dp</dimen>
+
+    <dimen name="profile_fragment_padding">16dp</dimen>
+    <dimen name="fragment_profile_user_details_card_padding">12dp</dimen>
+    <dimen name="fragment_profile_user_details_card_width">256dp</dimen>
+
+</resources>

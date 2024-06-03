@@ -1,9 +1,9 @@
 package ru.kpfu.itis.bagaviev.feed.impl.di
 
 import dagger.Component
+import ru.kpfu.itis.bagaviev.common.base.BaseViewModel
 import ru.kpfu.itis.bagaviev.common.di.DiComponent
 import ru.kpfu.itis.bagaviev.common.di.scopes.FeatureScope
-import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.FeedViewModel
 
 @FeatureScope
 @Component(
@@ -14,7 +14,7 @@ import ru.kpfu.itis.bagaviev.feed.impl.presentation.view.FeedViewModel
 )
 interface FeedComponent : DiComponent {
 
-    val viewModelFactory: FeedViewModel.Companion.Factory
+    val viewModelFactory: BaseViewModel.Companion.Factory
 
     @Component.Factory
     interface Factory {
